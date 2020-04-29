@@ -1,9 +1,21 @@
 # Binaries for programs and plugins
+logs
+log
+bin
+pid
+cache
+release
+
+.idea
+.DS_Stroe
+*workspace
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+
+
 
 # Test binary, built with `go test -c`
 *.test
