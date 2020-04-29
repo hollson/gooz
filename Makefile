@@ -30,12 +30,12 @@ build:
 
 
 # 运行(可从命令行接收参数，如：make run os=linux)
-.PYONY:run
+.PHONY:run
 run:
 	@echo "运行";
 
 # 发布
-.PYONY:deploy
+.PHONY:deploy
 deploy:
 	@echo "发布";
 

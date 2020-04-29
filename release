@@ -15,6 +15,5 @@ cp ./conf/config.ini ./release/conf
 cp ./conf/config.ini ./release/conf
 
 
-
 # 远程拷贝
 scp -rp ./bin  root@39.104.x.x:/app/deeplink
