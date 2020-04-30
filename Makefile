@@ -41,7 +41,7 @@ push:
 	@echo -e "\033[0;32mPush to GitHub...\033[0m"
 	git add .
 	msg="rebuilding site $(date)"
-	@if [ $# -eq 1 ]; \
+	@if [[ $# -eq 1 ]]; \
 	then \
 	  msg="$1" ; \
 	fi
