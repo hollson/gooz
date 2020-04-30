@@ -45,23 +45,6 @@ clean:
 .PHONY:deploy
 deploy:
 	@echo "\033[0;32m发布中...\033[0m"
-
-
-## push <msg>:推送到远程仓库(msg为空时，使用以时间标记的默认注释)
-.PHONY:push
-push:
-	@echo -e "\033[0;32mPush to GitHub...\033[0m"
-	git add .
-	msg="rebuilding site $(date)"
-	@if [[ $# -eq 1 ]]; \  #如果参数个数等于1
-	then \
-	  msg="$1" ; \
-	fi
-	git commit -m "$msg"
-	git push origin master
-	echo "源码推送成功！"
-
-
 	#编译
 #	rm -rf ./public/*
 #	hugo -v --baseURL=http://www.mafool.com
@@ -76,6 +59,21 @@ push:
 #	ssh root@www.mafool.com 'rm -rf /srv/www/mafool-blog'
 #	ssh root@www.mafool.com 'cd /srv/www && tar -zxvf mafool-blog.tar.gz && mv public mafool-blog && nginx -s reload'
 #	rm -f mafool-blog.tar.gz
+
+
+## push <msg>:推送到远程仓库(msg为空时，使用以时间标记的默认注释)
+.PHONY:push
+push:
+	@echo -e "\033[0;32mPush to GitHub...\033[0m"
+	git add .
+	msg="rebuilding site $(date)"
+	@if [[ $# -eq 1 ]]; \
+	then \
+	  msg="$1" ; \
+	fi
+	git commit -m "$msg"
+	git push origin master
+	echo "源码推送成功！"
 
 
 ## proto:更新并编译proto文件
