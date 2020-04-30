@@ -10,7 +10,7 @@ package app
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/config"
+	"github.com/hollson/deeplink/etc"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
@@ -57,7 +57,7 @@ var ddd=`
 func Run() {
 	router = gin.Default()
 	Route()
-	if err := router.Run(config.App.Port); err != nil {
+	if err := router.Run(etc.App.Port); err != nil {
 		panic(err)
 	}
 }

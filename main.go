@@ -8,7 +8,6 @@ package main
 
 import (
 	"github.com/hollson/deeplink/app"
-	_ "github.com/icattlecoder/godaemon"
 	"runtime"
 )
 
