@@ -38,7 +38,7 @@ run:
 #CMD: make push <msg>	-- 推送到远程仓库(msg为空时，使用时间标记的默认注释)
 .PHONY:push
 push:
-	echo -e "\033[0;32mPush to GitHub...\033[0m"
+	@echo -e "\033[0;32mPush to GitHub...\033[0m"
 	git add .
 	msg="rebuilding site $(date)"
 	if [ $# -eq 1 ]; then \
@@ -51,7 +51,7 @@ push:
 #CMD: make deploy	-- 发布
 .PHONY:deploy
 deploy:
-	echo -e "\033[0;32m发布中...\033[0m"
+	@echo "\033[0;32m发布中...\033[0m"
 
 	#编译
 #	rm -rf ./public/*
