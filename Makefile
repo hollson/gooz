@@ -5,11 +5,11 @@ AppName="Deeplink" #应用名称
 VERSION="v1.0.1"   #版本号
 CGO=0			   #是否开启Cgo，0：不开启，1：开启
 
-#CMD: make		-- 编译并运行
+## all:编译并运行(可省略该参数)
 all: build run
 
 
-#CMD: make build	-- 编译
+## build:编译
 .PHONY:build
 build: clean
 	@echo "开始编译..."
@@ -30,18 +30,30 @@ build: clean
 	fi
 
 
-#CMD: make run		-- 运行(可从命令行接收参数，如：make run daemon=true)
-.PHONY:run
-run:
-	@go run main.go $(deamon)
+## clean:清理编译、日志和缓存等数据
+.PHONY:clean
+clean:
+	@echo "开始清理..."
+	@rm -rf ./bin;
+	@rm -rf ./logs;
+	@rm -rf ./log;
+	@rm -rf ./cache;
+	@rm -rf ./pid;
 
-#CMD: make push <msg>	-- 推送到远程仓库(msg为空时，使用时间标记的默认注释)
+
+## deploy:发布
+.PHONY:deploy
+deploy:
+	@echo "\033[0;32m发布中...\033[0m"
+
+
+## push <msg>:推送到远程仓库(msg为空时，使用以时间标记的默认注释)
 .PHONY:push
 push:
 	@echo -e "\033[0;32mPush to GitHub...\033[0m"
 	git add .
 	msg="rebuilding site $(date)"
-	@if [[ $# -eq 1 ]]; \
+	@if [[ $# -eq 1 ]]; \  #如果参数个数等于1
 	then \
 	  msg="$1" ; \
 	fi
@@ -49,10 +61,6 @@ push:
 	git push origin master
 	echo "源码推送成功！"
 
-#CMD: make deploy	-- 发布
-.PHONY:deploy
-deploy:
-	@echo "\033[0;32m发布中...\033[0m"
 
 	#编译
 #	rm -rf ./public/*
@@ -70,7 +78,7 @@ deploy:
 #	rm -f mafool-blog.tar.gz
 
 
-#CMD: make proto	-- 更新并编译proto文件
+## proto:更新并编译proto文件
 .PHONY:proto
 proto:
 	@echo "更新并编译proto文件";
@@ -78,24 +86,34 @@ proto:
 	#protoc --proto_path=${GOPATH}/src:. --micro_out=. --go_out=. proto/user/user.proto
 
 
-#CMD: make xorm		-- 更新数据库模型
+
+## run:运行(可从命令行接收参数，如：make run daemon=true)
+.PHONY:run
+run:
+	@go run main.go $(deamon)
+
+
+## xorm:更新数据库模型
 .PHONY:xorm
 xorm:
 	@echo "更新数据库模型";
 
 
-#CMD: make clean	-- 清理编译、日志和缓存等数据
-.PHONY:clean
-clean:
-	@echo "开始清理..."
-	@rm -rf ./bin;
-	@rm -rf ./logs;
-	@rm -rf ./log;
-	@rm -rf ./cache;
-	@rm -rf ./pid;
-
-
-#CMD: make help		-- 查看make帮助
+## help:查看make帮助
 .PHONY:help
-help:
-	grep -ie "^#CMD" ./Makefile
+help:Makefile
+	@echo "Usage:\n  make [command]"
+	@echo
+	@echo "Available Commands:"
+	@sed -n "s/^##//p" $< | column -t -s ':' #|grep --color=auto -ie "\s....\s"
+
+
+.PHONY:test
+test:
+	@echo -e  "\033[0;32mPush to GitHub...\033[0m"
+	$msg="测试 site $(date)"
+	@if [[ $# -eq 1 ]]; \  #如果参数个数等于1
+	then \
+		msg="$1" ; \
+	fi
+	echo $(msg)
