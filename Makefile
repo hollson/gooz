@@ -38,10 +38,10 @@ run:
 #CMD: make push <msg>	-- 推送到远程仓库(msg为空时，使用时间标记的默认注释)
 .PHONY:push
 push:
-	echo -e "\033[0;32mPush to GitHub...\033[0m"
+	@echo -e "\033[0;32mPush to GitHub...\033[0m"
 	git add .
 	msg="rebuilding site $(date)"
-	if [ $# -eq 1 ]; then \
+	@if [ $# -eq 1 ]; then \
 	  msg="$1" ; \
 	fi
 	git commit -m "$msg"
