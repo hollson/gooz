@@ -63,7 +63,6 @@ deploy:
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
 commit:
 	@echo "\033[0;34mPush to remote...\033[0m"
-	@echo $(message)
 	@git add .
 	@git commit -m $(message)
 	@echo "\033[0;31mCommit成功\033[0m"
@@ -73,7 +72,7 @@ commit:
 .PHONY:push
 push:commit
 	@git push #origin master
-	@echo "\033[0;31m源码推送成功\033[0m"
+	@echo "\033[0;31mPush成功\033[0m"
 
 
 ## proto@更新并编译proto文件
