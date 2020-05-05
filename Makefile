@@ -58,14 +58,21 @@ deploy:
 	rm -f mafool-blog.tar.gz
 
 
-## push <msg>@推送到远程Git仓库(msg为空时，使用以时间标记的默认注释)
-.PHONY:push
+## commit@Git本地Commit
+.PHONY:commit
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
-push:
+commit:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@echo $(message)
 	@git add .
 	@git commit -m $(message)
+	@echo "\033[0;31mCommit成功\033[0m"
+
+
+## push <msg>@推送到远程Git仓库(如:make push msg="备注内容",msg参数为可选项)
+.PHONY:push
+#message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
+push:commit
 	@git push #origin master
 	@echo "\033[0;31m源码推送成功\033[0m"
 
@@ -78,10 +85,15 @@ proto:
 	#protoc --proto_path=${GOPATH}/src:. --micro_out=. --go_out=. proto/user/user.proto
 
 
-## run@运行(可从命令行接收参数，如：make run daemon=true)
+## run@运行(可从命令行接收参数,如:make run daemon=true)
 .PHONY:run
 run:
 	@go run main.go $(deamon)
+
+## update@更新Git和Submodule
+.PHONY:update
+update:
+	@git submodule update --init --recursive;
 
 
 ## xorm@更新数据库模型
