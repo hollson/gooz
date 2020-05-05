@@ -60,7 +60,7 @@ deploy:
 
 ## push <msg>@推送到远程Git仓库(msg为空时，使用以时间标记的默认注释)
 .PHONY:push
-message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y-%m-%d %H:%M:%S')");
+message:=$(if $(msg),$(msg),"Rebuilded at $$(date)");
 push:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@echo $(message)
