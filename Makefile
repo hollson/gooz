@@ -65,8 +65,8 @@ push:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@echo $(message)
 	@git add .
-	git commit -m $(message)
-	git push #origin master
+	@git commit -m $(message)
+	@git push #origin master
 	@echo "\033[0;31m源码推送成功\033[0m"
 
 
