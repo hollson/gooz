@@ -58,7 +58,7 @@ deploy:
 	rm -f mafool-blog.tar.gz
 
 
-## commit@Git本地Commit
+## commit@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)
 .PHONY:commit
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
 commit:
@@ -71,7 +71,6 @@ commit:
 
 ## push <msg>@推送到远程Git仓库(如:make push msg="备注内容",msg参数为可选项)
 .PHONY:push
-#message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
 push:commit
 	@git push #origin master
 	@echo "\033[0;31m源码推送成功\033[0m"
