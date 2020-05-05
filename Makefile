@@ -68,7 +68,7 @@ commit:
 	@echo "\033[0;31mCommit成功\033[0m"
 
 
-## push <msg>@先commit,再推送到远程Git仓库,格式如commit命令。
+## push <msg>@执行commit并push到远程Git仓库,格式如commit命令。
 .PHONY:push
 push:commit
 	@git push #origin master
