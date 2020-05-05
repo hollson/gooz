@@ -6,11 +6,11 @@ VERSION="v1.0.1"   #版本号
 CGO=0			   #是否开启Cgo，0：不开启，1：开启
 
 
-## all@编译并运行(默认项，可直接执行make命令)
+## all@编译并运行(默认项，可直接执行make命令)。
 all: build run
 
 
-## build@根据系统类型交叉编译(支持linux、darwin和windows)
+## build@根据系统类型交叉编译(支持linux、darwin和windows)。
 .PHONY:build
 build: clean
 	@echo "\033[34m开始编译...\033[0m"
@@ -32,7 +32,7 @@ build: clean
 	echo "\033[35m编译完成\033[0m"; \
 
 
-## clean@清理编译、日志和缓存等数据
+## clean@清理编译、日志和缓存等数据。
 .PHONY:clean
 clean:
 	@echo "\033[31m开始清理...\033[0m";
@@ -43,7 +43,7 @@ clean:
 	@rm -rf ./pid;
 
 
-## deploy@发布到远程Web服务器
+## deploy@发布到远程Web服务器。
 .PHONY:deploy
 deploy:
 	@#压缩本地发布包,并推送到远程服务器
@@ -58,7 +58,7 @@ deploy:
 	rm -f mafool-blog.tar.gz
 
 
-## commit@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)
+## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
 .PHONY:commit
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
 commit:
@@ -68,14 +68,14 @@ commit:
 	@echo "\033[0;31mCommit成功\033[0m"
 
 
-## push <msg>@推送到远程Git仓库(如:make push msg="备注内容",msg参数为可选项)
+## push <msg>@先commit,再推送到远程Git仓库,格式如commit命令。
 .PHONY:push
 push:commit
 	@git push #origin master
 	@echo "\033[0;31mPush成功\033[0m"
 
 
-## proto@更新并编译proto文件
+## proto@更新并编译proto文件。
 .PHONY:proto
 proto:
 	@echo "更新并编译proto文件";
@@ -83,24 +83,24 @@ proto:
 	#protoc --proto_path=${GOPATH}/src:. --micro_out=. --go_out=. proto/user/user.proto
 
 
-## run@运行(可从命令行接收参数,如:make run daemon=true)
+## run@运行(可从命令行接收参数,如:make run daemon=true)。
 .PHONY:run
 run:
 	@go run main.go $(deamon)
 
-## update@更新Git和Submodule
+## update@更新Git和Submodule。
 .PHONY:update
 update:
 	@git submodule update --init --recursive;
 
 
-## xorm@更新数据库模型
+## xorm@更新数据库模型。
 .PHONY:xorm
 xorm:
 	@echo "更新数据库模型";
 
 
-## help@查看make帮助
+## help@查看make帮助。
 .PHONY:help
 help:Makefile
 	@echo "Usage:\n  make [command]"
