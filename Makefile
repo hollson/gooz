@@ -13,22 +13,23 @@ all: build run
 ## build@根据系统类型交叉编译(支持linux、darwin和windows)
 .PHONY:build
 build: clean
-	@echo -e "\033[34m开始编译...\033[0m"
+	@echo "\033[34m开始编译...\033[0m"
 	@if [ $(GOOS) = "linux" ]; \
 	then \
-		echo "\033[31m当前系统类型：linux\033[0m"; \
+		echo "\033[35m当前系统类型：linux\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-linux-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "darwin" ]; \
 	then \
-		echo "\033[31m当前系统类型：darwin\033[0m"; \
+		echo "\033[35m当前系统类型：darwin\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-darwin-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "windows" ]; \
 	then \
-		echo "\033[33m当前系统类型：windows\033[0m"; \
+		echo "\033[35m当前系统类型：windows\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-win-amd64-$(VERSION).exe"; \
 	else \
 		echo "未知的操作系统类型."; \
 	fi
+	echo "\033[35m编译完成\033[0m"; \
 
 
 ## clean@清理编译、日志和缓存等数据
@@ -63,7 +64,6 @@ massage=$(if $(msg),$(msg),"Rebuilded at $$(date)");
 push:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@git add .
-	@echo "\033[0;35m$(massage)\033[0m"
 	git commit -m "$(massage)"
 	git push #origin master
 	@echo "\033[0;31m源码推送成功\033[0m"
