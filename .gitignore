@@ -7,7 +7,7 @@ cache
 release
 
 .idea
-.DS_Stroe
+*DS_Stroe
 *.out
 *workspace
 *.exe
