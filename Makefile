@@ -60,11 +60,12 @@ deploy:
 
 ## push <msg>@推送到远程Git仓库(msg为空时，使用以时间标记的默认注释)
 .PHONY:push
-massage=$(if $(msg),$(msg),"Rebuilded at $$(date)");
+message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y-%m-%d %H:%M:%S')");
 push:
 	@echo "\033[0;34mPush to remote...\033[0m"
+	@echo $(message)
 	@git add .
-	git commit -m "$(massage)"
+	git commit -m $(message)
 	git push #origin master
 	@echo "\033[0;31m源码推送成功\033[0m"
 
