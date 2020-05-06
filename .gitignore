@@ -1,23 +1,5 @@
 # Binaries for programs and plugins
-logs
-log
 bin
-pid
-cache
-release
-
-.idea
-*DS_Stroe
-*.out
-*workspace
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib
-*.etcd
-
-
 
 # Test binary, built with `go test -c`
 *.test
@@ -26,4 +8,21 @@ release
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor
+
+logs
+log
+pid
+cache
+release
+models
+
+.idea
+*DS_Stroe
+*workspace
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.etcd
