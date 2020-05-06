@@ -1,12 +1,12 @@
 #当前操作系统
 GOOS=$(shell go env GOOS)
 
-AppName="Deeplink" #应用名称
-VERSION="v1.0.1"   #版本号
-CGO=0			   #是否开启Cgo，0：不开启，1：开启
+AppName="Deeplink"	#应用名称
+VERSION="v1.0.1"	#版本号
+CGO=0				#是否开启Cgo，0：不开启，1：开启
 
 
-## all@编译并运行(默认项，可直接执行make命令)。
+## all@可选的命令参数，执行build和run命令。
 all: build run
 
 
@@ -27,20 +27,20 @@ build: clean
 		echo "\033[35m当前系统类型：windows\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-win-amd64-$(VERSION).exe"; \
 	else \
-		echo "未知的操作系统类型."; \
+		echo "未知的操作系统类型 ⚠️ ."; \
 	fi
-	echo "\033[35m编译完成\033[0m"; \
+	@echo "\033[35m编译完成\033[0m ✅ "; \
 
 
 ## clean@清理编译、日志和缓存等数据。
 .PHONY:clean
 clean:
-	@echo "\033[31m开始清理...\033[0m";
 	@rm -rf ./bin;
 	@rm -rf ./logs;
 	@rm -rf ./log;
 	@rm -rf ./cache;
 	@rm -rf ./pid;
+	@echo "\033[31m清理完成 ✅\033[0m";
 
 
 ## deploy@发布到远程Web服务器。
@@ -56,7 +56,7 @@ deploy:
 	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
 	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
 	rm -f mafool-blog.tar.gz
-
+	@echo "\033[31m发布完成 ✅\033[0m";
 
 ## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
 .PHONY:commit
