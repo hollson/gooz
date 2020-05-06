@@ -4,10 +4,8 @@ package domain
 import (
 	"errors"
 	"fmt"
-	"github.com/gogap/logrus"
-	"mafool.com/go/deeplink/config"
-	"mafool.com/go/deeplink/repo"
-	"mafool.com/go/deeplink/repo/models"
+	"github.com/hollson/deeplink/repo"
+	"github.com/sirupsen/logrus"
 )
 
 // SAAS模式，根据租户操作不同的数据库

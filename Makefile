@@ -17,11 +17,11 @@ build: clean
 	@if [ $(GOOS) = "linux" ]; \
 	then \
 		echo "\033[35m当前系统类型：linux\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-linux-amd64-$(VERSION)"; \
+		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-linux-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "darwin" ]; \
 	then \
 		echo "\033[35m当前系统类型：darwin\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-darwin-amd64-$(VERSION)"; \
+		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-darwin-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "windows" ]; \
 	then \
 		echo "\033[35m当前系统类型：windows\033[0m"; \
@@ -40,7 +40,7 @@ clean:
 	@rm -rf ./log;
 	@rm -rf ./cache;
 	@rm -rf ./pid;
-	@echo "\033[31m清理完成 ✅\033[0m";
+	@echo "\033[31m清理完成 ✅ \033[0m";
 
 
 ## deploy@发布到远程Web服务器。
@@ -56,7 +56,7 @@ deploy:
 	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
 	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
 	rm -f mafool-blog.tar.gz
-	@echo "\033[31m发布完成 ✅\033[0m";
+	@echo "\033[31m发布完成 ✅ \033[0m";
 
 ## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
 .PHONY:commit
@@ -96,8 +96,12 @@ update:
 
 ## xorm@更新数据库模型。
 .PHONY:xorm
+Templates=$(GOPATH)/src/github.com/go-xorm/cmd/xorm/templates/goxorm/
+REPO_PATH=$$(pwd)/repo
 xorm:
-	@echo "更新数据库模型";
+	@sudo rm -rf $(REPO_PATH)/models/*;
+	@sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
+	@echo "\033[31mReverse完成 ✅ \033[0m";
 
 
 ## help@查看make帮助。

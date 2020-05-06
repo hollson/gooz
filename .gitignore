@@ -15,6 +15,7 @@ release
 *.dll
 *.so
 *.dylib
+*.etcd
 
 
 
