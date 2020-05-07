@@ -10,6 +10,7 @@
 package repo
 
 import (
+	"github.com/hollson/deeplink/etc"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/xormplus/xorm"
@@ -19,12 +20,11 @@ var Eg *xorm.EngineGroup
 
 func init() {
 	var err error
+	cluster1 := etc.Postgres.Source
 
 	// 集群模式 Todo:从配置文件读取
 	conns := []string{
-		"postgres://postgres:123456@localhost:5432/testdb?sslmode=disable;",
-		//"postgres://postgres:root@localhost:5432/test1?sslmode=disable;",
-		//"postgres://postgres:root@localhost:5432/test2?sslmode=disable",
+		cluster1,
 	}
 
 	// 集群访问方式：
@@ -35,18 +35,12 @@ func init() {
 	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.WeightRoundRobinPolicy([]int{2, 3})) //权重轮询
 	Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.LeastConnPolicy()) //最小链接
 	if err != nil {
-		logrus.Errorln("Postgres Engine错误:",err.Error())
+		logrus.Errorln("Postgres Engine错误:", err.Error())
 	}
 
-	if err:= Eg.Ping();err!=nil{
-		logrus.Errorln(" ❌ Postgres数据库连接失败:",err)
-	}else {
+	if err := Eg.Ping(); err != nil {
+		logrus.Errorln(" ❌ Postgres数据库连接失败:", err)
+	} else {
 		logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
 	}
 }
-
-
-
-
-
-

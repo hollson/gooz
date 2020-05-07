@@ -15,9 +15,10 @@ import (
 	"gopkg.in/gcfg.v1"
 )
 
-var App *app     //App配置
-var Mysql *mysql //Mysql数据库
-var Redis *redis //Redis配置
+var App *app           //App配置
+var Mysql *mysql       //Mysql数据库
+var Redis *redis       //Redis配置
+var Postgres *postgres //Postgres数据库
 //var Log *Log
 //var Zk *Zookeeper
 //var etcd *Etcd
@@ -49,14 +50,20 @@ type mysql struct {
 	ConnStr  string `ini:"-"` //拼接的连接字符串
 }
 
+type postgres struct {
+	Enable bool   //是否启用mysql数据库
+	Source string //链接字符串
+}
+
 type redis struct {
 	Host string
 }
 
 type config struct {
-	App   app
-	Mysql mysql
-	Redis redis
+	App      app
+	Mysql    mysql
+	Postgres postgres
+	Redis    redis
 }
 
 func init() {
@@ -71,8 +78,7 @@ func init() {
 
 	App = &cfg.App
 	Mysql = &cfg.Mysql
+	Postgres = &cfg.Postgres
 	Redis = &cfg.Redis
-
-
 
 }
