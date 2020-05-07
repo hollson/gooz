@@ -1,0 +1,52 @@
+//-------------------------------------------------------------------------------------
+// @ Copyright (C) free license,without warranty of any kind .
+// @ Author: hollson <hollson@live.com>
+// @ Date: 2020-05-06
+// @ Version: 1.0.0
+//
+// Here's the code description...
+//-------------------------------------------------------------------------------------
+
+package repo
+
+import (
+	_ "github.com/lib/pq"
+	"github.com/sirupsen/logrus"
+	"github.com/xormplus/xorm"
+)
+
+var Eg *xorm.EngineGroup
+
+func init() {
+	var err error
+
+	// 集群模式 Todo:从配置文件读取
+	conns := []string{
+		"postgres://postgres:123456@localhost:5432/testdb?sslmode=disable;",
+		//"postgres://postgres:root@localhost:5432/test1?sslmode=disable;",
+		//"postgres://postgres:root@localhost:5432/test2?sslmode=disable",
+	}
+
+	// 集群访问方式：
+	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.RandomPolicy()) //随机
+	////此时设置的test1数据库和test2数据库的随机访问权重为2和3
+	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.WeightRandomPolicy([]int{2, 3})) //权重随机
+	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.RoundRobinPolicy())              //轮询
+	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.WeightRoundRobinPolicy([]int{2, 3})) //权重轮询
+	Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.LeastConnPolicy()) //最小链接
+	if err != nil {
+		logrus.Errorln("Postgres Engine错误:",err.Error())
+	}
+
+	if err:= Eg.Ping();err!=nil{
+		logrus.Errorln(" ❌ Postgres数据库连接失败:",err)
+	}else {
+		logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
+	}
+}
+
+
+
+
+
+

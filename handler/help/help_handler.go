@@ -9,26 +9,24 @@ package help
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/repo"
-	"net/http"
 )
 
 //curl http://0.0.0.0:8080/help/ping
-func PingHandler(c *gin.Context) {
-	pongs := gin.H{}
-
-	// 测试Mysql连通性
-	if _, err := repo.PingRedis(); err != nil {
-		pongs["redis"] = err.Error()
-	} else {
-		pongs["redis"] = "pong"
-	}
-
-	// 测试Redis连通性
-	if err := repo.PingMysql(); err != nil {
-		pongs["mysql"] = err.Error()
-	} else {
-		pongs["mysql"] = "pong"
-	}
-	c.JSON(http.StatusOK, pongs)
+func PingHandler(ctx *gin.Context) {
+	//pongs := gin.H{}
+	//
+	//// 测试Mysql连通性
+	//if _, err := repo.PingRedis(); err != nil {
+	//	pongs["redis"] = err.Error()
+	//} else {
+	//	pongs["redis"] = "pong"
+	//}
+	//
+	//// 测试Redis连通性
+	//if err := repo.PingMysql(); err != nil {
+	//	pongs["mysql"] = err.Error()
+	//} else {
+	//	pongs["mysql"] = "pong"
+	//}
+	//ctx.JSON(http.StatusOK, pongs)
 }

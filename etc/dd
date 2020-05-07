@@ -15,14 +15,6 @@ import (
 	"gopkg.in/gcfg.v1"
 )
 
-var App *app     //App配置
-var Mysql *mysql //Mysql数据库
-var Redis *redis //Redis配置
-//var Log *Log
-//var Zk *Zookeeper
-//var etcd *Etcd
-//var ConnStr string //拼接的连接字符串
-
 // 运行环境
 type Env string
 
@@ -31,22 +23,33 @@ const (
 	Env_PROD     = "prod" //成产环境
 )
 
+var App *app     //App配置
+var Mysql *mysql //Mysql数据库
+var Redis *redis //Redis配置
+//var Log *Log
+//var Zk *Zookeeper
+//var etcd *Etcd
+
+//var Config *config
+
+//var DbSource string //数据库连接字符串
+
 type app struct {
-	Name    string
-	Port    string
+	Name    string //应用程序名称
+	Port    string //服务端口
 	Env     Env    //运行环境
 	Version string //版本号
 }
 
 type mysql struct {
-	Enable   bool //是否启用mysql数据库
-	Host     string
-	Port     string
-	User     string
-	Password string
-	Schema   string
-	Charset  string
-	ConnStr  string `ini:"-"` //拼接的连接字符串
+	Enable   bool   //是否启用mysql数据库
+	Host     string //主机
+	Port     string //端口
+	User     string //用户名
+	Password string //密码
+	Schema   string //数据库
+	Charset  string //编码
+	ConnStr string //拼接的连接字符串
 }
 
 type redis struct {
@@ -60,19 +63,15 @@ type config struct {
 }
 
 func init() {
-	cfg := config{}
+	cfg := new(config)
 	err := gcfg.ReadFileInto(&cfg, "./etc/profiles/config.ini")
 	if err != nil {
 		logrus.Fatal(err)
 	}
-	//"root:123456@(localhost:3306)/testdb?charset=utf8"
-	cfg.Mysql.ConnStr = fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=%s", cfg.Mysql.User, cfg.Mysql.Password,
+	cfg.Mysql.ConnStr= fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=%s", cfg.Mysql.User, cfg.Mysql.Password,
 		cfg.Mysql.Host, cfg.Mysql.Port, cfg.Mysql.Schema, cfg.Mysql.Charset)
 
-	App = &cfg.App
-	Mysql = &cfg.Mysql
-	Redis = &cfg.Redis
-
-
-
+	App=&cfg.App
+	Mysql=&cfg.Mysql
+	Redis=&cfg.Redis
 }

@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/etc"
 	"github.com/sirupsen/logrus"
+	_ "github.com/hollson/deeplink/repo"
 	"os"
 	"time"
 )
@@ -34,24 +35,16 @@ For more please email hollson@qq.com
 
 var router *gin.Engine
 
+// 设置日志规则
 func init() {
 	fmt.Println(FAVORITE)
 
-	// 设置日志规则
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
 		logrus.Errorln("Create file err :", err)
 	} else {
 		logrus.SetOutput(log)
 	}
 }
-
-
-var ddd=`
-  ___ ____ ___ _  ___  ____
- / _ \/ _ \/  \ \/ _ \/ __/
- \_, /\_,_/_/_/_/\___/_/
-/___/
-`
 
 // 启动程序
 func Run() {

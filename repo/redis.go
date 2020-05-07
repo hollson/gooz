@@ -15,10 +15,17 @@ func init() {
 	rds, err = redis.Dial("tcp", redis_addr)
 
 	if err != nil {
-		logrus.Fatal("Redis连接失败:", err)
-		panic(err)
+		logrus.Errorln(" ❌ Redis连接失败:", err)
+	}else {
+		if _,err:=PingRedis();err!=nil{
+			logrus.Errorln(" ❌ Ping Redis失败:", err)
+		}else {
+			logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
+		}
 	}
 }
+
+
 func PingRedis() (string, error) {
 	return redis.String(rds.Do("ping"))
 }
@@ -30,8 +37,4 @@ func SetValue(key, val string) {
 
 func GetValue(key string) (string, error) {
 	return redis.String(rds.Do("GET", key))
-}
-
-func FlushDb(index int) {
-	//rds.Do("SET", key, val)
 }
