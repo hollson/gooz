@@ -28,8 +28,8 @@ func init() {
 	if !etc.Postgres.Enable {
 		return
 	}
-
-	PG, err := xorm.NewEngine("postgres", etc.Postgres.Source)
+	var err error
+	PG, err= xorm.NewEngine("postgres", etc.Postgres.Source)
 	if err != nil {
 		logrus.Errorln("Postgres Engine错误:", err.Error())
 	}

@@ -100,8 +100,8 @@ Templates=$(GOPATH)/src/github.com/go-xorm/cmd/xorm/templates/goxorm/
 REPO_PATH=$$(pwd)/repo
 xorm:
 	@sudo rm -rf $(REPO_PATH)/models/*;
-	@sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
-	@#sudo xorm reverse postgres "user=postgres password=123456 dbname=testdb host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
+	@#sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
+	@sudo xorm reverse postgres "user=postgres password=123456 dbname=testdb host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@#xorm reverse sqite3 test.db templates/goxorm C:\temp
 	@echo "\033[31m ✅  Reverse完成\033[0m";
 #https://pkg.go.dev/github.com/lib/pq?tab=doc

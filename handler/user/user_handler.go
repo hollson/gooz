@@ -14,6 +14,7 @@ import (
 	"github.com/hollson/deeplink/repo/domain"
 	"github.com/sirupsen/logrus"
 	"net/http"
+	"strconv"
 )
 
 var repo domain.IUser
@@ -31,15 +32,21 @@ type RepUser struct {
 
 // 获取用户信息
 func GetUserHandler(ctx *gin.Context) {
-	req := &ReqUser{}
-	if err := ctx.ShouldBind(req); err != nil {
-		ctx.String(http.StatusBadRequest, err.Error())
-		ctx.Abort()
+	//req := &ReqUser{}
+	//if err := ctx.ShouldBind(req); err != nil {
+	//	ctx.String(http.StatusBadRequest, err.Error())
+	//	ctx.Abort()
+	//}
+	id:=ctx.DefaultQuery("id","0")
+	n,err:= strconv.Atoi(id)
+	if err!=nil{
+		ctx.JSON(http.StatusBadRequest, "id error")
+		return
 	}
 
 	// 逻辑处理
 	repo = &domain.UserRepo{}
-	u, err := repo.GetUser(req.Id)
+	u, err := repo.GetUser(int64(n))
 	if err != nil {
 		logrus.Errorln(err)
 		return
