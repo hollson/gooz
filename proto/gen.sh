@@ -32,5 +32,3 @@ protoc -I ./ \
 #--php_out=./_gen/php/ \
 #--python_out=./_gen/py/ \
 #./*.proto
-
-echo " ✅ proto文件编译完成！！！"

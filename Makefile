@@ -7,29 +7,29 @@ CGO=0				#是否开启Cgo，0：不开启，1：开启
 
 
 ## all@可选的命令参数，执行build和run命令。
-all: build run
+all: proto build run
 
 
 ## build@根据系统类型交叉编译(支持linux、darwin和windows)。
 .PHONY:build
 build: clean
-	@echo "\033[34m开始编译...\033[0m"
+	@echo "\033[34m 😊 开始编译...\033[0m"
 	@if [ $(GOOS) = "linux" ]; \
 	then \
-		echo "\033[35m当前系统类型：linux\033[0m"; \
+		echo "\033[35m 🍵 当前系统类型：linux\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-linux-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "darwin" ]; \
 	then \
-		echo "\033[35m当前系统类型：darwin\033[0m"; \
+		echo "\033[35m 🍵 当前系统类型：darwin\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-darwin-amd64-$(VERSION)"; \
 	elif [ $(GOOS) = "windows" ]; \
 	then \
-		echo "\033[35m当前系统类型：windows\033[0m"; \
+		echo "\033[35m 🍵 当前系统类型：windows\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-win-amd64-$(VERSION).exe"; \
 	else \
-		echo "未知的操作系统类型 ⚠️ ."; \
+		echo " ⚠️  未知的操作系统类型."; \
 	fi
-	@echo "\033[35m编译完成\033[0m ✅ "; \
+	@echo "\033[35m ✅  编译完成\033[0m"; \
 
 
 ## clean@清理编译、日志和缓存等数据。
@@ -40,7 +40,7 @@ clean:
 	@rm -rf ./log;
 	@rm -rf ./cache;
 	@rm -rf ./pid;
-	@echo "\033[31m清理完成 ✅ \033[0m";
+	@echo "\033[31m ✅  清理完成\033[0m";
 
 
 ## deploy@发布到远程Web服务器。
@@ -56,7 +56,7 @@ deploy:
 	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
 	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
 	rm -f mafool-blog.tar.gz
-	@echo "\033[31m发布完成 ✅ \033[0m";
+	@echo "\033[31m ✅  发布完成\033[0m";
 
 ## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
 .PHONY:commit
@@ -79,11 +79,13 @@ push:commit
 .PHONY:proto
 proto:
 	@cd proto && ./gen.sh && cd -;
+	@echo "\033[35m ✅  Proto编译完成\033[0m"; \
 
 
 ## run@运行(可从命令行接收参数,如:make run daemon=true)。
 .PHONY:run
 run:
+	@echo " ⚽ 启动服务..."
 	@go run main.go $(deamon)
 
 ## update@更新Git和Submodule。
@@ -101,7 +103,7 @@ xorm:
 	@#sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
 	@sudo xorm reverse postgres "user=postgres password=123456 dbname=testdb host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@#xorm reverse sqite3 test.db templates/goxorm C:\temp
-	@echo "\033[31mReverse完成 ✅ \033[0m";
+	@echo "\033[31m ✅  Reverse完成\033[0m";
 
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
 
