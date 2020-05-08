@@ -14,10 +14,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
 // 用户列表获取
-func UserListHandler(ctx *gin.Context){
+func UserListHandler(ctx *gin.Context) {
 
-fmt.Println("用户业务逻辑示例")
+	fmt.Println("用户业务逻辑示例")
 
 }

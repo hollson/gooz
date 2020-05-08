@@ -33,11 +33,10 @@ func Today() time.Time {
 	return time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
 }
 
-
 func RandIntn(n int) int {
 	// 创建随机数种子  (默认将1970-1-1 00:00:00当做随机数种子)
 	rand.Seed(time.Now().UnixNano()) // UnixNano()表示纳秒
-	a := rand.Intn(n)               // 0-n之间的随机整数。 (包含0，不包含n。相当于对10求余)
+	a := rand.Intn(n)                // 0-n之间的随机整数。 (包含0，不包含n。相当于对10求余)
 	return a
 }
 

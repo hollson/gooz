@@ -1,0 +1,49 @@
+syntax = "proto3";
+//import "google/protobuf/any.proto";
+package pbs;
+
+// java 生成文件定义
+option java_package = "com.example.tutorial";
+option java_outer_classname = "PersonDto";
+// [END java_declaration]
+
+// c# 生成文件定义
+option csharp_namespace = "Pro.Demo";
+
+// 服务对象
+service Person {
+    // 传入一个姓名，返回相应的个人信息
+    rpc GetPersonInfoHandler (PersonRequest) returns (PersonReply) {
+    }
+}
+
+// 请求参数
+message PersonRequest {
+    string name = 1;
+}
+
+// 相应结果
+message PersonReply {
+    string name = 1; //姓名
+    string id_card = 2; //身份证
+    int32 age = 3; //年龄
+    enum Sex {
+        FEMALE = 0;
+        MALE = 1;
+    }
+    Sex sex = 4; //性别
+    bool married = 5; //是否已婚
+    double amount = 6; //资产
+    repeated string address = 7; //地址
+    Append.Educational educational = 8; //学历
+    //    repeated google.protobuf.Any Others = 9; //其他
+}
+
+// 附加信息
+message Append {
+    message Educational {
+        string university = 1; //毕业学校
+        repeated string specialty = 2; //专业
+    }
+    repeated Educational educational = 1; //学历信息
+}

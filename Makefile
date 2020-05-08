@@ -78,9 +78,7 @@ push:commit
 ## proto@更新并编译proto文件。
 .PHONY:proto
 proto:
-	@echo "更新并编译proto文件";
-	#git pull
-	#protoc --proto_path=${GOPATH}/src:. --micro_out=. --go_out=. proto/user/user.proto
+	@cd proto && ./gen.sh && cd -;
 
 
 ## run@运行(可从命令行接收参数,如:make run daemon=true)。

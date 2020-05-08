@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/etc"
-	"github.com/sirupsen/logrus"
 	_ "github.com/hollson/deeplink/repo"
+	"github.com/sirupsen/logrus"
 	"os"
 	"time"
 )

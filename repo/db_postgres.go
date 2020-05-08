@@ -14,6 +14,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"github.com/xormplus/xorm"
+	lg "github.com/xormplus/xorm/log"
 )
 
 var Eg *xorm.EngineGroup
@@ -42,5 +43,15 @@ func init() {
 		logrus.Errorln(" ❌ Postgres数据库连接失败:", err)
 	} else {
 		logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
+	}
+
+	if etc.App.Env == etc.Env_PROD {
+		DB.ShowSQL(false)
+		DB.SetLogLevel(lg.LOG_ERR)
+		//DB.SetMaxIdleConns(30) 	//最大空闲数
+		//DB.SetMaxOpenConns(500)	//最大连接数
+	} else {
+		DB.ShowSQL(true)
+		DB.SetLogLevel(lg.LOG_INFO)
 	}
 }

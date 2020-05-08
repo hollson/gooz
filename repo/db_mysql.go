@@ -8,7 +8,6 @@
 // 参考教程： https://www.kancloud.cn/xormplus/xorm/167078
 //-------------------------------------------------------------------------------------
 
-
 package repo
 
 import (
@@ -17,10 +16,8 @@ import (
 	"github.com/hollson/deeplink/etc"
 	"github.com/sirupsen/logrus"
 	"github.com/xormplus/xorm"
-	lv "github.com/xormplus/xorm/log"
+	lg "github.com/xormplus/xorm/log"
 )
-
-
 
 //定义orm引擎
 var DB *xorm.Engine
@@ -49,11 +46,11 @@ func InitMysql() {
 
 	if etc.App.Env == etc.Env_PROD {
 		DB.ShowSQL(false)
-		DB.SetLogLevel(lv.LOG_ERR)
+		DB.SetLogLevel(lg.LOG_ERR)
 		//DB.SetMaxIdleConns(30) //最大空闲数
 		//DB.SetMaxOpenConns(500)  //最大连接数
 	} else {
 		DB.ShowSQL(true)
-		DB.SetLogLevel(lv.LOG_INFO)
+		DB.SetLogLevel(lg.LOG_INFO)
 	}
 }

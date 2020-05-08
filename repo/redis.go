@@ -16,15 +16,14 @@ func init() {
 
 	if err != nil {
 		logrus.Errorln(" ❌ Redis连接失败:", err)
-	}else {
-		if _,err:=PingRedis();err!=nil{
+	} else {
+		if _, err := PingRedis(); err != nil {
 			logrus.Errorln(" ❌ Ping Redis失败:", err)
-		}else {
+		} else {
 			logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
 		}
 	}
 }
-
 
 func PingRedis() (string, error) {
 	return redis.String(rds.Do("ping"))
