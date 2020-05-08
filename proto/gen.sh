@@ -25,6 +25,7 @@ protoc -I ./ \
 --python_out=./_gen/py/ \
 ./*.proto
 
+
 # 多语言版本
 #protoc -I ./ \
 #--go_out=plugins=grpc:./_gen/go \
