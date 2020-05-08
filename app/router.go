@@ -19,8 +19,8 @@ func Route() {
 
 // 用户模块
 func UserRoute() {
-	// 获取用户列表
-	router.GET("user/list", user.UserListHandler)
+	// 获取用户信息 curl http://127.0.0.1:8080/user/detail?id=1
+	router.GET("user/detail", user.GetUserHandler)
 }
 
 // 帮助/测试路由

@@ -10,11 +10,10 @@
 package domain
 
 import (
-	"errors"
-	"github.com/hollson/deeplink/repo"
 	"github.com/hollson/deeplink/repo/models"
 	"github.com/sirupsen/logrus"
 )
+
 
 type IUser interface {
 	GetUser(id int64) (*models.User, error)
@@ -24,11 +23,19 @@ type IUser interface {
 type UserRepo struct {}
 
 // 查询单条记录
-func (p *UserRepo) GetUser(id int64) (*models.User, error) {
+func (p *UserRepo) GetUser(id int64) (ret *models.User,err error) {
+	logrus.Errorln(1111)
+
 	u:=models.User{Id:id}
-	 if _,err:=repo.Eg.Get(&u);err!=nil{
-	 	return nil,errors.New("")
+	logrus.Errorln(2222)
+	 if has,err:=db.Get(&u);err!=nil{
+		 logrus.Errorln(3333)
+		 logrus.Errorln(has)
+	 	//Warp包装Error
+		 logrus.Errorln(err) //todo warp包装
+	 	return nil,err
 	 }else {
+	 	logrus.Errorln(u)
 	 	return &u,nil
 	 }
 }
@@ -36,7 +43,7 @@ func (p *UserRepo) GetUser(id int64) (*models.User, error) {
 // 分页查询
 func (p *UserRepo) GetUserByPage(offset, limit int) ([]models.User, error) {
 	var us []models.User
-	if err:= repo.Eg.Where("1=1").Limit(limit,offset).Find(us);err!=nil{
+	if err:= db.Where("1=1").Limit(limit,offset).Find(us);err!=nil{
 		logrus.Errorln("GetUserByPage Err：",err)
 		return nil,err
 	}

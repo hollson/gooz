@@ -1,10 +1,14 @@
 //-------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.com>
-// @ Date: 2020-04-30
+// @ Date: 2020-05-08
 // @ Version: 1.0.0
 //
 // Here's the code description...
 //-------------------------------------------------------------------------------------
 
-package etc
+package domain
+
+import "github.com/hollson/deeplink/repo"
+
+var db=repo.PG

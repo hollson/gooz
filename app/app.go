@@ -23,11 +23,11 @@ Deeplink is a internal applications <XX科技.保留版权>
        _              _ _      _
     __| |___ ___ _ __| (_)_ _ | |__
    / _  / -_) -_) '_ \ | | ' \| / /
-   \____\___\___| .__/_|_|_||_|_\_\   v1.0.0
+   \____\___\___| .__/_|_|_||_|_\_\   %s(%s)
                 |_|
 
 Usage:
-	deeplink <command> [arguments] 
+	%s <command> [arguments] 
 
 Use "deeplink help <command>" for more information about a command.
 For more please email hollson@qq.com
@@ -37,8 +37,9 @@ var router *gin.Engine
 
 // 设置日志规则
 func init() {
-	fmt.Println(FAVORITE)
+	fmt.Printf(FAVORITE,etc.App.Version,etc.App.Env,etc.App.Name)
 
+	os.MkdirAll("./logs",os.ModePerm)
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
 		logrus.Errorln("Create file err :", err)
 	} else {

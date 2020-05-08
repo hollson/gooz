@@ -20,7 +20,7 @@ import (
 )
 
 //定义orm引擎
-var DB *xorm.Engine
+var My *xorm.Engine
 
 //创建orm引擎
 func init() {
@@ -33,11 +33,11 @@ func InitMysql() {
 	}
 
 	var err error
-	DB, err = xorm.NewEngine("mysql", etc.Mysql.ConnStr)
+	My, err = xorm.NewEngine("mysql", etc.Mysql.ConnStr)
 	if err != nil {
 		logrus.Errorln("Mysql Engine错误:", err.Error())
 	} else {
-		if err := DB.Ping(); err != nil {
+		if err := My.Ping(); err != nil {
 			logrus.Errorln(" ❌ Mysql数据库连接失败:", err)
 		} else {
 			logrus.Infoln(" ✅ Mysql数据库连接成功 !!!")
@@ -45,12 +45,12 @@ func InitMysql() {
 	}
 
 	if etc.App.Env == etc.Env_PROD {
-		DB.ShowSQL(false)
-		DB.SetLogLevel(lg.LOG_ERR)
-		//DB.SetMaxIdleConns(30) //最大空闲数
-		//DB.SetMaxOpenConns(500)  //最大连接数
+		My.ShowSQL(false)
+		My.SetLogLevel(lg.LOG_ERR)
+		//My.SetMaxIdleConns(30) //最大空闲数
+		//My.SetMaxOpenConns(500)  //最大连接数
 	} else {
-		DB.ShowSQL(true)
-		DB.SetLogLevel(lg.LOG_INFO)
+		My.ShowSQL(true)
+		My.SetLogLevel(lg.LOG_INFO)
 	}
 }
