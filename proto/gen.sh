@@ -18,6 +18,7 @@ mkdir -p ./_gen/go ./_gen/py ./_gen/php ./_gen/cs ./_gen/java
 用法：protoc [OPTION] PROTO_FILES
 参数：-I 指定一组ptoto文件
 '
+
 protoc -I ./ \
 --go_out=plugins=grpc:./_gen/go \
 --java_out=./_gen/java/ \
