@@ -15,7 +15,7 @@ public final class CommonShopProto {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface ChatMsgOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:pbs.ChatMsg)
+      // @@protoc_insertion_point(interface_extends:ChatMsg)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -134,11 +134,11 @@ public final class CommonShopProto {
    * 消息实体
    * </pre>
    *
-   * Protobuf type {@code pbs.ChatMsg}
+   * Protobuf type {@code ChatMsg}
    */
   public  static final class ChatMsg extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:pbs.ChatMsg)
+      // @@protoc_insertion_point(message_implements:ChatMsg)
       ChatMsgOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use ChatMsg.newBuilder() to construct.
@@ -243,13 +243,13 @@ public final class CommonShopProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_ChatMsg_descriptor;
+      return com.imrobot.proto.CommonShopProto.internal_static_ChatMsg_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_ChatMsg_fieldAccessorTable
+      return com.imrobot.proto.CommonShopProto.internal_static_ChatMsg_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.imrobot.proto.CommonShopProto.ChatMsg.class, com.imrobot.proto.CommonShopProto.ChatMsg.Builder.class);
     }
@@ -774,21 +774,21 @@ public final class CommonShopProto {
      * 消息实体
      * </pre>
      *
-     * Protobuf type {@code pbs.ChatMsg}
+     * Protobuf type {@code ChatMsg}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:pbs.ChatMsg)
+        // @@protoc_insertion_point(builder_implements:ChatMsg)
         com.imrobot.proto.CommonShopProto.ChatMsgOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_ChatMsg_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_ChatMsg_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_ChatMsg_fieldAccessorTable
+        return com.imrobot.proto.CommonShopProto.internal_static_ChatMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.imrobot.proto.CommonShopProto.ChatMsg.class, com.imrobot.proto.CommonShopProto.ChatMsg.Builder.class);
       }
@@ -831,7 +831,7 @@ public final class CommonShopProto {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_ChatMsg_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_ChatMsg_descriptor;
       }
 
       @java.lang.Override
@@ -1472,10 +1472,10 @@ public final class CommonShopProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:pbs.ChatMsg)
+      // @@protoc_insertion_point(builder_scope:ChatMsg)
     }
 
-    // @@protoc_insertion_point(class_scope:pbs.ChatMsg)
+    // @@protoc_insertion_point(class_scope:ChatMsg)
     private static final com.imrobot.proto.CommonShopProto.ChatMsg DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.imrobot.proto.CommonShopProto.ChatMsg();
@@ -1513,7 +1513,7 @@ public final class CommonShopProto {
   }
 
   public interface IdentityOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:pbs.Identity)
+      // @@protoc_insertion_point(interface_extends:Identity)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1549,11 +1549,11 @@ public final class CommonShopProto {
         getTokenBytes();
   }
   /**
-   * Protobuf type {@code pbs.Identity}
+   * Protobuf type {@code Identity}
    */
   public  static final class Identity extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:pbs.Identity)
+      // @@protoc_insertion_point(message_implements:Identity)
       IdentityOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Identity.newBuilder() to construct.
@@ -1632,13 +1632,13 @@ public final class CommonShopProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_Identity_descriptor;
+      return com.imrobot.proto.CommonShopProto.internal_static_Identity_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_Identity_fieldAccessorTable
+      return com.imrobot.proto.CommonShopProto.internal_static_Identity_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.imrobot.proto.CommonShopProto.Identity.class, com.imrobot.proto.CommonShopProto.Identity.Builder.class);
     }
@@ -1920,21 +1920,21 @@ public final class CommonShopProto {
       return builder;
     }
     /**
-     * Protobuf type {@code pbs.Identity}
+     * Protobuf type {@code Identity}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:pbs.Identity)
+        // @@protoc_insertion_point(builder_implements:Identity)
         com.imrobot.proto.CommonShopProto.IdentityOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Identity_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_Identity_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Identity_fieldAccessorTable
+        return com.imrobot.proto.CommonShopProto.internal_static_Identity_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.imrobot.proto.CommonShopProto.Identity.class, com.imrobot.proto.CommonShopProto.Identity.Builder.class);
       }
@@ -1969,7 +1969,7 @@ public final class CommonShopProto {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Identity_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_Identity_descriptor;
       }
 
       @java.lang.Override
@@ -2254,10 +2254,10 @@ public final class CommonShopProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:pbs.Identity)
+      // @@protoc_insertion_point(builder_scope:Identity)
     }
 
-    // @@protoc_insertion_point(class_scope:pbs.Identity)
+    // @@protoc_insertion_point(class_scope:Identity)
     private static final com.imrobot.proto.CommonShopProto.Identity DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.imrobot.proto.CommonShopProto.Identity();
@@ -2295,7 +2295,7 @@ public final class CommonShopProto {
   }
 
   public interface OperationOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:pbs.Operation)
+      // @@protoc_insertion_point(interface_extends:Operation)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2342,11 +2342,11 @@ public final class CommonShopProto {
         getDataBytes();
   }
   /**
-   * Protobuf type {@code pbs.Operation}
+   * Protobuf type {@code Operation}
    */
   public  static final class Operation extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:pbs.Operation)
+      // @@protoc_insertion_point(message_implements:Operation)
       OperationOrBuilder {
   private static final long serialVersionUID = 0L;
     // Use Operation.newBuilder() to construct.
@@ -2420,13 +2420,13 @@ public final class CommonShopProto {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_Operation_descriptor;
+      return com.imrobot.proto.CommonShopProto.internal_static_Operation_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.imrobot.proto.CommonShopProto.internal_static_pbs_Operation_fieldAccessorTable
+      return com.imrobot.proto.CommonShopProto.internal_static_Operation_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.imrobot.proto.CommonShopProto.Operation.class, com.imrobot.proto.CommonShopProto.Operation.Builder.class);
     }
@@ -2693,21 +2693,21 @@ public final class CommonShopProto {
       return builder;
     }
     /**
-     * Protobuf type {@code pbs.Operation}
+     * Protobuf type {@code Operation}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:pbs.Operation)
+        // @@protoc_insertion_point(builder_implements:Operation)
         com.imrobot.proto.CommonShopProto.OperationOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Operation_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_Operation_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Operation_fieldAccessorTable
+        return com.imrobot.proto.CommonShopProto.internal_static_Operation_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 com.imrobot.proto.CommonShopProto.Operation.class, com.imrobot.proto.CommonShopProto.Operation.Builder.class);
       }
@@ -2740,7 +2740,7 @@ public final class CommonShopProto {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.imrobot.proto.CommonShopProto.internal_static_pbs_Operation_descriptor;
+        return com.imrobot.proto.CommonShopProto.internal_static_Operation_descriptor;
       }
 
       @java.lang.Override
@@ -3023,10 +3023,10 @@ public final class CommonShopProto {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:pbs.Operation)
+      // @@protoc_insertion_point(builder_scope:Operation)
     }
 
-    // @@protoc_insertion_point(class_scope:pbs.Operation)
+    // @@protoc_insertion_point(class_scope:Operation)
     private static final com.imrobot.proto.CommonShopProto.Operation DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.imrobot.proto.CommonShopProto.Operation();
@@ -3064,20 +3064,20 @@ public final class CommonShopProto {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_pbs_ChatMsg_descriptor;
+    internal_static_ChatMsg_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_pbs_ChatMsg_fieldAccessorTable;
+      internal_static_ChatMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_pbs_Identity_descriptor;
+    internal_static_Identity_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_pbs_Identity_fieldAccessorTable;
+      internal_static_Identity_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_pbs_Operation_descriptor;
+    internal_static_Operation_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_pbs_Operation_fieldAccessorTable;
+      internal_static_Operation_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3087,36 +3087,36 @@ public final class CommonShopProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rdemo_v2.proto\022\003pbs\"\215\001\n\007ChatMsg\022\016\n\006talk" +
-      "er\030\001 \002(\t\022\017\n\007content\030\002 \002(\t\022\017\n\007msgType\030\003 \002" +
-      "(\005\022\023\n\013receiveWxId\030\004 \002(\t\022\022\n\nthImgVideo\030\005 " +
-      "\001(\t\022\023\n\013videolength\030\006 \001(\005\022\022\n\ncreateTime\030\007" +
-      " \002(\003\"9\n\010Identity\022\016\n\006shopId\030\001 \002(\005\022\016\n\006user" +
-      "Id\030\002 \002(\005\022\r\n\005token\030\003 \002(\t\"&\n\tOperation\022\013\n\003" +
-      "cmd\030\001 \002(\005\022\014\n\004data\030\002 \002(\tB$\n\021com.imrobot.p" +
-      "rotoB\017CommonShopProto"
+      "\n\rdemo_v2.proto\"\215\001\n\007ChatMsg\022\016\n\006talker\030\001 " +
+      "\002(\t\022\017\n\007content\030\002 \002(\t\022\017\n\007msgType\030\003 \002(\005\022\023\n" +
+      "\013receiveWxId\030\004 \002(\t\022\022\n\nthImgVideo\030\005 \001(\t\022\023" +
+      "\n\013videolength\030\006 \001(\005\022\022\n\ncreateTime\030\007 \002(\003\"" +
+      "9\n\010Identity\022\016\n\006shopId\030\001 \002(\005\022\016\n\006userId\030\002 " +
+      "\002(\005\022\r\n\005token\030\003 \002(\t\"&\n\tOperation\022\013\n\003cmd\030\001" +
+      " \002(\005\022\014\n\004data\030\002 \002(\tB+\n\021com.imrobot.protoB" +
+      "\017CommonShopProtoZ\005.;pbs"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_pbs_ChatMsg_descriptor =
+    internal_static_ChatMsg_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_pbs_ChatMsg_fieldAccessorTable = new
+    internal_static_ChatMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_pbs_ChatMsg_descriptor,
+        internal_static_ChatMsg_descriptor,
         new java.lang.String[] { "Talker", "Content", "MsgType", "ReceiveWxId", "ThImgVideo", "Videolength", "CreateTime", });
-    internal_static_pbs_Identity_descriptor =
+    internal_static_Identity_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_pbs_Identity_fieldAccessorTable = new
+    internal_static_Identity_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_pbs_Identity_descriptor,
+        internal_static_Identity_descriptor,
         new java.lang.String[] { "ShopId", "UserId", "Token", });
-    internal_static_pbs_Operation_descriptor =
+    internal_static_Operation_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_pbs_Operation_fieldAccessorTable = new
+    internal_static_Operation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_pbs_Operation_descriptor,
+        internal_static_Operation_descriptor,
         new java.lang.String[] { "Cmd", "Data", });
   }
 

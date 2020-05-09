@@ -2,7 +2,8 @@ syntax = "proto3";
 
 //import "google/protobuf/any.proto";
 
-package pbs;
+//package pbs;
+option go_package = ".;pbs";
 
 // java 生成文件定义
 option java_package = "com.example.tutorial";
