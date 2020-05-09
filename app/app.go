@@ -39,7 +39,7 @@ var router *gin.Engine
 func init() {
 	fmt.Printf(FAVORITE, config.App.Version, config.App.Env, config.App.Name)
 
-	os.MkdirAll("./logs",os.ModePerm)
+	os.MkdirAll("./logs", os.ModePerm)
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
 		logrus.Errorln("Create file err :", err)
 	} else {

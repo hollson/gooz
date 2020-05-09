@@ -37,9 +37,9 @@ func GetUserHandler(ctx *gin.Context) {
 	//	ctx.String(http.StatusBadRequest, err.Error())
 	//	ctx.Abort()
 	//}
-	id:=ctx.DefaultQuery("id","0")
-	n,err:= strconv.Atoi(id)
-	if err!=nil{
+	id := ctx.DefaultQuery("id", "0")
+	n, err := strconv.Atoi(id)
+	if err != nil {
 		ctx.JSON(http.StatusBadRequest, "id error")
 		return
 	}

@@ -21,15 +21,15 @@ import (
 )
 
 var PG *xorm.Engine
-//var Eg *xorm.EngineGroup  //集群模式
 
+//var Eg *xorm.EngineGroup  //集群模式
 
 func init() {
 	if !config.Postgres.Enable {
 		return
 	}
 	var err error
-	PG, err= xorm.NewEngine("postgres", config.Postgres.Source)
+	PG, err = xorm.NewEngine("postgres", config.Postgres.Source)
 	if err != nil {
 		logrus.Errorln("Postgres Engine错误:", err.Error())
 	}

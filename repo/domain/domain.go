@@ -11,4 +11,4 @@ package domain
 
 import "github.com/hollson/deeplink/repo"
 
-var db=repo.PG
+var db = repo.PG
