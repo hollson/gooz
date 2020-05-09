@@ -16,7 +16,7 @@ build: clean
 	@echo "\033[34m 😊 开始编译...\033[0m"
 	@if [ $(OS) = "linux" ]; \
 	then \
-		echo "\033[35m 🍵 当前系统类型：$(OS)\033[0m"; \
+		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
 		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
 		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
 		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
@@ -26,7 +26,7 @@ build: clean
 		echo "输出路径：./tmp" && ls -hl ./tmp;\
 	elif [ $(OS) = "darwin" ]; \
 	then \
-		echo "\033[35m 🍵 当前系统类型：$(OS)\033[0m"; \
+		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
 		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
 		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
 		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
@@ -36,7 +36,7 @@ build: clean
 		echo "输出路径：./tmp" && ls -hl ./tmp;\
 	elif [ $(OS) = "windows" ]; \
 	then \
-		echo "\033[35m 🍵 当前系统类型：windows\033[0m"; \
+		echo "\033[35m 🍵 编译环境：windows\033[0m"; \
 		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-win-amd64-$(VERSION).exe|sed s/[[:space:]]//g`"; \
 		cp -rp ./conf ./tmp \
         echo "\033[35m ✅  编译完成\033[0m";\
