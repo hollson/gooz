@@ -12,8 +12,7 @@ package repo
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-
-	"github.com/hollson/deeplink/etc"
+	"github.com/hollson/deeplink/app/config"
 	"github.com/sirupsen/logrus"
 	"github.com/xormplus/xorm"
 	lg "github.com/xormplus/xorm/log"
@@ -28,12 +27,12 @@ func init() {
 }
 
 func InitMysql() {
-	if !etc.Mysql.Enable {
+	if !config.Mysql.Enable {
 		return
 	}
 
 	var err error
-	My, err = xorm.NewEngine("mysql", etc.Mysql.ConnStr)
+	My, err = xorm.NewEngine("mysql", config.Mysql.ConnStr)
 	if err != nil {
 		logrus.Errorln("Mysql Engine错误:", err.Error())
 	} else {
@@ -44,7 +43,7 @@ func InitMysql() {
 		}
 	}
 
-	if etc.App.Env == etc.Env_PROD {
+	if config.App.Env == config.Env_PROD {
 		My.ShowSQL(false)
 		My.SetLogLevel(lg.LOG_ERR)
 		//My.SetMaxIdleConns(30) //最大空闲数

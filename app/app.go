@@ -10,7 +10,7 @@ package app
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/etc"
+	"github.com/hollson/deeplink/app/config"
 	_ "github.com/hollson/deeplink/repo"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -37,7 +37,7 @@ var router *gin.Engine
 
 // 设置日志规则
 func init() {
-	fmt.Printf(FAVORITE,etc.App.Version,etc.App.Env,etc.App.Name)
+	fmt.Printf(FAVORITE, config.App.Version, config.App.Env, config.App.Name)
 
 	os.MkdirAll("./logs",os.ModePerm)
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
@@ -51,7 +51,7 @@ func init() {
 func Run() {
 	router = gin.Default()
 	Route()
-	if err := router.Run(etc.App.Port); err != nil {
+	if err := router.Run(config.App.Port); err != nil {
 		panic(err)
 	}
 }

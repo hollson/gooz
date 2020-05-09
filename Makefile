@@ -10,26 +10,27 @@ CGO=0				#是否开启Cgo，0：不开启，1：开启
 all: proto build run
 
 
-## build@根据系统类型交叉编译(支持linux、darwin和windows)。
+## build@根据系统类型进行交叉编译(支持linux、darwin和windows)。
 .PHONY:build
 build: clean
 	@echo "\033[34m 😊 开始编译...\033[0m"
 	@if [ $(GOOS) = "linux" ]; \
 	then \
 		echo "\033[35m 🍵 当前系统类型：linux\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-linux-amd64-$(VERSION)"; \
+		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-linux-amd64-$(VERSION)|sed s/[[:space:]]//g`"; \
 	elif [ $(GOOS) = "darwin" ]; \
 	then \
 		echo "\033[35m 🍵 当前系统类型：darwin\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-darwin-amd64-$(VERSION)"; \
+		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-darwin-amd64-$(VERSION)|sed s/[[:space:]]//g`"; \
 	elif [ $(GOOS) = "windows" ]; \
 	then \
 		echo "\033[35m 🍵 当前系统类型：windows\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./bin/"`echo $(AppName)|sed s/[[:space:]]//g`-win-amd64-$(VERSION).exe"; \
+		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./tmp/"`echo $(AppName)-win-amd64-$(VERSION).exe|sed s/[[:space:]]//g`"; \
 	else \
 		echo " ⚠️  未知的操作系统类型."; \
 	fi
-	@echo "\033[35m ✅  编译完成\033[0m"; \
+	@cp -rp ./conf ./tmp
+	@echo "\033[35m ✅  编译完成\033[0m";
 
 
 ## clean@清理编译、日志和缓存等数据。
@@ -40,23 +41,12 @@ clean:
 	@rm -rf ./log;
 	@rm -rf ./cache;
 	@rm -rf ./pid;
+	@rm -rf ./release;
+	@rm -rf ./debug;
+	@rm -rf ./tmp;
+	@rm -rf ./temp;
 	@echo "\033[31m ✅  清理完成\033[0m";
 
-
-## deploy@发布到远程Web服务器。
-.PHONY:deploy
-deploy:
-	@#压缩本地发布包,并推送到远程服务器
-	@echo "\033[0;32m发布中...\033[0m"
-	tar -zcvf $(AppName)-release-$(VERSION)-tar.gz public
-	scp $(AppName)-release-$(VERSION)-tar.gz root@www.xxx.com:/srv/www/$(AppNAme)
-
-	@#执行远程命令,进行解压、重启，并清理本地压缩包
-	echo -e "\033[0;32m执行远程清理...\033[0m"
-	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
-	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
-	rm -f mafool-blog.tar.gz
-	@echo "\033[31m ✅  发布完成\033[0m";
 
 ## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
 .PHONY:commit
@@ -66,6 +56,30 @@ commit:
 	@git add .
 	@git commit -m $(message)
 	@echo "\033[0;31mCommit成功\033[0m"
+
+
+## deploy@[远程]发布到远程服务器。
+.PHONY:deploy
+deploy:
+	@#压缩本地发布包,并推送到远程服务器
+	@echo "\033[0;32m发布中...\033[0m"
+	tar -zcvf $(AppName)-release-$(VERSION)-tar.gz public
+	scp $(AppName)-release-$(VERSION)-tar.gz root@www.xxx.com:/srv/www/$(AppNAme)
+	@#执行远程命令,进行解压、重启，并清理本地压缩包
+	echo -e "\033[0;32m执行远程清理...\033[0m"
+	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
+	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
+	rm -f mafool-blog.tar.gz
+	@echo "\033[31m ✅  发布完成\033[0m";
+
+## install@[本地]安装到/tmp"目录并启动服务。
+.PHONY:install
+install:
+	@pkill $(AppName)
+	@sudo cp -rp ./release /tmp/ && mv /tmp/;
+	@/tmp/xxxx -d=true
+	@echo "\033[31m ✅  服务已启动\033[0m";
+	@ps aux|grep $(AppName)
 
 
 ## push <msg>@执行commit并push到远程Git仓库,格式如commit命令。
@@ -82,7 +96,7 @@ proto:
 	@echo "\033[35m ✅  Proto编译完成\033[0m"; \
 
 
-## run@运行(可从命令行接收参数,如:make run daemon=true)。
+## run@运行(可附加参数，如:make run daemon=true)。
 .PHONY:run
 run:
 	@echo " ⚽  启动服务..."

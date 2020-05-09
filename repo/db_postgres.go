@@ -11,7 +11,7 @@ package repo
 
 import (
 	"github.com/go-xorm/xorm"
-	"github.com/hollson/deeplink/etc"
+	"github.com/hollson/deeplink/app/config"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	//"github.com/xormplus/xorm"
@@ -25,11 +25,11 @@ var PG *xorm.Engine
 
 
 func init() {
-	if !etc.Postgres.Enable {
+	if !config.Postgres.Enable {
 		return
 	}
 	var err error
-	PG, err= xorm.NewEngine("postgres", etc.Postgres.Source)
+	PG, err= xorm.NewEngine("postgres", config.Postgres.Source)
 	if err != nil {
 		logrus.Errorln("Postgres Engine错误:", err.Error())
 	}
@@ -53,7 +53,7 @@ func init() {
 	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.WeightRoundRobinPolicy([]int{2, 3})) //权重轮询
 	//Eg, err = xorm.NewEngineGroup("postgres", conns, xorm.LeastConnPolicy()) //最小链接
 
-	if etc.App.Env == etc.Env_PROD {
+	if config.App.Env == config.Env_PROD {
 		PG.ShowSQL(false)
 		PG.SetLogLevel(core.LOG_ERR)
 		//PG.SetMaxIdleConns(30) 	//最大空闲数

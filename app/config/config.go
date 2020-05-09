@@ -7,7 +7,7 @@
 // Here's the code description...
 //-------------------------------------------------------------------------------------
 
-package etc
+package config
 
 import (
 	"fmt"
@@ -68,7 +68,7 @@ type config struct {
 
 func init() {
 	cfg := config{}
-	err := gcfg.ReadFileInto(&cfg, "./etc/profiles/config.ini")
+	err := gcfg.ReadFileInto(&cfg, "./conf/app.ini")
 	if err != nil {
 		logrus.Fatal(err)
 	}
