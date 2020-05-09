@@ -1,36 +1,49 @@
-#当前操作系统
-GOOS=$(shell go env GOOS)
-
+# App基本信息
 AppName="Deeplink"	#应用名称
 VERSION="v1.0.1"	#版本号
 CGO=0				#是否开启Cgo，0：不开启，1：开启
 
 
 ## all@可选的命令参数，执行build和run命令。
-all: proto build run
+all: proto build
 
 
-## build@根据系统类型进行交叉编译(支持linux、darwin和windows)。
+## build <os>@编译(格式：make build os=linux/darwin/windows,os为可选参数)。
 .PHONY:build
+OS:=$(if $(os),$(os),$(shell go env GOOS))
+ARCH:=$(if $(arch),$(arch),"amd64")
 build: clean
 	@echo "\033[34m 😊 开始编译...\033[0m"
-	@if [ $(GOOS) = "linux" ]; \
+	@if [ $(OS) = "linux" ]; \
 	then \
-		echo "\033[35m 🍵 当前系统类型：linux\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=linux GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-linux-amd64-$(VERSION)|sed s/[[:space:]]//g`"; \
-	elif [ $(GOOS) = "darwin" ]; \
+		echo "\033[35m 🍵 当前系统类型：$(OS)\033[0m"; \
+		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
+		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
+		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
+		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/run.sh; \
+		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/stop.sh; \
+		echo "\033[35m ✅  编译完成\033[0m";\
+		echo "输出路径：./tmp" && ls -hl ./tmp;\
+	elif [ $(OS) = "darwin" ]; \
 	then \
-		echo "\033[35m 🍵 当前系统类型：darwin\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=darwin GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-darwin-amd64-$(VERSION)|sed s/[[:space:]]//g`"; \
-	elif [ $(GOOS) = "windows" ]; \
+		echo "\033[35m 🍵 当前系统类型：$(OS)\033[0m"; \
+		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
+		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
+		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
+		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/run.sh`; \
+		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/stop.sh`; \
+		echo "\033[35m ✅  编译完成\033[0m";\
+		echo "输出路径：./tmp" && ls -hl ./tmp;\
+	elif [ $(OS) = "windows" ]; \
 	then \
 		echo "\033[35m 🍵 当前系统类型：windows\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -x -o ./tmp/"`echo $(AppName)-win-amd64-$(VERSION).exe|sed s/[[:space:]]//g`"; \
+		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-win-amd64-$(VERSION).exe|sed s/[[:space:]]//g`"; \
+		cp -rp ./conf ./tmp \
+        echo "\033[35m ✅  编译完成\033[0m";\
+        echo "输出路径：./tmp" && ls -hl ./tmp;\
 	else \
-		echo " ⚠️  未知的操作系统类型."; \
-	fi
-	@cp -rp ./conf ./tmp
-	@echo "\033[35m ✅  编译完成\033[0m";
+		echo " ❌  未知的操作系统类型:$(OS)."; \
+	fi;
 
 
 ## clean@清理编译、日志和缓存等数据。
@@ -48,9 +61,9 @@ clean:
 	@echo "\033[31m ✅  清理完成\033[0m";
 
 
-## commit <msg>@Git本地Commit(如:make commit msg="备注内容",msg参数为可选项)。
+## commit <msg>@提交Git(格式:make commit msg="备注内容",msg为可选参数)。
 .PHONY:commit
-message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')");
+message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')")
 commit:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@git add .
@@ -72,7 +85,8 @@ deploy:
 	rm -f mafool-blog.tar.gz
 	@echo "\033[31m ✅  发布完成\033[0m";
 
-## install@[本地]安装到/tmp"目录并启动服务。
+
+## install@[本地]安装并启动服务。
 .PHONY:install
 install:
 	@pkill $(AppName)
@@ -82,7 +96,7 @@ install:
 	@ps aux|grep $(AppName)
 
 
-## push <msg>@执行commit并push到远程Git仓库,格式如commit命令。
+## push <msg>@提交并推送到Git仓库(格式:make push msg="备注内容",msg为可选参数)。
 .PHONY:push
 push:commit
 	@git push #origin master
@@ -96,8 +110,8 @@ proto:
 	@echo "\033[35m ✅  Proto编译完成\033[0m"; \
 
 
-## run@运行(可附加参数，如:make run daemon=true)。
-.PHONY:run
+## run@运行服务。
+.PHONY:proto run
 run:
 	@echo " ⚽  启动服务..."
 	@go run main.go $(deamon)
