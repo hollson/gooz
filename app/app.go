@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/app/config"
 	_ "github.com/hollson/deeplink/repo"
+	logredis "github.com/rogierlommers/logrus-redis-hook"
 	"github.com/sirupsen/logrus"
 	"os"
 	"time"
@@ -39,12 +40,48 @@ var router *gin.Engine
 func init() {
 	fmt.Printf(FAVORITE, config.App.Version, config.App.Env, config.App.Name)
 
+	//todo 日志配置文件
 	os.MkdirAll("./logs", os.ModePerm)
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
 		logrus.Errorln("Create file err :", err)
 	} else {
 		logrus.SetOutput(log)
 	}
+
+	logrus.SetLevel(logrus.InfoLevel) //日志级别
+	logrus.SetReportCaller(true)      //打印行号
+
+	//Json输出
+	logrus.SetFormatter(&logrus.JSONFormatter{
+		PrettyPrint:     false,
+		TimestampFormat: "2006-01-02 15:04:05",
+	})
+
+	// 设置Hook
+	hookConfig := logredis.HookConfig{
+		Host:     "localhost",
+		Key:      "test",
+		Format:   "v1",
+		App:      "my_app_name",
+		Port:     6379,
+		Hostname: "my_app_hostname",
+		DB:       0, // optional
+		TTL:      3600,
+	}
+	hook, err := logredis.NewHook(hookConfig)
+	if err == nil {
+		logrus.AddHook(hook)
+	} else {
+		logrus.Errorf("logredis error: %q", err)
+	}
+
+	// 公共信息，可组合
+	logrus.WithFields(logrus.Fields{"module": "user"}).
+		WithFields(logrus.Fields{"node": "master"}).
+		Infoln("日志内容")
+
+	//关闭日志输出
+	//logrus.SetOutput(ioutil.Discard)
 }
 
 // 启动程序

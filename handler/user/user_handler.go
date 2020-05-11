@@ -32,6 +32,7 @@ type RepUser struct {
 
 // 获取用户信息
 func GetUserHandler(ctx *gin.Context) {
+	logrus.Infoln("接收到请求...")
 	//req := &ReqUser{}
 	//if err := ctx.ShouldBind(req); err != nil {
 	//	ctx.String(http.StatusBadRequest, err.Error())

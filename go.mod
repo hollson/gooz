@@ -19,6 +19,7 @@ require (
 	github.com/icattlecoder/godaemon v0.0.0-20140627053409-f0fff2a3c017 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/lib/pq v1.0.0
+	github.com/rogierlommers/logrus-redis-hook v0.0.0-20200302072909-4231d5052bd1
 	github.com/sirupsen/logrus v1.6.0
 	github.com/syndtr/goleveldb v1.0.0 // indirect
 	github.com/tealeg/xlsx v1.0.5 // indirect
