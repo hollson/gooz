@@ -1,0 +1,34 @@
+appName="Deeplink"  #应用名称
+port = ":8080"      #服务端口
+version="v1.0.1"    #版本号
+env = "dev"         #运行环境（开发：dev，生产：prod）
+
+# Mysql数据库
+[mysql]
+# 是否启用mysql
+enable = true
+host = "127.0.0.1"
+port = 3306
+user = "root"
+password = 123456
+schema = "demo"
+charset = "utf8"
+
+# PG数据库集群
+[postgres]
+
+
+#Redis哨兵/集群
+[redis]
+    [redis.master]
+        ip = "10.0.0.1"
+        port=6379
+    [redis.cluster]
+        ip = "10.0.0.2"
+        port=6379
+    [redis.cluster]
+        ip = "10.0.0.3"
+        port=6379
+
+
+

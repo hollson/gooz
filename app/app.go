@@ -38,7 +38,9 @@ var router *gin.Engine
 
 // 设置日志规则
 func init() {
+
 	fmt.Printf(FAVORITE, config.App.Version, config.App.Env, config.App.Name)
+
 
 	//todo 日志配置文件
 	os.MkdirAll("./logs", os.ModePerm)

@@ -4,7 +4,7 @@
 // @ Date: 2019-12-05
 // @ Version: 1.0.0
 //
-// Here's the code description...
+// 按模块定义配置对象
 //-------------------------------------------------------------------------------------
 
 package config
@@ -26,10 +26,11 @@ var Postgres *postgres //Postgres数据库
 
 // 运行环境
 type Env string
-
 const (
-	Env_DEV  Env = "dev"  //开发环境
-	Env_PROD     = "prod" //成产环境
+	Env_DEV   Env = "dev"   //开发环境
+	Env_TEST  Env = "test"  //测试环境
+	Env_STAGE Env = "stage" //验收环境
+	Env_PROD  Env = "prod"  //成产环境
 )
 
 type app struct {
@@ -80,5 +81,4 @@ func init() {
 	Mysql = &cfg.Mysql
 	Postgres = &cfg.Postgres
 	Redis = &cfg.Redis
-
 }

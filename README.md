@@ -1,5 +1,37 @@
 # deeplink
-基于gin框架的初始化项目
+基于Gin+Zk+Xorm+Mysql+Redis+Zipkin的Restfull+Jwt的项目模板
 
-## ETC
-配置文件
+
+## 配置管理
+> 基于TOML v0.4.0的配置管理
+> 
+> Toml语法可查看[Toml官方文档](https://github.com/toml-lang/toml)或[中文文档](
+> https://github.com/toml-lang/toml/blob/master/versions/cn/toml-v0.4.0.md)。
+>
+> GO客户端：[Toml-Go客户端](https://github.com/BurntSushi/toml)，[使用示例](https://github.com/BurntSushi/toml/tree/master/_examples)。
+
+```bash
+# 安装toml-go客户端
+go get github.com/BurntSushi/toml
+
+# 验证toml语法
+go get github.com/BurntSushi/toml/cmd/tomlv
+tomlv some-toml-file.toml
+```
+
+
+
+# 配置文件
+
+## Zipkin链路追踪
+https://segmentfault.com/a/1190000016677230
+
+
+
+
+xorm问题
+https://www.cnblogs.com/nickchou/p/9561561.html
+
+
+## 代码规范
+https://github.com/uber-go/guide

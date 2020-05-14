@@ -1,6 +1,6 @@
 package models
 
 type User struct {
-	Id   int64  `xorm:"pk autoincr BIGINT(11)"`
-	Name string `xorm:"VARCHAR(50)"`
+	Id   int64  `xorm:"pk BIGINT"`
+	Name string `xorm:"not null VARCHAR(20)"`
 }
