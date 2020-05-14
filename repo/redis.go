@@ -1,39 +1,45 @@
 package repo
 
 import (
+	"fmt"
 	"github.com/garyburd/redigo/redis"
+	"github.com/hollson/deeplink/app/config"
 	"github.com/sirupsen/logrus"
 )
 
 //todo
-const redis_addr = "0.0.0.0:6379"
+//const redis_addr = "0.0.0.0:6379"
 
-var rds redis.Conn
+var Rds []redis.Conn
 
 func init() {
-	var err error
-	rds, err = redis.Dial("tcp", redis_addr)
-
-	if err != nil {
-		logrus.Errorln(" ❌ Redis连接失败:", err)
-	} else {
-		if _, err := PingRedis(); err != nil {
-			logrus.Errorln(" ❌ Ping Redis失败:", err)
-		} else {
-			logrus.Infoln(" ✅ Postgres数据库连接成功 !!!")
+	for k, v := range config.Redis {
+		rds, err := redis.Dial("tcp", fmt.Sprintf("%s:%d", v.Host, v.Port))
+		if err != nil {
+			logrus.Errorf(" ❌  Redis-%s 拨号失败,%s", k, err.Error())
+			continue
 		}
-	}
-}
 
-func PingRedis() (string, error) {
-	return redis.String(rds.Do("ping"))
+		if _, err := redis.String(rds.Do("ping")); err != nil {
+			logrus.Errorf(" ❌  Redis-%s [%s:%d] 连接失败,%s", k, v.Host, v.Port, err.Error())
+			continue
+		}
+
+		logrus.Infof(" ✅  Redis-%s [%s:%d] 连接成功 !!!", k, v.Host, v.Port)
+		Rds = append(Rds, rds)
+	}
+
+	// 测试
+	SetValue("hi", "hello world")
+	rt,err:=GetValue("hi")
+	fmt.Println("Redis测试",rt,err)
 }
 
 func SetValue(key, val string) {
 	// 24+小时过期 todo
-	rds.Do("SET", key, val)
+	Rds[0].Do("SET", key, val)
 }
 
 func GetValue(key string) (string, error) {
-	return redis.String(rds.Do("GET", key))
+	return redis.String(Rds[0].Do("GET", key))
 }

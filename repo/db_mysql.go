@@ -32,14 +32,14 @@ func InitMysql() {
 	}
 
 	var err error
-	My, err = xorm.NewEngine("mysql", config.Mysql.ConnStr)
+	My, err = xorm.NewEngine("mysql", config.Mysql.Source)
 	if err != nil {
 		logrus.Errorln("Mysql Engine错误:", err.Error())
 	} else {
 		if err := My.Ping(); err != nil {
-			logrus.Errorln(" ❌ Mysql数据库连接失败:", err)
+			logrus.Errorln(" ❌  Mysql数据库连接失败:", err)
 		} else {
-			logrus.Infoln(" ✅ Mysql数据库连接成功 !!!")
+			logrus.Infoln(" ✅  Mysql数据库连接成功 !!!")
 		}
 	}
 

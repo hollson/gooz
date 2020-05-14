@@ -11,21 +11,21 @@ package config
 
 import (
 	"fmt"
-	"github.com/sirupsen/logrus"
-	"gopkg.in/gcfg.v1"
+	"github.com/BurntSushi/toml"
 )
 
-var App *app           //App配置
-var Mysql *mysql       //Mysql数据库
-var Redis *redis       //Redis配置
-var Postgres *postgres //Postgres数据库
+var App *app               //App配置
+var Log *log               //日志配置
+var Mysql *mysql           //Mysql数据库
+var Redis map[string]redis //Redis配置
+var Postgres *[]postgres   //Postgres数据库
 //var Log *Log
 //var Zk *Zookeeper
 //var etcd *Etcd
-//var ConnStr string //拼接的连接字符串
 
 // 运行环境
 type Env string
+
 const (
 	Env_DEV   Env = "dev"   //开发环境
 	Env_TEST  Env = "test"  //测试环境
@@ -36,49 +36,71 @@ const (
 type app struct {
 	Name    string
 	Port    string
-	Env     Env    //运行环境
-	Version string //版本号
+	Env     Env `toml:"environment"` //运行环境
+	Version string                   //版本号
+}
+
+type log struct {
+	Path  string
+	Level string
+	Hook  string
 }
 
 type mysql struct {
 	Enable   bool //是否启用mysql数据库
 	Host     string
-	Port     string
+	Port     int
 	User     string
 	Password string
 	Schema   string
 	Charset  string
-	ConnStr  string `ini:"-"` //拼接的连接字符串
+	Source   string `toml:"-"` //拼接的连接字符串
 }
 
 type postgres struct {
-	Enable bool   //是否启用mysql数据库
-	Source string //链接字符串
+	Enable   bool
+	Host     string
+	Port     int
+	User     string
+	Password string
+	Schema   string
+	Sslmode  string
+	Source   string `toml:"-"` //拼接的连接字符串
 }
 
 type redis struct {
 	Host string
+	Port int
 }
 
+// 组合
 type config struct {
 	App      app
+	Log      log
 	Mysql    mysql
-	Postgres postgres
-	Redis    redis
+	Postgres []postgres
+	Redis    map[string]redis
 }
 
 func init() {
-	cfg := config{}
-	err := gcfg.ReadFileInto(&cfg, "./conf/app.ini")
-	if err != nil {
-		logrus.Fatal(err)
+	var cfg config
+	if _, err := toml.DecodeFile("./conf/app.toml", &cfg); err != nil {
+		panic(err)
 	}
-	//"root:123456@(localhost:3306)/testdb?charset=utf8"
-	cfg.Mysql.ConnStr = fmt.Sprintf("%s:%s@(%s:%s)/%s?charset=%s", cfg.Mysql.User, cfg.Mysql.Password,
-		cfg.Mysql.Host, cfg.Mysql.Port, cfg.Mysql.Schema, cfg.Mysql.Charset)
+
+	//Mysql链接字符串："user:pwd@(host:port)/dbname?charset=utf8"
+	cfg.Mysql.Source = fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=%s", cfg.Mysql.User,
+		cfg.Mysql.Password, cfg.Mysql.Host, cfg.Mysql.Port, cfg.Mysql.Schema, cfg.Mysql.Charset)
+
+	//Postgres链接字符串："postgres://user:pwd@host:port/dbname?sslmode=disable;"
+	for k, v := range cfg.Postgres {
+		cfg.Postgres[k].Source =fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s;",
+			v.User,v.Password,v.Host,v.Port,v.Schema,v.Sslmode)
+	}
 
 	App = &cfg.App
+	Log = &cfg.Log
 	Mysql = &cfg.Mysql
 	Postgres = &cfg.Postgres
-	Redis = &cfg.Redis
+	Redis = cfg.Redis
 }
