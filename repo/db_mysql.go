@@ -42,6 +42,7 @@ func InitMysql() {
 			logrus.Infoln(" ✅  Mysql数据库连接成功 !!!")
 		}
 	}
+
 	My.ShowSQL(true)
 	My.SetLogLevel(lg.LOG_INFO)
 	if config.App.Env == config.Env_PROD {
