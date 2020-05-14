@@ -42,14 +42,12 @@ func InitMysql() {
 			logrus.Infoln(" ✅  Mysql数据库连接成功 !!!")
 		}
 	}
-
+	My.ShowSQL(true)
+	My.SetLogLevel(lg.LOG_INFO)
 	if config.App.Env == config.Env_PROD {
 		My.ShowSQL(false)
 		My.SetLogLevel(lg.LOG_ERR)
 		//My.SetMaxIdleConns(30) //最大空闲数
 		//My.SetMaxOpenConns(500)  //最大连接数
-	} else {
-		My.ShowSQL(true)
-		My.SetLogLevel(lg.LOG_INFO)
 	}
 }
