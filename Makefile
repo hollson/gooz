@@ -68,7 +68,7 @@ commit:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@git add .
 	@git commit -m $(message)
-	@echo "\033[0;31mCommit成功\033[0m"
+	@echo "\033[0;31m 💿 Commit成功\033[0m"
 
 
 ## deploy@[远程]发布到远程服务器。
@@ -100,7 +100,7 @@ install:
 .PHONY:push
 push:commit
 	@git push #origin master
-	@echo "\033[0;31mPush成功\033[0m"
+	@echo "\033[0;31m ⬆️ Push成功\033[0m"
 
 
 ## proto@更新并编译proto文件。
