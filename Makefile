@@ -61,7 +61,7 @@ clean:
 	@echo "\033[31m ✅  清理完成\033[0m";
 
 
-## commit <msg>@提交Git(格式:make commit msg="备注内容",msg为可选参数)。
+## commit <msg>@提交Git(格式:make commit msg=备注内容,msg为可选参数)。
 .PHONY:commit
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')")
 commit:
@@ -96,7 +96,7 @@ install:
 	@ps aux|grep $(AppName)
 
 
-## push <msg>@提交并推送到Git仓库(格式:make push msg="备注内容",msg为可选参数)。
+## push <msg>@提交并推送到Git仓库(格式:make push msg=备注内容,msg为可选参数)。
 .PHONY:push
 push:commit
 	@git push #origin master
