@@ -4,7 +4,8 @@
 // @ Date: 2019-12-05
 // @ Version: 1.0.0
 //
-// 按模块定义配置对象
+// 解析app.toml配置文件
+// 使用示例：https://blog.csdn.net/Gusand/article/details/106094535
 //-------------------------------------------------------------------------------------
 
 package config
@@ -12,6 +13,10 @@ package config
 import (
 	"fmt"
 	"github.com/BurntSushi/toml"
+	"github.com/hollson/deeplink/util"
+	"github.com/sirupsen/logrus"
+	"os"
+	"time"
 )
 
 var App *app               //App配置
@@ -26,6 +31,7 @@ var Postgres *[]postgres   //Postgres数据库
 // 运行环境
 type Env string
 
+//参考Viki：https://en.wikipedia.org/wiki/Deployment_environment
 const (
 	Env_DEV   Env = "dev"   //开发环境
 	Env_TEST  Env = "test"  //测试环境
@@ -82,10 +88,40 @@ type config struct {
 	Redis    map[string]redis
 }
 
+func main() {
+	file, _ := os.Create("d:/test.log") //创建文件
+	defer file.Close()
+
+	num, _ := file.Write([]byte("hello"))
+	fmt.Printf("写入 %d 个字节n", num)
+}
+
 func init() {
 	var cfg config
-	if _, err := toml.DecodeFile("./conf/app.toml", &cfg); err != nil {
-		panic(err)
+	//todo 命令行可创建模板配置文件
+
+	//按照./app.config和./conf/app.toml目录优先级加载配置文件，都不存在时使用模板创建配置文件。
+	if pth := "./app.toml"; util.Exists(pth) {
+		if _, err := toml.DecodeFile(pth, &cfg); err != nil {
+			logrus.Panic(err)
+		}
+	} else if pth:= "./conf/app.toml"; util.Exists(pth) {
+		if _, err := toml.DecodeFile(pth, &cfg); err != nil {
+			logrus.Panic(err)
+		}
+	} else {
+		util.CreateFile("./conf")
+		f, err := os.Create(pth)
+		defer f.Close()
+		if err != nil {
+			logrus.Panic(err)
+		}
+		f.WriteString(fmt.Sprintf(tpl,time.Now().Format("2006-01-02 15:04:05")))
+		logrus.Infof(" 👷 初始化配置文件创建成功！！！")
+
+		if _, err := toml.Decode(tpl, &cfg); err != nil {
+			panic(err)
+		}
 	}
 
 	//Mysql链接字符串："user:pwd@(host:port)/dbname?charset=utf8"
@@ -94,8 +130,8 @@ func init() {
 
 	//Postgres链接字符串："postgres://user:pwd@host:port/dbname?sslmode=disable;"
 	for k, v := range cfg.Postgres {
-		cfg.Postgres[k].Source =fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s;",
-			v.User,v.Password,v.Host,v.Port,v.Schema,v.Sslmode)
+		cfg.Postgres[k].Source = fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s;",
+			v.User, v.Password, v.Host, v.Port, v.Schema, v.Sslmode)
 	}
 
 	App = &cfg.App

@@ -39,7 +39,7 @@ func InitMysql() {
 		if err := My.Ping(); err != nil {
 			logrus.Errorln(" ❌  Mysql数据库连接失败:", err)
 		} else {
-			logrus.Infoln(" ✅  Mysql数据库连接成功 !!!")
+			logrus.Infoln(" ✅  Mysql数据库连接成功")
 		}
 	}
 

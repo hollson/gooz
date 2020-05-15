@@ -38,7 +38,7 @@ func init() {
 			}
 			tips = append(tips, fmt.Sprintf("【%s:%d/%s】", val.Host, val.Port, val.Schema))
 			conns = append(conns, val.Source)
-			logrus.Infof(" ✅  Postgres【%s:%d/%s】连接成功 !!!", val.Host, val.Port,val.Schema)
+			logrus.Infof(" ✅  Postgres【%s:%d/%s】连接成功", val.Host, val.Port,val.Schema)
 		}
 	}
 

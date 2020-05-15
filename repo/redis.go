@@ -7,9 +7,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-//todo
-//const redis_addr = "0.0.0.0:6379"
-
 var Rds []redis.Conn
 
 func init() {
@@ -25,14 +22,23 @@ func init() {
 			continue
 		}
 
-		logrus.Infof(" ✅  Redis-%s [%s:%d] 连接成功 !!!", k, v.Host, v.Port)
+		logrus.Infof(" ✅  Redis-%s [%s:%d] 连接成功", k, v.Host, v.Port)
 		Rds = append(Rds, rds)
 	}
 
-	// 测试
+	test()
+}
+
+// 测试
+func test() {
+	defer func() {
+		if err := recover(); err != nil {
+			logrus.Errorln(err)
+		}
+	}()
 	SetValue("hi", "hello world")
-	rt,err:=GetValue("hi")
-	fmt.Println("Redis测试",rt,err)
+	rt, err := GetValue("hi")
+	fmt.Println("Redis测试", rt, err)
 }
 
 func SetValue(key, val string) {

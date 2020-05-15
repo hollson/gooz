@@ -112,9 +112,10 @@ proto:
 
 ## run@运行服务。
 .PHONY:proto run
-run:
+run: clean
 	@echo " ⚽  启动服务..."
 	@go run main.go $(deamon)
+
 
 ## update@更新Git和Submodule。
 .PHONY:update
@@ -133,6 +134,7 @@ xorm:
 	@#xorm reverse sqite3 test.db templates/goxorm C:\temp
 	@echo "\033[31m ✅  Reverse完成\033[0m";
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
+
 
 ## help@查看make帮助。
 .PHONY:help
