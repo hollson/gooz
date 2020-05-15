@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
-// @ Author: hollson <hollson@live.com>
+// @ Author: hollson <hollson@live.cn>
 // @ Date: 2019-12-05
 // @ Version: 1.0.0
 //

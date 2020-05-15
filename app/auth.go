@@ -1,5 +1,5 @@
 //------------------------------------------------------------------
-// @ Author: hollson <hollson@live.com>
+// @ Author: hollson <hollson@live.cn>
 // @ Date: 2019-12-01
 // @ Version: 1.0.0
 // 验证授权：签名验证服务
