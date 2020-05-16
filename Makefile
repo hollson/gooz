@@ -1,7 +1,8 @@
 # App基本信息
 AppName="Deeplink"	#应用名称
-VERSION="v1.0.1"	#版本号
-CGO=0				#是否开启Cgo，0：不开启，1：开启
+AppPort="8080"		#服务端口
+Version="v1.0.1"	#版本号
+Cgo=1				#是否开启Cgo，0：不开启，1：开启
 
 
 ## all@可选的命令参数，执行build和run命令。
@@ -17,27 +18,29 @@ build: clean
 	@if [ $(OS) = "linux" ]; \
 	then \
 		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
-		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
-		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
+		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(Version)|sed s/[[:space:]]//g`";\
+		CGO_ENABLED=$(Cgo) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
 		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/run.sh; \
+		sed -i "s/tmp_port/$${AppPort}/g" ./tmp/run.sh; \
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/stop.sh; \
 		echo "\033[35m ✅  编译完成\033[0m";\
 		echo "输出路径：./tmp" && ls -hl ./tmp;\
 	elif [ $(OS) = "darwin" ]; \
 	then \
 		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
-		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(VERSION)|sed s/[[:space:]]//g`";\
-		CGO_ENABLED=$(CGO) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
+		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(Version)|sed s/[[:space:]]//g`";\
+		CGO_ENABLED=$(Cgo) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
 		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/run.sh`; \
+		sed -i "" "s/tmp_port/${AppPort}/g" ./tmp/run.sh;\
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/stop.sh`; \
-		echo "\033[35m ✅  编译完成\033[0m";\
-		echo "输出路径：./tmp" && ls -hl ./tmp;\
+		echo "\033[35m ✅  编译完成:\033[0m ./tmp";\
+		ls -hl ./tmp;\
 	elif [ $(OS) = "windows" ]; \
 	then \
 		echo "\033[35m 🍵 编译环境：windows\033[0m"; \
-		CGO_ENABLED=$(CGO) GOOS=windows GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-win-amd64-$(VERSION).exe|sed s/[[:space:]]//g`"; \
+		CGO_ENABLED=$(Cgo) GOOS=windows GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-win-amd64-$(Version).exe|sed s/[[:space:]]//g`"; \
 		cp -rp ./conf ./tmp \
         echo "\033[35m ✅  编译完成\033[0m";\
         echo "输出路径：./tmp" && ls -hl ./tmp;\
@@ -76,12 +79,12 @@ commit:
 deploy:
 	@#压缩本地发布包,并推送到远程服务器
 	@echo "\033[0;32m发布中...\033[0m"
-	tar -zcvf $(AppName)-release-$(VERSION)-tar.gz public
-	scp $(AppName)-release-$(VERSION)-tar.gz root@www.xxx.com:/srv/www/$(AppNAme)
+	tar -zcvf $(AppName)-release-$(Version)-tar.gz public
+	scp $(AppName)-release-$(Version)-tar.gz root@www.xxx.com:/srv/www/$(AppNAme)
 	@#执行远程命令,进行解压、重启，并清理本地压缩包
 	echo -e "\033[0;32m执行远程清理...\033[0m"
 	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
-	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(VERSION)-tar.gz && nginx -s reload'
+	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(Version)-tar.gz && nginx -s reload'
 	rm -f mafool-blog.tar.gz
 	@echo "\033[31m ✅  发布完成\033[0m";
 
@@ -113,6 +116,7 @@ proto:
 ## run@运行服务。
 .PHONY:proto run
 run: clean
+	@pkill $(AppName)
 	@echo " ⚽  启动服务..."
 	@go run main.go $(deamon)
 
