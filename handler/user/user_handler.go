@@ -1,20 +1,21 @@
-//---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.cn>
 // @ Date: 2020-05-07
 // @ Version: 1.0.0
 //
 // 用户相关的业务处理逻辑
-//----------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 package user
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/repo/domain"
 	"github.com/sirupsen/logrus"
-	"net/http"
-	"strconv"
 )
 
 var repo domain.IUser
@@ -33,11 +34,11 @@ type RepUser struct {
 // 获取用户信息
 func GetUserHandler(ctx *gin.Context) {
 	logrus.Infoln("接收到请求...")
-	//req := &ReqUser{}
-	//if err := ctx.ShouldBind(req); err != nil {
+	// req := &ReqUser{}
+	// if err := ctx.ShouldBind(req); err != nil {
 	//	ctx.String(http.StatusBadRequest, err.Error())
 	//	ctx.Abort()
-	//}
+	// }
 	id := ctx.DefaultQuery("id", "0")
 	n, err := strconv.Atoi(id)
 	if err != nil {

@@ -1,24 +1,25 @@
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.cn>
 // @ Date: 2019-12-01
 // @ Version: 1.0.0
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 
 package app
 
 import (
 	"fmt"
+	"os"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/app/config"
 	_ "github.com/hollson/deeplink/repo"
 	logredis "github.com/rogierlommers/logrus-redis-hook"
 	"github.com/sirupsen/logrus"
-	"os"
-	"time"
 )
 
-//http://www.network-science.de/ascii/
+// http://www.network-science.de/ascii/
 const FAVORITE = `
 Deeplink is a internal applications <XX科技.保留版权>
        _              _ _      _
@@ -41,8 +42,7 @@ func init() {
 
 	fmt.Printf(FAVORITE, config.App.Version, config.App.Env, config.App.Name)
 
-
-	//todo 日志配置文件
+	// todo 日志配置文件
 	os.MkdirAll("./logs", os.ModePerm)
 	if log, err := os.Create(fmt.Sprintf("./logs/%s.log", time.Now().Format("20060102150405"))); err != nil {
 		logrus.Errorln("Create file err :", err)
@@ -50,10 +50,10 @@ func init() {
 		logrus.SetOutput(log)
 	}
 
-	logrus.SetLevel(logrus.InfoLevel) //日志级别
-	logrus.SetReportCaller(true)      //打印行号
+	logrus.SetLevel(logrus.InfoLevel) // 日志级别
+	logrus.SetReportCaller(true)      // 打印行号
 
-	//Json输出
+	// Json输出
 	logrus.SetFormatter(&logrus.JSONFormatter{
 		PrettyPrint:     false,
 		TimestampFormat: "2006-01-02 15:04:05",
@@ -82,8 +82,8 @@ func init() {
 		WithFields(logrus.Fields{"node": "master"}).
 		Infoln("日志内容")
 
-	//关闭日志输出
-	//logrus.SetOutput(ioutil.Discard)
+	// 关闭日志输出
+	// logrus.SetOutput(ioutil.Discard)
 }
 
 // 启动程序

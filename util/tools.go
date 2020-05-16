@@ -48,13 +48,7 @@ func AtoInt64(num string) int64 {
 	}
 }
 
-
-
-
-
-
-
-//hash := sha256.New()
-//hash.Write([]byte(sign))
-//md := hash.Sum(nil)
-//mdStr := hex.EncodeToString(md)
+// hash := sha256.New()
+// hash.Write([]byte(sign))
+// md := hash.Sum(nil)
+// mdStr := hex.EncodeToString(md)

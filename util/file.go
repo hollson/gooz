@@ -1,11 +1,11 @@
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.cn>
 // @ Date: 2020-05-15
 // @ Version: 1.0.0
 //
 // Here's the code description...
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 
 package util
 
@@ -13,7 +13,7 @@ import "os"
 
 // 判断所给路径文件/文件夹是否存在
 func Exists(path string) bool {
-	_, err := os.Stat(path)    //os.Stat获取文件信息
+	_, err := os.Stat(path) // os.Stat获取文件信息
 	if err != nil {
 		if os.IsExist(err) {
 			return true
@@ -37,10 +37,10 @@ func IsFile(path string) bool {
 	return !IsDir(path)
 }
 
-//调用os.MkdirAll递归创建文件夹
-func CreateFile(filePath string)  error  {
+// 调用os.MkdirAll递归创建文件夹
+func CreateFile(filePath string) error {
 	if !Exists(filePath) {
-		err := os.MkdirAll(filePath,os.ModePerm)
+		err := os.MkdirAll(filePath, os.ModePerm)
 		return err
 	}
 	return nil

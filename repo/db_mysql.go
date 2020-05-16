@@ -1,4 +1,4 @@
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.cn>
 // @ Date: 2020-05-06
@@ -6,7 +6,7 @@
 //
 // Here's the code description...
 // 参考教程： https://www.kancloud.cn/xormplus/xorm/167078
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 
 package repo
 
@@ -18,10 +18,10 @@ import (
 	lg "github.com/xormplus/xorm/log"
 )
 
-//定义orm引擎
+// 定义orm引擎
 var My *xorm.Engine
 
-//创建orm引擎
+// 创建orm引擎
 func init() {
 	InitMysql()
 }
@@ -48,7 +48,7 @@ func InitMysql() {
 	if config.App.Env == config.Env_PROD {
 		My.ShowSQL(false)
 		My.SetLogLevel(lg.LOG_ERR)
-		//My.SetMaxIdleConns(30) //最大空闲数
-		//My.SetMaxOpenConns(500)  //最大连接数
+		// My.SetMaxIdleConns(30) //最大空闲数
+		// My.SetMaxOpenConns(500)  //最大连接数
 	}
 }

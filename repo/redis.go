@@ -2,6 +2,7 @@ package repo
 
 import (
 	"fmt"
+
 	"github.com/garyburd/redigo/redis"
 	"github.com/hollson/deeplink/app/config"
 	"github.com/sirupsen/logrus"

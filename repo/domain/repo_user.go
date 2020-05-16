@@ -1,11 +1,11 @@
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // @ Copyright (C) free license,without warranty of any kind .
 // @ Author: hollson <hollson@live.cn>
 // @ Date: 2020-05-07
 // @ Version: 1.0.0
 //
 // 产品数据仓储
-//-------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 
 package domain
 
@@ -26,7 +26,7 @@ func (p *UserRepo) GetUser(id int64) (ret *models.User, err error) {
 	u := new(models.User)
 	logrus.Infoln("id=", id)
 	if has, err := db.ID(id).Get(u); err != nil {
-		logrus.Errorln(has, err) //todo warp包装
+		logrus.Errorln(has, err) // todo warp包装
 		return nil, err
 	} else {
 		return u, nil
@@ -43,10 +43,10 @@ func (p *UserRepo) GetUserByPage(offset, limit int) ([]models.User, error) {
 	return us, nil
 }
 
-//Join查询
+// Join查询
 
-//分库查询
-//explain
-///*!mycat: schema=DEEPLINK_1000020*/ select * from tb_hit;
-///*!mycat: schema=DEEPLINK_1000020*/ INSERT INTO `tb_hit`( id,`uid`, `serial`) VALUES (next value for MYCATSEQ_GLOBAL,1000017, 'twretet');
-///*!mycat: schema=DEEPLINK_1000020*/ truncate tb_hit;
+// 分库查询
+// explain
+// /*!mycat: schema=DEEPLINK_1000020*/ select * from tb_hit;
+// /*!mycat: schema=DEEPLINK_1000020*/ INSERT INTO `tb_hit`( id,`uid`, `serial`) VALUES (next value for MYCATSEQ_GLOBAL,1000017, 'twretet');
+// /*!mycat: schema=DEEPLINK_1000020*/ truncate tb_hit;

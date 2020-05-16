@@ -18,7 +18,7 @@ const (
 	LEN_2048 RsaLength = 2048
 )
 
-//RSA公钥私钥产生
+// RSA公钥私钥产生
 func GenRsaKey(len RsaLength) (prvkey, pubkey []byte) {
 	// 生成私钥文件
 	privateKey, err := rsa.GenerateKey(rand.Reader, int(len))
@@ -44,7 +44,7 @@ func GenRsaKey(len RsaLength) (prvkey, pubkey []byte) {
 	return
 }
 
-//签名
+// 签名
 func RsaSignWithSha256(data []byte, keyBytes []byte) []byte {
 	h := sha256.New()
 	h.Write(data)
@@ -68,7 +68,7 @@ func RsaSignWithSha256(data []byte, keyBytes []byte) []byte {
 	return signature
 }
 
-//验证
+// 验证
 func RsaVerySignWithSha256(data, signData, keyBytes []byte) bool {
 	block, _ := pem.Decode(keyBytes)
 	if block == nil {
@@ -89,7 +89,7 @@ func RsaVerySignWithSha256(data, signData, keyBytes []byte) bool {
 
 // 公钥加密
 func RsaEncrypt(data, keyBytes []byte) []byte {
-	//解密pem格式的公钥
+	// 解密pem格式的公钥
 	block, _ := pem.Decode(keyBytes)
 	if block == nil {
 		panic(errors.New("public key error"))
@@ -101,7 +101,7 @@ func RsaEncrypt(data, keyBytes []byte) []byte {
 	}
 	// 类型断言
 	pub := pubInterface.(*rsa.PublicKey)
-	//加密
+	// 加密
 	ciphertext, err := rsa.EncryptPKCS1v15(rand.Reader, pub, data)
 	if err != nil {
 		panic(err)
@@ -111,12 +111,12 @@ func RsaEncrypt(data, keyBytes []byte) []byte {
 
 // 私钥解密
 func RsaDecrypt(ciphertext, keyBytes []byte) []byte {
-	//获取私钥
+	// 获取私钥
 	block, _ := pem.Decode(keyBytes)
 	if block == nil {
 		panic(errors.New("private key error!"))
 	}
-	//解析PKCS1格式的私钥
+	// 解析PKCS1格式的私钥
 	priv, err := x509.ParsePKCS1PrivateKey(block.Bytes)
 	if err != nil {
 		panic(err)
@@ -129,26 +129,26 @@ func RsaDecrypt(ciphertext, keyBytes []byte) []byte {
 	return data
 }
 
-//func main() {
-////rsa 密钥文件产生
-//fmt.Println("-------------------------------获取RSA公私钥-----------------------------------------")
-//prvKey, pubKey := GenRsaKey()
-//fmt.Println(string(prvKey))
-//fmt.Println(string(pubKey))
+// func main() {
+// //rsa 密钥文件产生
+// fmt.Println("-------------------------------获取RSA公私钥-----------------------------------------")
+// prvKey, pubKey := GenRsaKey()
+// fmt.Println(string(prvKey))
+// fmt.Println(string(pubKey))
 //
-//fmt.Println("-------------------------------进行签名与验证操作-----------------------------------------")
-//var data = "卧了个槽，这么神奇的吗？？！！！  ԅ(¯﹃¯ԅ) ！！！！！！）"
-//fmt.Println("对消息进行签名操作...")
-//signData := RsaSignWithSha256([]byte(data), prvKey)
-//fmt.Println("消息的签名信息： ", hex.EncodeToString(signData))
-//fmt.Println("\n对签名信息进行验证...")
-//if RsaVerySignWithSha256([]byte(data), signData, pubKey) {
+// fmt.Println("-------------------------------进行签名与验证操作-----------------------------------------")
+// var data = "卧了个槽，这么神奇的吗？？！！！  ԅ(¯﹃¯ԅ) ！！！！！！）"
+// fmt.Println("对消息进行签名操作...")
+// signData := RsaSignWithSha256([]byte(data), prvKey)
+// fmt.Println("消息的签名信息： ", hex.EncodeToString(signData))
+// fmt.Println("\n对签名信息进行验证...")
+// if RsaVerySignWithSha256([]byte(data), signData, pubKey) {
 //	fmt.Println("签名信息验证成功，确定是正确私钥签名！！")
-//}
+// }
 //
-//fmt.Println("-------------------------------进行加密解密操作-----------------------------------------")
-//ciphertext := RsaEncrypt([]byte(data), pubKey)
-//fmt.Println("公钥加密后的数据：", hex.EncodeToString(ciphertext))
-//sourceData := RsaDecrypt(ciphertext, prvKey)
-//fmt.Println("私钥解密后的数据：", string(sourceData))
-//}
+// fmt.Println("-------------------------------进行加密解密操作-----------------------------------------")
+// ciphertext := RsaEncrypt([]byte(data), pubKey)
+// fmt.Println("公钥加密后的数据：", hex.EncodeToString(ciphertext))
+// sourceData := RsaDecrypt(ciphertext, prvKey)
+// fmt.Println("私钥解密后的数据：", string(sourceData))
+// }
