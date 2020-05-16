@@ -20,7 +20,7 @@ build: clean
 		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
 		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(Version)|sed s/[[:space:]]//g`";\
 		CGO_ENABLED=$(Cgo) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
-		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
+		cp -rp ./conf ./tmp && cp ./setup/run.sh ./tmp && cp ./setup/stop.sh ./tmp; \
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/run.sh; \
 		sed -i "s/tmp_port/$${AppPort}/g" ./tmp/run.sh; \
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/stop.sh; \
@@ -31,7 +31,7 @@ build: clean
 		echo "\033[35m 🍵 编译环境：$(OS)\033[0m"; \
 		AppName="`echo $(AppName)-$(OS)-$(ARCH)-$(Version)|sed s/[[:space:]]//g`";\
 		CGO_ENABLED=$(Cgo) GOOS=$(OS) GOARCH=$(ARCH) go build -o ./tmp/$${AppName}; \
-		cp -rp ./conf ./tmp && cp ./scripts/run.sh ./tmp && cp ./scripts/stop.sh ./tmp; \
+		cp -rp ./conf ./tmp && cp ./setup/run.sh ./tmp && cp ./setup/stop.sh ./tmp; \
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/run.sh`; \
 		sed -i "" "s/tmp_port/${AppPort}/g" ./tmp/run.sh;\
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/stop.sh`; \
