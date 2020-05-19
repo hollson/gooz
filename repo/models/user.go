@@ -1,6 +1,12 @@
 package models
 
+import (
+	"time"
+)
+
 type User struct {
-	Id   int64  `xorm:"pk BIGINT"`
-	Name string `xorm:"not null VARCHAR(20)"`
+	Id      int       `xorm:"not null pk autoincr INTEGER"`
+	Name    string    `xorm:"VARCHAR(20)"`
+	Created time.Time `xorm:"default now() DATETIME"`
+	ClassId int       `xorm:"default 1 INTEGER"`
 }

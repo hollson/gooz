@@ -48,6 +48,10 @@ build: clean
 		echo " ❌  未知的操作系统类型:$(OS)."; \
 	fi;
 
+# todo 如果编译失败，则中断shell
+# https://my.oschina.net/u/2409113/blog/490833
+
+
 
 ## clean@清理编译、日志和缓存等数据。
 .PHONY:clean
@@ -61,6 +65,7 @@ clean:
 	@rm -rf ./debug;
 	@rm -rf ./tmp;
 	@rm -rf ./temp;
+	@rm -rf ./vendor/*;
 	@echo "\033[31m ✅  清理完成\033[0m";
 
 
@@ -116,9 +121,9 @@ proto:
 ## run@运行服务。
 .PHONY:proto run
 run: clean
-	@pkill $(AppName)
-	@echo " ⚽  启动服务..."
-	@go run main.go $(deamon)
+#	@pkill ${{AppName}};
+	@echo " ⚽  启动服务...";
+	@go run main.go $(deamon);
 
 
 ## update@更新Git和Submodule。
@@ -126,10 +131,16 @@ run: clean
 update:
 	@git submodule update --init --recursive;
 
+## vendor@分发编译包。
+.PHONY:vendor
+vendor:
+	@mkdir ./vendor;
+	@go mod vendor;
+
 
 ## xorm@根据数据表结构生成实体,支持mysql、postgres、sqlite等。
 .PHONY:xorm
-Templates=$(GOPATH)/src/github.com/go-xorm/cmd/xorm/templates/goxorm/
+Templates=$(GOPATH)/src/xorm.io/cmd/xorm/templates/goxorm/
 REPO_PATH=$$(pwd)/repo
 xorm:
 	@sudo rm -rf $(REPO_PATH)/models/*;

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # XORM参考文档：
-# https://github.com/go-xorm/xorm/blob/master/README_CN.md
+# https://xorm.io/
+# https://gitea.com/xorm/xorm/src/branch/master/README_CN.md
 
+# 从数据库生成对象代码
 cd .. && make xorm && cd -
 
 

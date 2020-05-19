@@ -22,12 +22,12 @@ var repo domain.IUser
 
 // 请求参数
 type ReqUser struct {
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 }
 
 // 响应参数(Proto定义)
 type RepUser struct {
-	Id   int64  `json:"id"`
+	Id   int  `json:"id"`
 	Name string `json:"name"`
 }
 

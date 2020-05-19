@@ -14,17 +14,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/hollson/deeplink/app/config"
 	"github.com/sirupsen/logrus"
-	"github.com/xormplus/xorm"
-	lg "github.com/xormplus/xorm/log"
+	"xorm.io/xorm"
+	xlg "xorm.io/xorm/log"
 )
 
-// 定义orm引擎
-var My *xorm.Engine
-
-// 创建orm引擎
-func init() {
-	InitMysql()
-}
 
 func InitMysql() {
 	if !config.Mysql.Enable {
@@ -43,11 +36,12 @@ func InitMysql() {
 		}
 	}
 
+	// todo 配置
 	My.ShowSQL(true)
-	My.SetLogLevel(lg.LOG_INFO)
+	My.SetLogLevel(xlg.LOG_INFO)
 	if config.App.Env == config.Env_PROD {
 		My.ShowSQL(false)
-		My.SetLogLevel(lg.LOG_ERR)
+		My.SetLogLevel(xlg.LOG_ERR)
 		// My.SetMaxIdleConns(30) //最大空闲数
 		// My.SetMaxOpenConns(500)  //最大连接数
 	}

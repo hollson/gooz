@@ -8,8 +8,8 @@
 package app
 
 import (
-	"github.com/hollson/deeplink/handler/help"
-	"github.com/hollson/deeplink/handler/user"
+	"github.com/hollson/deeplink/service/help"
+	"github.com/hollson/deeplink/service/user"
 )
 
 func Route() {

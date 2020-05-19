@@ -16,14 +16,12 @@ import (
 	"github.com/hollson/deeplink/app/config"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
-	"github.com/xormplus/xorm"
-	lg "github.com/xormplus/xorm/log"
+	"xorm.io/xorm"
+	xlg "xorm.io/xorm/log"
 )
 
-// var PG *xorm.Engine
-var PG *xorm.EngineGroup // 集群模式
 
-func init() {
+func InitPostgres() {
 	// 添加集群连接字符串
 	var conns, tips []string
 	for _, val := range *config.Postgres {
@@ -61,12 +59,25 @@ func init() {
 		return
 	}
 
-	PG.ShowSQL(true)
-	PG.SetLogLevel(lg.LOG_ERR)
+
+	// // 2.显示sql语句
+	// db.ShowSQL(true)
+	//
+	// // 3.设置连接数
+	// db.SetMaxIdleConns(2000)
+	// db.SetMaxOpenConns(1000)
+	//
+	// cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(), 500) // 缓存的条数
+	// db.SetDefaultCacher(cacher)
+
+
+	// todo 配置
+	PG.ShowSQL(true)  //显示sql语句
+	PG.SetLogLevel(xlg.LOG_INFO)
 	if config.App.Env == config.Env_PROD {
 		PG.ShowSQL(false)
-		PG.SetLogLevel(lg.LOG_ERR)
-		// PG.SetMaxIdleConns(30) 	//最大空闲数
+		PG.SetLogLevel(xlg.LOG_ERR)
+		// PG.SetMaxIdleConns(200) 	//最大空闲数
 		// PG.SetMaxOpenConns(500)	//最大连接数
 	}
 }
