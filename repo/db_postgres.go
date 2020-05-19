@@ -28,9 +28,10 @@ func InitPostgres() {
 		if val.Enable {
 			pg, err := xorm.NewEngine("postgres", val.Source)
 			if err != nil {
-				logrus.Errorf("Postgres Engine错误:%v", err.Error())
+				logrus.Errorf(" ❌  Postgres Engine错误:%v", err.Error())
 				continue
 			}
+
 			if err := pg.Ping(); err != nil {
 				logrus.Errorf(" ❌  Postgres【%s:%d/%s】连接失败,%v", val.Host, val.Port, val.Schema, err)
 				continue

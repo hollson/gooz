@@ -25,5 +25,3 @@ var PG *xorm.EngineGroup // 集群模式
 
 // Redis数据库
 var Rds []redis.Conn
-
-

@@ -18,7 +18,6 @@ import (
 	xlg "xorm.io/xorm/log"
 )
 
-
 func InitMysql() {
 	if !config.Mysql.Enable {
 		return
@@ -27,14 +26,15 @@ func InitMysql() {
 	var err error
 	My, err = xorm.NewEngine("mysql", config.Mysql.Source)
 	if err != nil {
-		logrus.Errorln("Mysql Engine错误:", err.Error())
-	} else {
-		if err := My.Ping(); err != nil {
-			logrus.Errorln(" ❌  Mysql数据库连接失败:", err)
-		} else {
-			logrus.Infoln(" ✅  Mysql数据库连接成功")
-		}
+		logrus.Errorln(" ❌  Mysql Engine错误:", err.Error())
+		return
 	}
+
+	if err := My.Ping(); err != nil {
+		logrus.Errorln(" ❌  Mysql数据库连接失败:", err)
+		return
+	}
+	logrus.Infoln(" ✅  Mysql数据库连接成功")
 
 	// todo 配置
 	My.ShowSQL(true)

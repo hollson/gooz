@@ -14,12 +14,13 @@ import (
 	"github.com/hollson/deeplink/repo"
 )
 
+// 按顺序加载初始化项
 func init() {
 	config.Load()       // 加载配置
-	config.InitLog()    // 初始化日志
 	repo.InitMysql()    // 初始化Mysql
 	repo.InitPostgres() // 初始化Postgres
 	repo.InitRedis()    // 初始化Redis
+	config.InitLog()    // 初始化日志
 }
 
 func main() {
