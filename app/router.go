@@ -12,7 +12,7 @@ import (
 	"github.com/hollson/deeplink/service/user"
 )
 
-func Route() {
+func RegisterRoute() {
 	UserRoute()
 	HelpRoute()
 }
