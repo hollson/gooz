@@ -25,5 +25,15 @@ func init() {
 
 func main() {
 	runtime.Gosched()
+
+	// go func() {
+	// 	for {
+	// 		logrus.WithField("Feature", "测试Error").Errorln("ErrorError")
+	// 		logrus.WithField("Feature", "测试Info").Warnln("警告警告")
+	// 		logrus.WithField("Feature", "测试Info").Infoln("OKOKOKOKOK")
+	// 		time.Sleep(time.Millisecond*300)
+	// 	}
+	// }()
+
 	app.Run()
 }

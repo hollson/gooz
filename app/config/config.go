@@ -89,14 +89,6 @@ type config struct {
 	Redis    map[string]redis
 }
 
-func main() {
-	file, _ := os.Create("d:/test.log") // 创建文件
-	defer file.Close()
-
-	num, _ := file.Write([]byte("hello"))
-	fmt.Printf("写入 %d 个字节n", num)
-}
-
 func Load() {
 	var cfg config
 	// todo 命令行可创建模板配置文件
