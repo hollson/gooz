@@ -56,7 +56,6 @@ func getNumCgoCall() interface{} {
 	return runtime.NumCgoCall()
 }
 
-
 var lastPause uint32
 
 // getLastGCPauseTime 获取上次 GC 的暂停时间
@@ -103,10 +102,7 @@ func GetCurrentRunningStats(c *gin.Context) {
 	c.String(http.StatusOK, "")
 }
 
-
-
 func init() {
-
 
 	// 这些都是我自定义的变量，发布到expvar中，每次请求接口，expvar会自动去获取这些变量，并返回给我
 	expvar.Publish("运行时间", expvar.Func(calculateUptime))

@@ -1,39 +1,33 @@
-// ------------------------------------------------------------------
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2019-12-01
-// @ Version: 1.0.0
-// ------------------------------------------------------------------
-
 package main
 
 import (
 	"runtime"
+	"time"
 
 	"github.com/hollson/deeplink/app"
 	"github.com/hollson/deeplink/app/config"
+	"github.com/hollson/deeplink/app/logger"
 	"github.com/hollson/deeplink/repo"
+	"github.com/sirupsen/logrus"
 )
 
 // 按顺序加载初始化项
 func init() {
-	config.Load()       // 加载配置
-	repo.InitMysql()    // 初始化Mysql
-	repo.InitPostgres() // 初始化Postgres
-	repo.InitRedis()    // 初始化Redis
-	config.InitLog()    // 初始化日志
+	config.Init() // 初始化配置
+	app.Init()    // 初始化应用
+	repo.Init()   // 初始化数据
+	logger.Init() // 初始化日志
 }
 
 func main() {
 	runtime.Gosched()
+	go func() {
+		for {
+			time.Sleep(time.Second)
+			logrus.Errorln("<br/>ddddd")
+			logrus.Infoln("eeeeee")
+		}
 
-	// go func() {
-	// 	for {
-	// 		logrus.WithField("Feature", "测试Error").Errorln("ErrorError")
-	// 		logrus.WithField("Feature", "测试Info").Warnln("警告警告")
-	// 		logrus.WithField("Feature", "测试Info").Infoln("OKOKOKOKOK")
-	// 		time.Sleep(time.Millisecond*300)
-	// 	}
-	// }()
-
+	}()
 	app.Run()
 }

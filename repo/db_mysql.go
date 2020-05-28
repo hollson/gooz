@@ -18,7 +18,7 @@ import (
 	xlg "xorm.io/xorm/log"
 )
 
-func InitMysql() {
+func initMysql() {
 	if !config.Mysql.Enable {
 		return
 	}

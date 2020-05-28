@@ -8,7 +8,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func InitRedis() {
+func initRedis() {
 	for k, v := range config.Redis {
 		rds, err := redis.Dial("tcp", fmt.Sprintf("%s:%d", v.Host, v.Port))
 		if err != nil {

@@ -14,7 +14,7 @@ import (
 )
 
 // 自定义的Join联合对象
-type ClassUser struct{
+type ClassUser struct {
 	models.User `xorm:"extends"`
-	Name string
+	Name        string
 }

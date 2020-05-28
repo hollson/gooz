@@ -1,17 +1,9 @@
-// -----------------------------------------------------------------------
-// @ Copyright (C) free license,without warranty of any kind .
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2020-05-18
-// @ Version: 1.0.0
-//
-// Here's the code description...
-// -----------------------------------------------------------------------
-
-package config
+package logger
 
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"runtime"
 	"strings"
 	"time"
@@ -26,10 +18,11 @@ import (
 // todo 配置文件
 const (
 	LogRoot                = "./logs"
-	TIDYPATH          bool = false // 精简文件路径
-	MAXLOGSIZE             = 200   // 文件最大尺寸
-	INFOLEVEL              = 4     // 1-6  ,默认4
+	TIDYPATH          bool = true // 精简文件路径
+	MAXLOGSIZE             = 200  // 文件最大尺寸
+	INFOLEVEL              = 4    // 1-6  ,默认4
 	DISABLEHTMLESCAPE      = true
+	CONSOLEOUT             = false
 
 	ESHOOK_ENABLE     = false
 	INFLUXHOOK_ENABLE = false
@@ -42,7 +35,7 @@ var (
 
 // 设置日志规则
 // todo 配置hook时，无须log文件
-func InitLog() {
+func Init() {
 	logrus.SetLevel(INFOLEVEL) // 日志级别
 	if hk, err := MultiSplitHook(""); err != nil {
 		logrus.Errorf(" ❌ Local log hook error,%v", err)
@@ -52,7 +45,7 @@ func InitLog() {
 	}
 
 	if hk, err := ESHook(""); err != nil {
-		logrus.Errorf(" ❌ Elastic search log hook error,%v", err)
+		logrus.Errorf(" ❌  Elastic search log hook error,%v", err)
 	} else {
 		logrus.Infof(" 🐸 Es hook OK")
 		logrus.AddHook(hk)
@@ -66,7 +59,9 @@ func InitLog() {
 	}
 
 	logrus.SetReportCaller(true) // 打印行号
-	// logrus.SetOutput(ioutil.Discard) // 关闭日志输出
+	if !CONSOLEOUT {
+		logrus.SetOutput(ioutil.Discard) // 是否同时在控制台输出
+	}
 }
 
 // 本地日志多文件切分Hook
@@ -76,7 +71,6 @@ func MultiSplitHook(prefix string) (hk logrus.Hook, err error) {
 	}
 	var accessWriter, errorWriter *rotatelogs.RotateLogs
 
-	// logs/deeplink-20200203-access.log
 	accessWriter, err = rotatelogs.New(
 		fmt.Sprintf("%s/%s%s-access.log", LogRoot, prefix, "%Y%m%d"),
 		rotatelogs.ForceNewFile(),
@@ -88,7 +82,6 @@ func MultiSplitHook(prefix string) (hk logrus.Hook, err error) {
 		return nil, err
 	}
 
-	// logs/deeplink-20200203-error.log
 	errorWriter, err = rotatelogs.New(
 		fmt.Sprintf("%s/%s%s-error.log", LogRoot, prefix, "%Y%m%d"),
 		rotatelogs.ForceNewFile(),
@@ -155,16 +148,16 @@ func jsonFormat() *logrus.JSONFormatter {
 		DisableHTMLEscape: DISABLEHTMLESCAPE,
 		TimestampFormat:   "2006-01-02 15:04:05",
 		CallerPrettyfier: func(frame *runtime.Frame) (function string, file string) {
+			if frame == nil || frame.Func == nil {
+				return "runtime.Frame.Function.Init", "runtime.Frame.File Init"
+			}
 			if TIDYPATH {
-				if frame == nil || frame.Func == nil {
-					return "runtime.Frame.Function.Init", "runtime.Frame.File Init"
-				}
 				fn := strings.LastIndex(frame.Function, "/")
 				_, ln := frame.Func.FileLine(frame.PC)
 				fi := strings.LastIndex(frame.File, "/")
 				return frame.Function[fn+1:], fmt.Sprintf("%s:%d", frame.File[fi+1:], ln)
 			}
-			return
+			return frame.Function, frame.File
 		},
 	}
 }

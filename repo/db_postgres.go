@@ -20,8 +20,7 @@ import (
 	xlg "xorm.io/xorm/log"
 )
 
-
-func InitPostgres() {
+func initPostgres() {
 	// 添加集群连接字符串
 	var conns, tips []string
 	for _, val := range *config.Postgres {
@@ -60,7 +59,6 @@ func InitPostgres() {
 		return
 	}
 
-
 	// // 2.显示sql语句
 	// db.ShowSQL(true)
 	//
@@ -71,9 +69,8 @@ func InitPostgres() {
 	// cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(), 500) // 缓存的条数
 	// db.SetDefaultCacher(cacher)
 
-
 	// todo 配置
-	PG.ShowSQL(true)  //显示sql语句
+	PG.ShowSQL(true) // 显示sql语句
 	PG.SetLogLevel(xlg.LOG_INFO)
 	if config.App.Env == config.Env_PROD {
 		PG.ShowSQL(false)

@@ -15,13 +15,13 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
+
 var apiVisit ApiVisit
 
 type ApiVisit struct {
 	visit map[string]int
-	mu sync.RWMutex
+	mu    sync.RWMutex
 }
-
 
 func apiStats() interface{} {
 	apiVisit.mu.RLock()
@@ -39,7 +39,7 @@ func ApiVisitHandler(c *gin.Context) {
 	apiVisit.visit[c.Request.RequestURI] = 1
 }
 
-func init()  {
-	apiVisit =ApiVisit{visit:make(map[string]int)}
+func init() {
+	apiVisit = ApiVisit{visit: make(map[string]int)}
 	expvar.Publish("API统计", expvar.Func(apiStats))
 }
