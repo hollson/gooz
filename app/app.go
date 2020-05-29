@@ -1,51 +1,46 @@
-// -------------------------------------------------------------------------------------
-// @ Copyright (C) free license,without warranty of any kind .
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2019-12-01
-// @ Version: 1.0.0
-// -------------------------------------------------------------------------------------
-
 package app
 
 import (
 	"fmt"
+	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/app/config"
-	"github.com/hollson/deeplink/app/monitor"
+	"github.com/hollson/deeplink/app/midware/stats"
+
 	_ "github.com/hollson/deeplink/repo"
 )
 
 var router *gin.Engine
 
 func Init() {
-	// 欢迎光临
 	fmt.Printf(WELCOME, config.App.Version, config.App.Env, config.App.Name)
+
+	router = gin.Default()
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
+	router.Use(stats.ApiVisitHandler)
+	Route()
+
+	router.GET("/help/stats", stats.GetCurrentRunningStats)
+	router.GET("/help/check", stats.GetCurrentRunningStats)
+
+	// gin.SetMode(config.Env2Gin[config.App.Env])
 }
 
 // 启动程序
 func Run() {
-	router = gin.Default()
+	server := &http.Server{
+		Addr:           config.App.Port,
+		Handler:        router,
+		ReadTimeout:    time.Second * 30,
+		WriteTimeout:   time.Second * 30,
+		MaxHeaderBytes: 1 << 20, // 2M
+	}
 
-	// 统计API和系统信息
-	router.Use(monitor.ApiVisitHandler)
-	router.GET("/help/stats", monitor.GetCurrentRunningStats)
-	router.GET("/help/check", monitor.GetCurrentRunningStats) // 检查
-
-	// s := &http.Server{
-
-	RegisterRoute() // 注册路由表
-
-	// 	Addr:           ":8080",
-	// 	Handler:        router,
-	// 	ReadTimeout:    5 * time.Second,
-	// 	WriteTimeout:   5 * time.Second,
-	// 	MaxHeaderBytes: 1 << 20,
-	// }
-	//
-	// s.ListenAndServe()  //开始监听
-
-	if err := router.Run(config.App.Port); err != nil {
+	if err := server.ListenAndServe(); err != nil {
 		panic(err)
 	}
 }

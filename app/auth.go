@@ -1,10 +1,3 @@
-// ------------------------------------------------------------------
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2019-12-01
-// @ Version: 1.0.0
-// 验证授权：签名验证服务
-// -------------------------------------------------------------------------------------
-
 package app
 
 import (
@@ -16,10 +9,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// 渠道账号(客户编号:令牌)
+// 账号(客户编号:令牌)
 type Users map[int64]string
 
-// 分配渠道账号(客户编号:令牌)   todo 配置
+// 账号(客户编号:令牌)   todo 配置
 var users = Users{
 	1000010: "KhBQKxfMeElLPUNSQ66R0y9yW5kio4XM", // 测试
 }
@@ -31,10 +24,10 @@ func (p Users) GetAll() Users {
 type Auth struct {
 	UID       int64  `json:"uid"`       // 要执行的任务
 	Timestamp int64  `json:"timestamp"` // 签名时间戳(毫秒)
-	Sign      string `json:"sign"`      // 签名内容：sha256(uid+token+timestamp)
+	Sign      string `json:"sign"`      // 签名内容
 }
 
-// 验证用户签名
+// 验证用户签名,sha256(uid+token+timestamp)
 func (p *Auth) CheckAuth() error {
 	if p.UID == 1000020 &&
 		p.Sign == "607973dbe8b96d7066beb80b64216009" &&

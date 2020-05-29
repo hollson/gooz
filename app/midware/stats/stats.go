@@ -1,13 +1,6 @@
-// -----------------------------------------------------------------------
-// @ Copyright (C) free license,without warranty of any kind .
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2020-05-19
-// @ Version: 1.0.0
-//
-// Here's the code description...
-// -----------------------------------------------------------------------
+// Go运行时的性能统计
 
-package monitor
+package stats
 
 import (
 	"encoding/json"
@@ -79,7 +72,6 @@ func getLastGCPauseTime() interface{} {
 // GetCurrentRunningStats 返回当前运行信息
 func GetCurrentRunningStats(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
-
 	first := true
 	report := func(key string, value interface{}) {
 		if !first {
@@ -98,12 +90,10 @@ func GetCurrentRunningStats(c *gin.Context) {
 		report(kv.Key, kv.Value)
 	})
 	fmt.Fprintf(c.Writer, "\n}\n")
-
 	c.String(http.StatusOK, "")
 }
 
 func init() {
-
 	// 这些都是我自定义的变量，发布到expvar中，每次请求接口，expvar会自动去获取这些变量，并返回给我
 	expvar.Publish("运行时间", expvar.Func(calculateUptime))
 	expvar.Publish("version", expvar.Func(currentGoVersion))
@@ -112,5 +102,4 @@ func init() {
 	expvar.Publish("cgo", expvar.Func(getNumCgoCall))
 	expvar.Publish("goroutine", expvar.Func(getNumGoroutins))
 	expvar.Publish("gcpause", expvar.Func(getLastGCPauseTime))
-
 }

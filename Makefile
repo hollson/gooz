@@ -52,7 +52,6 @@ build: clean
 # https://my.oschina.net/u/2409113/blog/490833
 
 
-
 ## clean@清理编译、日志和缓存等数据。
 .PHONY:clean
 clean:
@@ -66,7 +65,7 @@ clean:
 	@rm -rf ./tmp;
 	@rm -rf ./temp;
 	@rm -rf ./vendor/*;
-	@echo "\033[31m ✅  清理完成\033[0m";
+	@echo "\033[31m ✅  清理完毕\033[0m";
 
 
 ## commit <msg>@提交Git(格式:make commit msg=备注内容,msg为可选参数)。
@@ -131,10 +130,10 @@ run: clean
 update:
 	@git submodule update --init --recursive;
 
+
 ## vendor@分发编译包。
 .PHONY:vendor
 vendor:
-	@mkdir ./vendor;
 	@go mod vendor;
 
 
@@ -150,6 +149,8 @@ xorm:
 	@echo "\033[31m ✅  Reverse完成\033[0m";
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
 
+
+## 对release包签名与签名私钥 todo
 
 ## help@查看make帮助。
 .PHONY:help

@@ -34,10 +34,9 @@ type Env string
 
 // 参考Viki：https://en.wikipedia.org/wiki/Deployment_environment
 const (
-	Env_DEV   Env = "dev"   // 开发环境
-	Env_TEST  Env = "test"  // 测试环境
-	Env_STAGE Env = "stage" // 验收环境
-	Env_PROD  Env = "prod"  // 成产环境
+	Env_DEV  Env = "dev"  // 开发环境
+	Env_TEST Env = "test" // 测试环境
+	Env_PROD Env = "prod" // 成产环境
 )
 
 type app struct {
@@ -110,10 +109,10 @@ func load() {
 		if err != nil {
 			log.Panic(err)
 		}
-		f.WriteString(fmt.Sprintf(tpl, time.Now().Format("2006-01-02 15:04:05")))
+		f.WriteString(fmt.Sprintf(TPL, time.Now().Format("2006-01-02 15:04:05")))
 		log.Println(" 👷 初始化配置文件创建成功！！！")
 
-		if _, err := toml.Decode(tpl, &cfg); err != nil {
+		if _, err := toml.Decode(TPL, &cfg); err != nil {
 			panic(err)
 		}
 	}
