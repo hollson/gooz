@@ -1,7 +1,7 @@
 # App基本信息
-AppName="Deeplink"	#应用名称
+AppName="deeplink"	#应用名称
 AppPort="8080"		#服务端口
-Version="v1.0.1"	#版本号
+Version="v1.0.0"	#版本号
 Cgo=1				#是否开启Cgo，0：不开启，1：开启
 
 
@@ -24,7 +24,7 @@ build: clean
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/run.sh; \
 		sed -i "s/tmp_port/$${AppPort}/g" ./tmp/run.sh; \
 		sed -i "s/tmp_appname/$${AppName}/g" ./tmp/stop.sh; \
-		echo "\033[35m ✅  编译完成\033[0m";\
+		echo "\033[35m ✅  编译完毕\033[0m";\
 		echo "输出路径：./tmp" && ls -hl ./tmp;\
 	elif [ $(OS) = "darwin" ]; \
 	then \
@@ -35,14 +35,14 @@ build: clean
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/run.sh`; \
 		sed -i "" "s/tmp_port/${AppPort}/g" ./tmp/run.sh;\
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/stop.sh`; \
-		echo "\033[35m ✅  编译完成:\033[0m ./tmp";\
+		echo "\033[35m ✅  编译完毕:\033[0m ./tmp";\
 		ls -hl ./tmp;\
 	elif [ $(OS) = "windows" ]; \
 	then \
 		echo "\033[35m 🍵 编译环境：windows\033[0m"; \
 		CGO_ENABLED=$(Cgo) GOOS=windows GOARCH=amd64 go build -o ./tmp/"`echo $(AppName)-win-amd64-$(Version).exe|sed s/[[:space:]]//g`"; \
 		cp -rp ./conf ./tmp \
-        echo "\033[35m ✅  编译完成\033[0m";\
+        echo "\033[35m ✅  编译完毕\033[0m";\
         echo "输出路径：./tmp" && ls -hl ./tmp;\
 	else \
 		echo " ❌  未知的操作系统类型:$(OS)."; \
@@ -75,7 +75,7 @@ commit:
 	@echo "\033[0;34mPush to remote...\033[0m"
 	@git add .
 	@git commit -m $(message)
-	@echo "\033[0;31m 💿 Commit成功\033[0m"
+	@echo "\033[0;31m 💿 Commit完毕\033[0m"
 
 
 ## deploy@[远程]发布到远程服务器。
@@ -90,7 +90,7 @@ deploy:
 	ssh root@www.mafool.com 'rm -rf /srv/www/$(AppName)'
 	ssh root@www.mafool.com 'cd /srv/www/$(AppName) && tar -zxvf $(AppName)-release-$(Version)-tar.gz && nginx -s reload'
 	rm -f mafool-blog.tar.gz
-	@echo "\033[31m ✅  发布完成\033[0m";
+	@echo "\033[31m ✅  发布完毕\033[0m";
 
 
 ## install@[本地]安装并启动服务。
@@ -107,14 +107,14 @@ install:
 .PHONY:push
 push:commit
 	@git push #origin master
-	@echo "\033[0;31m ⬆️ Push成功\033[0m"
+	@echo "\033[0;31m ⬆️ Push完毕\033[0m"
 
 
 ## proto@更新并编译proto文件。
 .PHONY:proto
 proto:
 	@cd proto && ./gen.sh && cd -;
-	@echo "\033[35m ✅  Proto编译完成\033[0m"; \
+	@echo "\033[35m ✅  Proto编译完毕\033[0m"; \
 
 
 ## run@运行服务。
@@ -146,7 +146,7 @@ xorm:
 	@#sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
 	@sudo xorm reverse postgres "user=postgres password=123456 dbname=testdb host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@#xorm reverse sqite3 test.db templates/goxorm C:\temp
-	@echo "\033[31m ✅  Reverse完成\033[0m";
+	@echo "\033[31m ✅  Reverse完毕\033[0m";
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
 
 
