@@ -32,6 +32,8 @@ https://segmentfault.com/a/1190000016677230
 xorm问题
 https://www.cnblogs.com/nickchou/p/9561561.html
 
+https://www.jianshu.com/p/b15cdc114458
+
 
 ## 代码规范
 https://github.com/uber-go/guide

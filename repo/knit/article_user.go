@@ -14,7 +14,12 @@ import (
 )
 
 // 自定义的Join联合对象
-type ClassUser struct {
-	models.User `xorm:"extends"`
-	Name        string
+type ArticleUser struct {
+	models.Article `xorm:"extends"`
+	models.User    `xorm:"extends"`
+}
+
+func (ArticleUser) TableName() string {
+	//指定使用该结构体对象 进行数据库查询时，使用的表名，这里返回子表名称
+	return "article_user"
 }

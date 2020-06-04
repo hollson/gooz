@@ -6,8 +6,8 @@ import (
 	"github.com/EDDYCJY/go-gin-example/middleware/jwt"
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/app/export"
+	"github.com/hollson/deeplink/service/article"
 	"github.com/hollson/deeplink/service/help"
-	"github.com/hollson/deeplink/service/user"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
@@ -15,7 +15,7 @@ import (
 var (
 	helper  *gin.RouterGroup // 帮助模块
 	rgAsset *gin.RouterGroup // 静态资源
-	rgUser  *gin.RouterGroup // 用户管理
+	rgAtc   *gin.RouterGroup // 文章管理
 	rgSys   *gin.RouterGroup // 系统管理
 )
 
@@ -37,13 +37,13 @@ func Route() {
 		rgAsset.StaticFS("/download", http.Dir(export.GetExcelFullPath()))
 	}
 
-	// 用户模块
-	rgUser = router.Group("/v1/user")
-	rgUser.Use(jwt.JWT())
+	// 文章模块
+	rgAtc = router.Group("/v1/atc")
+	// rgAtc.Use(jwt.JWT())
 	{
-		// 获取用户信息 curl http://127.0.0.1:8080/v1/user/detail?id=1
-		rgUser.GET("/detail", user.GetUserHandler)
-		rgUser.GET("/detail2", user.GetUserHandler)
+		// 获取用户信息 curl http://127.0.0.1:8080/v1/atc/detail?id=1
+		rgAtc.GET("/detail", article.GetArticleDetailHandler)
+		rgAtc.GET("/list", article.GetArticleDetailHandler)
 	}
 
 	// 其他模块...
@@ -52,7 +52,7 @@ func Route() {
 	rgSys = router.Group("/v1/sys")
 	rgSys.Use(jwt.JWT())
 	{
-		rgSys.GET("/profile", user.GetUserHandler)
-		rgSys.GET("/logout", user.GetUserHandler)
+		rgSys.GET("/profile", article.GetArticleDetailHandler)
+		rgSys.GET("/logout", article.GetArticleDetailHandler)
 	}
 }

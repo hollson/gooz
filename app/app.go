@@ -19,9 +19,9 @@ func Init() {
 
 	router = gin.Default()
 	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
+	// router.Use(gin.Recovery())
 
-	router.Use(stats.ApiVisitHandler)
+	// router.Use(stats.ApiVisitHandler)
 	Route()
 
 	router.GET("/help/stats", stats.GetCurrentRunningStats)

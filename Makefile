@@ -137,16 +137,16 @@ vendor:
 	@go mod vendor;
 
 
-## xorm@根据数据表结构生成实体,支持mysql、postgres、sqlite等。
+## xorm@生成数据库表实体,支持mysql、postgres、sqlite等。
 .PHONY:xorm
 Templates=$(GOPATH)/src/xorm.io/cmd/xorm/templates/goxorm/
 REPO_PATH=$$(pwd)/repo
 xorm:
 	@sudo rm -rf $(REPO_PATH)/models/*;
-	@#sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/demo?charset=utf8 $(Templates) $(REPO_PATH)/models;
-	@sudo xorm reverse postgres "user=postgres password=123456 dbname=testdb host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
-	@#xorm reverse sqite3 test.db templates/goxorm C:\temp
+	@sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/deeplink?charset=utf8 $(Templates) $(REPO_PATH)/models;
+	@#sudo xorm reverse postgres "user=postgres password=123456 dbname=deeplink host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@echo "\033[31m ✅  Reverse完毕\033[0m";
+
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
 
 
