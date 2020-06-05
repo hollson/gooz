@@ -26,7 +26,7 @@ var audience map[int64]*claims
 func init() {
 	audience = make(map[int64]*claims)
 	audience[100000] = &claims{"测试1", "KhBQKxfMeElLPUNSQ66R0y9yW5kio4XM", TERM, true}
-	audience[100011] = &claims{"客户A", "XhBQKxfMeE1LJUNSQ66R0y3yW5kio4AA", TERM, false}
-	audience[100012] = &claims{"客户B", "YhBQKxfMeE2LKUNSQ66R0y4yW5kio4AB", TERM, false}
-	audience[100013] = &claims{"客户C", "ZhBQKxfMeE3LLNMSQ66R0y5yW5kio4AC", TERM, false}
+	audience[100011] = &claims{"客户端A", "XhBQKxfMeE1LJUNSQ66R0y3yW5kio4AA", TERM, false}
+	audience[100012] = &claims{"客户端B", "YhBQKxfMeE2LKUNSQ66R0y4yW5kio4AB", TERM, false}
+	audience[100013] = &claims{"客户端C", "ZhBQKxfMeE3LLNMSQ66R0y5yW5kio4AC", TERM, false}
 }
