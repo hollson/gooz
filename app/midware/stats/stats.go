@@ -13,9 +13,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// var CuMemoryPtr *map[string]models.Kline
-// var BTCMemoryPtr *map[string]models.Kline
-
 // 开始时间
 var start = time.Now()
 
@@ -94,7 +91,6 @@ func GetCurrentRunningStats(c *gin.Context) {
 }
 
 func init() {
-	// 这些都是我自定义的变量，发布到expvar中，每次请求接口，expvar会自动去获取这些变量，并返回给我
 	expvar.Publish("运行时间", expvar.Func(calculateUptime))
 	expvar.Publish("version", expvar.Func(currentGoVersion))
 	expvar.Publish("cores", expvar.Func(getNumCPUs))

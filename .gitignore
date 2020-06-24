@@ -7,7 +7,7 @@ pid
 cache
 tmp
 temp
-*DS_Stroe
+.DS_Stroe
 *workspace
 #_gen
 

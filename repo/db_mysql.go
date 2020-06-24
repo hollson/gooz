@@ -24,7 +24,7 @@ func initMysql() {
 	}
 
 	var err error
-	My, err = xorm.NewEngine("mysql", config.Mysql.Source)
+	My, err = xorm.NewEngine("mysql", config.Mysql.String())
 	if err != nil {
 		logrus.Errorln(" ❌  Mysql Engine错误:", err.Error())
 		return

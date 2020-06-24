@@ -48,6 +48,15 @@ func AtoInt64(num string) int64 {
 	}
 }
 
+func StringIn(target string,container ...string)bool{
+	for _, value := range container {
+		if value==target{
+			return true
+		}
+	}
+	return false
+}
+
 // hash := sha256.New()
 // hash.Write([]byte(sign))
 // md := hash.Sum(nil)

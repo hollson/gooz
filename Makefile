@@ -35,7 +35,7 @@ build: clean
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/run.sh`; \
 		sed -i "" "s/tmp_port/${AppPort}/g" ./tmp/run.sh;\
 		sed -i "" "s/tmp_appname/$${AppName}/g" `grep -rl tmp_appname ./tmp/stop.sh`; \
-		echo "\033[35m ✅  编译完毕:\033[0m ./tmp";\
+		echo "\033[35m ✅  编译完毕 \033[0m \n输出路径：./tmp";\
 		ls -hl ./tmp;\
 	elif [ $(OS) = "windows" ]; \
 	then \
@@ -121,7 +121,7 @@ proto:
 .PHONY:proto run
 run: clean
 #	@pkill ${{AppName}};
-	@echo " ⚽  启动服务...";
+	@echo " ⚽  正在启动...";
 	@go run main.go $(deamon);
 
 

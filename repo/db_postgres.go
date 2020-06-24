@@ -25,7 +25,7 @@ func initPostgres() {
 	var conns, tips []string
 	for _, val := range *config.Postgres {
 		if val.Enable {
-			pg, err := xorm.NewEngine("postgres", val.Source)
+			pg, err := xorm.NewEngine("postgres", val.String())
 			if err != nil {
 				logrus.Errorf(" ❌  Postgres Engine错误:%v", err.Error())
 				continue
@@ -36,7 +36,7 @@ func initPostgres() {
 				continue
 			}
 			tips = append(tips, fmt.Sprintf("【%s:%d/%s】", val.Host, val.Port, val.Schema))
-			conns = append(conns, val.Source)
+			conns = append(conns, val.String())
 			logrus.Infof(" ✅  Postgres【%s:%d/%s】连接成功", val.Host, val.Port, val.Schema)
 		}
 	}

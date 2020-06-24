@@ -6,9 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/deeplink/app/auth/jwt"
 	"github.com/hollson/deeplink/app/export"
+	"github.com/hollson/deeplink/app/midware/stats"
 	"github.com/hollson/deeplink/service/account"
 	"github.com/hollson/deeplink/service/article"
-	"github.com/hollson/deeplink/service/help"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
@@ -21,11 +21,12 @@ var (
 )
 
 func Route() {
+
 	// 游客身份
 	aym := router.Group("/v1/account")
 	{
 		aym.POST("/register", article.GetArticleDetailHandler) // 注册
-		aym.POST("/login", account.LoginHandler)    // 登录
+		aym.POST("/login", account.LoginHandler)               // 登录
 		aym.POST("/forget", article.GetArticleDetailHandler)   // 忘记
 	}
 
@@ -75,10 +76,12 @@ func Route() {
 	}
 
 	// 帮助模块
-	// Doc: http://localhost:8080/swagger/index.html
 	helper = router.Group("/help")
 	{
-		helper.GET("/ping", help.PingHandler)
-		helper.GET("/swg/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+		// 自动文档: http://localhost:8080/help/doc/index.html
+		helper.GET("/doc/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+		// 系统监控: http://localhost:8080/help/stats
+		helper.GET("/stats", stats.GetCurrentRunningStats)
 	}
 }
