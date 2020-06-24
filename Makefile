@@ -1,7 +1,7 @@
 # App基本信息
 AppName="deeplink"	#应用名称
 AppPort="8080"		#服务端口
-Version="v1.0.0"	#版本号
+Version="v1.0.1"	#版本号
 Cgo=1				#是否开启Cgo，0：不开启，1：开启
 
 
@@ -47,9 +47,6 @@ build: clean
 	else \
 		echo " ❌  未知的操作系统类型:$(OS)."; \
 	fi;
-
-# todo 如果编译失败，则中断shell
-# https://my.oschina.net/u/2409113/blog/490833
 
 
 ## clean@清理编译、日志和缓存等数据。
@@ -136,6 +133,12 @@ update:
 vendor:
 	@go mod vendor;
 
+## tag@修订版本号(同步git/tag和本地编译版本号)。
+.PHONY:tag
+tag:
+	@go mod vendor;
+	#"版本号一致"
+
 
 ## xorm@生成数据库表实体,支持mysql、postgres、sqlite等。
 .PHONY:xorm
@@ -149,8 +152,6 @@ xorm:
 
 #https://pkg.go.dev/github.com/lib/pq?tab=doc
 
-
-## 对release包签名与签名私钥 todo
 
 ## help@查看make帮助。
 .PHONY:help

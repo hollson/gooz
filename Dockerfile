@@ -1,15 +1,11 @@
 # This file is a template, and might need editing before it works on your project.
 FROM golang:1.14 AS builder
 
-WORKDIR /usr/src/app
+MAINTAINER Hollson Hollson@qq.com
 
-COPY . .
-RUN go-wrapper download
-RUN go build -v
+WORKDIR /app
 
-FROM buildpack-deps:jessie
-
-WORKDIR /usr/local/bin
+COPY ./tmp/ .
 
 COPY --from=builder /usr/src/app/app .
 CMD ["./app"]

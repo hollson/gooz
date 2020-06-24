@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/EDDYCJY/go-gin-example v0.0.0-20200505102242-63963976dee0
+	github.com/EDDYCJY/go-gin-example v0.0.0-20200505102242-63963976dee0 // indirect
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
