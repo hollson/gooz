@@ -17,6 +17,7 @@ func init() {
 	logger.Init()
 }
 
+//go:generate go build -o deeplink
 func main() {
 	runtime.Gosched()
 	app.Run()

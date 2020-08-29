@@ -4138,9 +4138,9 @@ public final class PersonDto {
       "nal\030\001 \003(\0132\023.Append.Educational\0324\n\013Educat" +
       "ional\022\022\n\nuniversity\030\001 \001(\t\022\021\n\tspecialty\030\002" +
       " \003(\t2@\n\006Person\0226\n\024GetPersonInfoHandler\022\016" +
-      ".PersonRequest\032\014.PersonReply\"\000B3\n\024com.ex" +
-      "ample.tutorialB\tPersonDtoZ\005.;pbs\252\002\010Pro.D" +
-      "emob\006proto3"
+      ".PersonRequest\032\014.PersonReply\"\000B2\n\024com.ex" +
+      "ample.tutorialB\tPersonDtoZ\004.;pb\252\002\010Pro.De" +
+      "mob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

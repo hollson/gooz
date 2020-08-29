@@ -3,7 +3,7 @@ syntax = "proto3";
 //import "google/protobuf/any.proto";
 
 //package pbs;
-option go_package = ".;pbs";
+option go_package = ".;pb";
 
 // java 生成文件定义
 option java_package = "com.example.tutorial";
@@ -27,7 +27,8 @@ message PersonRequest {
 
 // 相应结果
 message PersonReply {
-    string name = 1; //姓名
+    //姓名
+    string name = 1;
     string id_card = 2; //身份证
     int32 age = 3; //年龄
     enum Sex {
@@ -35,7 +36,8 @@ message PersonReply {
         MALE = 1;
     }
     Sex sex = 4; //性别
-    bool married = 5; //是否已婚
+    //是否已婚
+    bool married = 5;
     double amount = 6; //资产
     repeated string address = 7; //地址
     Append.Educational educational = 8; //学历

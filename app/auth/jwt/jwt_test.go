@@ -21,6 +21,7 @@ func TestClaimToken(t *testing.T) {
 		return
 	}
 	fmt.Println(tk)
+
 	fmt.Printf("\n=================Token解码=================\n")
 	items := strings.Split(tk, ".")
 	header, _ := base64.URLEncoding.DecodeString(items[0])
@@ -30,7 +31,7 @@ func TestClaimToken(t *testing.T) {
 	fmt.Println(items[2])
 
 	fmt.Printf("\n=================Token反解析=================\n")
-	token, err := Verify(tk)
+	token, err := Resolve(tk)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -40,14 +41,13 @@ func TestClaimToken(t *testing.T) {
 
 func TestParse(t *testing.T) {
 	var token *jwt.Token
-
 	//  修改并验证claims校验项
 	var claims Claims = Claims{
 		StandardClaims: jwt.StandardClaims{
 			Audience:  "abc",
 			ExpiresAt: 1591755941,
 		},
-		Ver: 159166954,
+		Version: 159166954,
 	}
 
 	token = jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

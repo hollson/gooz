@@ -68,6 +68,8 @@ type redis struct {
 }
 
 type sentinel struct {
+	Psssworld string
+	MasterName string
 	Member []redis
 }
 

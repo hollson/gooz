@@ -19,16 +19,17 @@ var JWT_STATUS = map[int]string{
 	504: "Token verification timeout",
 }
 
-// 验证JWT的中间件
-// 从Http头部的Authorization(忽略大小写)中获取Token信息，并验证Token的有效性。
+// Gin中间件：
+//	验证JWT的中间件
+// 	从Http头部的Authorization(忽略大小写)中获取Token信息，并验证Token的有效性。
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var code int = 200
+		var code  = 200
 		token := c.GetHeader("Authorization")
 		if len(token) == 0 {
 			code = 400
 		} else {
-			_, err := Verify(token)
+			_, err := Resolve(token)
 			if err != nil {
 				logrus.Errorln(err)
 				switch err.(*jwt.ValidationError).Errors {

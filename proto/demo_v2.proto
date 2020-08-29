@@ -1,7 +1,7 @@
 syntax = "proto2";
 
 //package pbs; 老版本格式
-option go_package = ".;pbs";
+option go_package = ".;pb";
 
 option java_package = "com.imrobot.proto";
 option java_outer_classname = "CommonShopProto";

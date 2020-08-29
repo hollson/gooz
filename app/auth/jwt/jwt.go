@@ -24,11 +24,39 @@ var (
 
 type Claims struct {
 	jwt.StandardClaims // 标准Claim
-	Ver int64          // 服务端版本号
+	Version int64      // 服务端版本号
+}
+
+// 生成JWT令牌：
+// uuid ：用户唯一标识，
+func Generate(uuid string) (string, error) {
+	var token *jwt.Token
+
+	claims := Claims{
+		StandardClaims: jwt.StandardClaims{
+			Audience:  uuid,                             // 签发对象
+			ExpiresAt: time.Now().Add(TokenTerm).Unix(), // 过期时间
+
+			// 为了精简化token，可省略其他缺省项
+			// Id:        util.EncodeMD5(fmt.Sprintf("%d+%s",time.Now().UnixNano(),uuid)), // JWT标识
+			// Subject:   "deeplink_service",                            // 应用主题
+			// Issuer:    "deeplink.org",                                // 签发机构
+			// IssuedAt:  jwt.TimeFunc().Unix(),                         // 签发时间
+			// NotBefore: time.Now().Unix(),                             // 生效时间
+		},
+		Version: time.Now().Unix(),
+	}
+	if VersionCtl {
+
+	}
+
+	token = jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenStr, err := token.SignedString([]byte(JWTSECRET))
+	return tokenStr, err
 }
 
 // 将Token字符串解析成Claim对象
-func Verify(token string) (*Claims, error) {
+func Resolve(token string) (*Claims, error) {
 	token = strings.TrimPrefix(token, "Bearer ")
 	tokenClaims, err := jwt.ParseWithClaims(token, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(JWTSECRET), nil
@@ -58,7 +86,7 @@ func Verify(token string) (*Claims, error) {
 					return nil, err
 				}
 
-				ver := strconv.Itoa(int(claims.Ver))
+				ver := strconv.Itoa(int(claims.Version))
 				if v != ver {
 					return nil, errors.New("token已失效")
 				}
@@ -67,34 +95,6 @@ func Verify(token string) (*Claims, error) {
 		}
 	}
 	return nil, err
-}
-
-// 生成JWT令牌：
-// uuid ：用户唯一标识，
-func Generate(uuid string) (string, error) {
-	var token *jwt.Token
-
-	claims := Claims{
-		StandardClaims: jwt.StandardClaims{
-			Audience:  uuid,                             // 签发对象
-			ExpiresAt: time.Now().Add(TokenTerm).Unix(), // 过期时间
-
-			// 为了精简化token，可省略其他缺省项
-			// Id:        util.EncodeMD5(fmt.Sprintf("%d+%s",time.Now().UnixNano(),uuid)), // JWT标识
-			// Subject:   "deeplink_service",                            // 应用主题
-			// Issuer:    "deeplink.org",                                // 签发机构
-			// IssuedAt:  jwt.TimeFunc().Unix(),                         // 签发时间
-			// NotBefore: time.Now().Unix(),                             // 生效时间
-		},
-		Ver: time.Now().Unix(),
-	}
-	if VersionCtl {
-
-	}
-
-	token = jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenStr, err := token.SignedString([]byte(JWTSECRET))
-	return tokenStr, err
 }
 
 // Token版本升级

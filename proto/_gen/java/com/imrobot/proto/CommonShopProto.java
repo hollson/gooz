@@ -3093,8 +3093,8 @@ public final class CommonShopProto {
       "\n\013videolength\030\006 \001(\005\022\022\n\ncreateTime\030\007 \002(\003\"" +
       "9\n\010Identity\022\016\n\006shopId\030\001 \002(\005\022\016\n\006userId\030\002 " +
       "\002(\005\022\r\n\005token\030\003 \002(\t\"&\n\tOperation\022\013\n\003cmd\030\001" +
-      " \002(\005\022\014\n\004data\030\002 \002(\tB+\n\021com.imrobot.protoB" +
-      "\017CommonShopProtoZ\005.;pbs"
+      " \002(\005\022\014\n\004data\030\002 \002(\tB*\n\021com.imrobot.protoB" +
+      "\017CommonShopProtoZ\004.;pb"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
