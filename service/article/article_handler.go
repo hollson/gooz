@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/repo/domain"
+	"github.com/hollson/gooz/repo/domain"
 	"github.com/sirupsen/logrus"
 )
 

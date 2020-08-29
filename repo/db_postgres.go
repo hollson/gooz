@@ -13,7 +13,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/hollson/deeplink/app/config"
+	"github.com/hollson/gooz/app/config"
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"xorm.io/xorm"

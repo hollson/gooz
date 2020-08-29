@@ -4,11 +4,12 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/app/auth/jwt"
-	"github.com/hollson/deeplink/app/export"
-	"github.com/hollson/deeplink/app/midware/stats"
-	"github.com/hollson/deeplink/service/account"
-	"github.com/hollson/deeplink/service/article"
+	"github.com/hollson/gooz/app/auth/jwt"
+	"github.com/hollson/gooz/app/export"
+	"github.com/hollson/gooz/app/midware/stats"
+	"github.com/hollson/gooz/service/account"
+	"github.com/hollson/gooz/service/article"
+	 "github.com/hollson/gooz/service/home"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
@@ -21,13 +22,18 @@ var (
 )
 
 func Route() {
+	// main
+	main := router.Group("/")
+	{
+		main.GET("",home.IndexHandler)
+	}
 
 	// 游客身份
-	aym := router.Group("/v1/account")
+	guest := router.Group("/v1/account")
 	{
-		aym.POST("/register", article.GetArticleDetailHandler) // 注册
-		aym.POST("/login", account.LoginHandler)               // 登录
-		aym.POST("/forget", article.GetArticleDetailHandler)   // 忘记
+		guest.POST("/register", article.GetArticleDetailHandler) // 注册
+		guest.POST("/login", account.LoginHandler)               // 登录
+		guest.POST("/forget", article.GetArticleDetailHandler)   // 忘记
 	}
 
 	// 账号管理

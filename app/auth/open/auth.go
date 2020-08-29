@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hollson/deeplink/util"
+	"github.com/hollson/gooz/util"
 	"github.com/sirupsen/logrus"
 )
 

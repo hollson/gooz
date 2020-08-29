@@ -5,9 +5,9 @@
 package domain
 
 import (
-	"github.com/hollson/deeplink/repo"
-	"github.com/hollson/deeplink/repo/knit"
-	"github.com/hollson/deeplink/repo/models"
+	"github.com/hollson/gooz/repo"
+	"github.com/hollson/gooz/repo/knit"
+	"github.com/hollson/gooz/repo/models"
 	"github.com/sirupsen/logrus"
 )
 

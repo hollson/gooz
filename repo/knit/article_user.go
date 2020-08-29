@@ -10,7 +10,7 @@
 package knit
 
 import (
-	"github.com/hollson/deeplink/repo/models"
+	"github.com/hollson/gooz/repo/models"
 )
 
 // 自定义的Join联合对象

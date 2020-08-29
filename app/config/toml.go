@@ -32,7 +32,7 @@ var TPL = `# 系统配置文件（可根据规则删除不需要的配置项）
 	port = 3306
 	user = "root"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	charset = "utf8"
 
 
@@ -44,21 +44,21 @@ var TPL = `# 系统配置文件（可根据规则删除不需要的配置项）
 	port = 5432
 	user = "postgres"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	sslmode = "disable"
 [[postgres]]
 	host = "127.0.0.1"
 	port = 5433
 	user = "postgres"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	sslmode = "disable"
 [[postgres]]
 	host = "127.0.0.1"
 	port = 5434
 	user = "postgres"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	sslmode = "disable"
 
 

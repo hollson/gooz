@@ -11,6 +11,6 @@ sign=`echo $raw| md5sum | cut -d ' ' -f 1`  #签名
 attach="timespan="$timespan"&sign="$sign
 
 # api接口（注意末尾是否要加&）
-api_url="http://deeplink.xxx.com/api/update?over=0&"$attach
+api_url="http://gooz.xxx.com/api/update?over=0&"$attach
 echo $api_url
 curl $api_url

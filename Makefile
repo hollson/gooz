@@ -1,5 +1,5 @@
 # App基本信息
-AppName="deeplink"	#应用名称
+AppName="gooz"	#应用名称
 AppPort="8080"		#服务端口
 Version="v1.0.1"	#版本号
 Cgo=1				#是否开启Cgo，0：不开启，1：开启
@@ -146,8 +146,8 @@ Templates=$(GOPATH)/src/xorm.io/cmd/xorm/templates/goxorm/
 REPO_PATH=$$(pwd)/repo
 xorm:
 	@sudo rm -rf $(REPO_PATH)/models/*;
-	@sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/deeplink?charset=utf8 $(Templates) $(REPO_PATH)/models;
-	@#sudo xorm reverse postgres "user=postgres password=123456 dbname=deeplink host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
+	@sudo xorm reverse mysql root:"123456"@"(127.0.1:3306)"/gooz?charset=utf8 $(Templates) $(REPO_PATH)/models;
+	@#sudo xorm reverse postgres "user=postgres password=123456 dbname=gooz host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@echo "\033[31m ✅  Reverse完毕\033[0m";
 
 #https://pkg.go.dev/github.com/lib/pq?tab=doc

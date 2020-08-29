@@ -39,7 +39,7 @@ func TestExists(t *testing.T) {
 	cli.Exists()
 	log.Println( cli.Server())
 	defer cli.Close()
-	fmt.Println(cli.Exists("/deeplink"))
+	fmt.Println(cli.Exists("/gooz"))
 
 }
 

@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
-	"github.com/hollson/deeplink/util"
+	"github.com/hollson/gooz/util"
 )
 
 var App *app               // App配置

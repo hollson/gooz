@@ -29,7 +29,7 @@
 	port = 3306
 	user = "root"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	charset = "utf8"
 
 
@@ -41,7 +41,7 @@
 	port = 5432
 	user = "postgres"
 	password = "123456"
-	schema = "deeplink"
+	schema = "gooz"
 	sslmode = "disable"
 
 

@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/app/config"
-	"github.com/hollson/deeplink/app/midware/stats"
+	"github.com/hollson/gooz/app/config"
+	"github.com/hollson/gooz/app/midware/stats"
 	"github.com/sirupsen/logrus"
 
-	_ "github.com/hollson/deeplink/repo"
+	_ "github.com/hollson/gooz/repo"
 )
 
 const (
@@ -31,7 +31,7 @@ Deeplink is a internal applications <XX科技.保留版权>
 Usage:
 	%s <command> [arguments] 
 
-Use "deeplink help <command>" for more information about a command.
+Use "gooz help <command>" for more information about a command.
 For more please email hollson@qq.com
 
 `

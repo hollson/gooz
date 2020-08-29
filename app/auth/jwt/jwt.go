@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/hollson/deeplink/repo"
+	"github.com/hollson/gooz/repo"
 	"github.com/sirupsen/logrus"
 )
 
@@ -39,8 +39,8 @@ func Generate(uuid string) (string, error) {
 
 			// 为了精简化token，可省略其他缺省项
 			// Id:        util.EncodeMD5(fmt.Sprintf("%d+%s",time.Now().UnixNano(),uuid)), // JWT标识
-			// Subject:   "deeplink_service",                            // 应用主题
-			// Issuer:    "deeplink.org",                                // 签发机构
+			// Subject:   "gooz_service",                            // 应用主题
+			// Issuer:    "gooz.org",                                // 签发机构
 			// IssuedAt:  jwt.TimeFunc().Unix(),                         // 签发时间
 			// NotBefore: time.Now().Unix(),                             // 生效时间
 		},

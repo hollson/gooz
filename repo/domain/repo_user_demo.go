@@ -16,8 +16,8 @@ package domain
 // 	"strconv"
 // 	"time"
 //
-// 	"github.com/hollson/deeplink/repo/knit"
-// 	"github.com/hollson/deeplink/repo/models"
+// 	"github.com/hollson/gooz/repo/knit"
+// 	"github.com/hollson/gooz/repo/models"
 // 	_ "github.com/lib/pq"
 // 	"xorm.io/xorm"
 // )

@@ -1,4 +1,4 @@
-# deeplink
+# gooz
 基于Gin+Zk+Xorm+Mysql+Redis+Zipkin的Restfull+Jwt的项目模板
 
 

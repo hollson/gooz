@@ -10,7 +10,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hollson/deeplink/app/auth/jwt"
+	"github.com/hollson/gooz/app/auth/jwt"
 	"github.com/sirupsen/logrus"
 )
 

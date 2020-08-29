@@ -12,7 +12,7 @@ package repo
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/hollson/deeplink/app/config"
+	"github.com/hollson/gooz/app/config"
 	"github.com/sirupsen/logrus"
 	"xorm.io/xorm"
 	xlg "xorm.io/xorm/log"
