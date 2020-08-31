@@ -1,11 +1,15 @@
 # This file is a template, and might need editing before it works on your project.
-FROM golang:1.14 AS builder
+# https://blog.csdn.net/Gusand/article/details/100658595
 
-MAINTAINER Hollson Hollson@qq.com
-
+FROM alpine
+MAINTAINER holson hollson@live.com
 WORKDIR /app
+COPY . .
+EXPOSE 8080
 
-COPY ./tmp/ .
+#RUN find . -name *.go -exec rm -rf {} \ #删除源文件
+#RUN find -type d -empty |xargs rm -rf;  #删除空目录
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY --from=builder /usr/src/app/app .
-CMD ["./app"]
+CMD ./gooz

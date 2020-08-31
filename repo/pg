@@ -5,18 +5,3 @@ https://blog.csdn.net/bangli1024/article/details/94433927
 https://blog.csdn.net/H_XINGHAI/article/details/85125602
 https://blog.csdn.net/WwJoyous/article/details/80430613
 https://blog.csdn.net/fwhezfwhez/article/details/79291492
-
-
-
-数据库结构
-SELECT s.table_catalog,table_schema,table_name,column_name,data_type,udt_name
-FROM pg_attribute f
-    JOIN pg_class c ON c.oid = f.attrelid JOIN pg_type t ON t.oid = f.atttypid
-    LEFT JOIN pg_attrdef d ON d.adrelid = c.oid AND d.adnum = f.attnum
-    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-    LEFT JOIN pg_constraint p ON p.conrelid = c.oid AND f.attnum = ANY (p.conkey)
-    LEFT JOIN pg_class AS g ON p.confrelid = g.oid
-    LEFT JOIN INFORMATION_SCHEMA.COLUMNS s ON s.column_name=f.attname AND c.relname=s.table_name
-WHERE n.nspname= s.table_schema AND c.relkind = 'r'::char  AND f.attnum > 0 and s.table_schema='public' ORDER BY f.attnum;
-
-

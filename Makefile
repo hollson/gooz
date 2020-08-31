@@ -136,8 +136,8 @@ vendor:
 ## tag@修订版本号(同步git/tag和本地编译版本号)。
 .PHONY:tag
 tag:
-	@go mod vendor;
-	#"版本号一致"
+	@git tag;
+#"版本号一致"
 
 
 ## xorm@生成数据库表实体,支持mysql、postgres、sqlite等。

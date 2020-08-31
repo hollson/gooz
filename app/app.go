@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/hollson/gooz/app/config"
 	"github.com/hollson/gooz/app/midware/stats"
+	"github.com/hollson/goox/color"
 	"github.com/sirupsen/logrus"
 
 	_ "github.com/hollson/gooz/repo"
@@ -21,21 +22,20 @@ const (
 	// 		fmt.Printf(WELCOME,app.version,app.env,app.name)
 	// See http://www.network-science.de/ascii/ for more .
 	WELCOME = `
-Deeplink is a internal applications <XX科技.保留版权>
-       _              _ _      _
-    __| |___ ___ _ __| (_)_ _ | |__
-   / _  / -_) -_) '_ \ | | ' \| / /
-   \____\___\___| .__/_|_|_||_|_\_\   %s(%s)
-                |_|
+Deeplink is a internal applications <XX科技.保留版权>	
+   ____  ____  ____  ____
+  / __ \/ __ \/ __ \/_  /
+ / /_/ / /_/ / /_/ / / /_
+ \__, /\____/\____/ /___/
+/____/    		 %s(%s)
 
 Usage:
 	%s <command> [arguments] 
 
-Use "gooz help <command>" for more information about a command.
+Use "Gooz help <command>" for more information about a command.
 For more please email hollson@qq.com
 
 `
-	Version = "v1.0.0"
 )
 
 var (
@@ -43,7 +43,7 @@ var (
 )
 
 func Init() {
-	fmt.Printf(WELCOME, config.App.Version, config.App.Env, config.App.Name)
+	fmt.Printf(color.Blue( WELCOME), config.App.Version, config.App.Env, config.App.Name)
 	router = gin.Default()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())

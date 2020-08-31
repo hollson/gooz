@@ -106,6 +106,8 @@ github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+
 github.com/gorilla/context v1.1.1/go.mod h1:kBGZzfjB9CEq2AlWe17Uuf7NDRt0dE0s8S51q0aT7Yg=
 github.com/gorilla/mux v1.6.2/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
+github.com/hollson/goox v0.0.0-20200831064935-bcae4aee2352 h1:d2TCrwxzErQMPa02K7GsyRu+YEX9RaYUz8PJj/2sEoY=
+github.com/hollson/goox v0.0.0-20200831064935-bcae4aee2352/go.mod h1:CNHIYh7NVhCW5yEWVQOqQB2mN/f8NiMEmrLMErNQjQs=
 github.com/hollson/gox v0.0.0-20200526082844-25d395bf2f9a h1:3WpqdN+TZDM4C9JOetzDU4qhcrOVqJitVN9DA9CjW9w=
 github.com/hollson/gox v0.0.0-20200526082844-25d395bf2f9a/go.mod h1:zAgEsiVn0kYQ8A2YzzY7dpHK8MF+Ki35VqeO4NV9FJg=
 github.com/hpcloud/tail v1.0.0 h1:nfCOvKYfkgYP8hkirhJocXT2+zOD8yUNjXaWfTlyFKI=

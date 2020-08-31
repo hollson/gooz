@@ -11,6 +11,7 @@ require (
 	github.com/garyburd/redigo v1.6.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-sql-driver/mysql v1.5.0
+	github.com/hollson/goox v0.0.0-20200831064935-bcae4aee2352
 	github.com/hollson/gox v0.0.0-20200526082844-25d395bf2f9a
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jonboulle/clockwork v0.1.0 // indirect

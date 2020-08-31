@@ -11,7 +11,6 @@ var TPL = `# 系统配置文件（可根据规则删除不需要的配置项）
 [app]
 	appName = "Deeplink"
 	port = ":8080"
-	version = "v1.0.1"
 	environment = "dev"   # dev:开发、test:测试、prod:生产
 
 
