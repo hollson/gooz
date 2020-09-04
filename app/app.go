@@ -7,13 +7,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/hollson/gooz/app/config"
 	"github.com/hollson/gooz/app/midware/stats"
-	"github.com/hollson/goox/color"
-	"github.com/sirupsen/logrus"
-
 	_ "github.com/hollson/gooz/repo"
+
+	"github.com/gookit/color"
+	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -22,7 +22,7 @@ const (
 	// 		fmt.Printf(WELCOME,app.version,app.env,app.name)
 	// See http://www.network-science.de/ascii/ for more .
 	WELCOME = `
-Deeplink is a internal applications <XX科技.保留版权>	
+Gooz is a internal applications <XX科技.保留版权>	
    ____  ____  ____  ____
   / __ \/ __ \/ __ \/_  /
  / /_/ / /_/ / /_/ / / /_
@@ -43,7 +43,7 @@ var (
 )
 
 func Init() {
-	fmt.Printf(color.Blue( WELCOME), config.App.Version, config.App.Env, config.App.Name)
+	color.Style{color.Blue, color.OpBold}.Printf(WELCOME, config.App.Version, config.App.Env, config.App.Name)
 	router = gin.Default()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())

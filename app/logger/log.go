@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hollson/gox/file"
-	"github.com/hollson/gox/memory"
+	"github.com/hollson/goox/file"
+	"github.com/hollson/goox/memory"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"

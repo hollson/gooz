@@ -9,9 +9,7 @@ import (
 	"github.com/hollson/gooz/app/midware/stats"
 	"github.com/hollson/gooz/service/account"
 	"github.com/hollson/gooz/service/article"
-	 "github.com/hollson/gooz/service/home"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/hollson/gooz/service/home"
 )
 
 var (
@@ -84,9 +82,6 @@ func Route() {
 	// 帮助模块
 	helper = router.Group("/help")
 	{
-		// 自动文档: http://localhost:8080/help/doc/index.html
-		helper.GET("/doc/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
 		// 系统监控: http://localhost:8080/help/stats
 		helper.GET("/stats", stats.GetCurrentRunningStats)
 	}
