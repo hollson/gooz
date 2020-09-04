@@ -1,4 +1,4 @@
-# gooz
+# Gooz
 基于Gin+Zk+Xorm+Mysql+Redis+Zipkin的Restfull+Jwt的项目模板
 
 
@@ -19,6 +19,38 @@ go get github.com/BurntSushi/toml/cmd/tomlv
 tomlv some-toml-file.toml
 ```
 
+# 目录结构
+```txt
+├── apiauth
+├── app
+│   ├── app.go
+│   ├── auth
+│   ├── cmd.go
+│   ├── config
+│   ├── etcd
+│   ├── export
+│   ├── logger
+│   ├── midware
+│   └── router.go
+├── asset
+│   └── index.html
+├── base
+│   └── api.go
+├── cmd
+├── conf
+├── docs
+├── main.go
+├── proto
+├── repo
+├── service
+│   ├── account
+│   ├── article
+│   ├── help
+│   └── home
+├── setup
+├── util
+└── version.go
+```
 
 
 # 配置文件

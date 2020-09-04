@@ -1,4 +1,4 @@
-package middle
+package midware
 //
 // import (
 // 	"github.com/e421083458/gin_scaffold/public"

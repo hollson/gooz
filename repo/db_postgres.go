@@ -1,12 +1,3 @@
-// -------------------------------------------------------------------------------------
-// @ Copyright (C) free license,without warranty of any kind .
-// @ Author: hollson <hollson@live.cn>
-// @ Date: 2020-05-06
-// @ Version: 1.0.0
-//
-// Here's the code description...
-// -------------------------------------------------------------------------------------
-
 package repo
 
 import (
@@ -41,7 +32,7 @@ func initPostgres() {
 		}
 	}
 
-	if len(conns) < 1 {
+	if len(conns) ==0 {
 		return
 	}
 	logrus.Infof(" 🍇 Postgres集群状态：%v️", strings.Join(tips, ""))

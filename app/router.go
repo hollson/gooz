@@ -13,76 +13,57 @@ import (
 )
 
 var (
-	rgAsset *gin.RouterGroup // 静态资源
-	rgAtc   *gin.RouterGroup // 文章管理
-	rgSys   *gin.RouterGroup // 系统管理
-	helper  *gin.RouterGroup // 帮助模块
+	_home  *gin.RouterGroup // 通行游客
+	_asset *gin.RouterGroup // 静态资源
+	_prof  *gin.RouterGroup // 个人信息
+	_sys   *gin.RouterGroup // 系统管理
+	_help  *gin.RouterGroup // 帮助模块
 )
 
 func Route() {
-	// main
-	main := router.Group("/")
+	// 通行游客
+	_home = router.Group("/")
 	{
-		main.GET("",home.IndexHandler)
-	}
-
-	// 游客身份
-	guest := router.Group("/v1/account")
-	{
-		guest.POST("/register", article.GetArticleDetailHandler) // 注册
-		guest.POST("/login", account.LoginHandler)               // 登录
-		guest.POST("/forget", article.GetArticleDetailHandler)   // 忘记
+		_home.GET("", home.IndexHandler)
+		_home.POST("/register", article.GetArticleDetailHandler) // 注册
+		_home.POST("/login", account.LoginHandler)               // 登录
+		_home.POST("/forget", article.GetArticleDetailHandler)   // 忘记密码
 	}
 
 	// 账号管理
-	acc := router.Group("/v1/account")
-	acc.Use(jwt.Auth())
+	_prof = router.Group("/v1/profile")
+	_prof.Use(jwt.Auth())
 	{
-		// 获取用户信息 curl http://127.0.0.1:8080/v1/atc/detail?id=1
-		acc.GET("/profile", article.GetArticleDetailHandler) // 个人信息
-		acc.GET("/modpwd", article.GetArticleDetailHandler)  // 修改密码
-		acc.GET("/logout", article.GetArticleDetailHandler)  // 登出
-	}
-
-	// 主页
-	home := router.Group("/v1/account")
-	home.Use(jwt.Auth())
-	{
-		// 获取用户信息 curl http://127.0.0.1:8080/v1/atc/detail?id=1
-		home.GET("/home/index", article.GetArticleDetailHandler)
-		home.GET("/home/detail", article.GetArticleDetailHandler)
-	}
-
-	// 文章模块
-	rgAtc = router.Group("/v1/atc")
-	rgAtc.Use(jwt.Auth())
-	{
-		// 获取用户信息 curl http://127.0.0.1:8080/v1/atc/detail?id=1
-		rgAtc.GET("/detail", article.GetArticleDetailHandler)
-		rgAtc.GET("/list", article.GetArticleDetailHandler)
+		_prof.GET("/info", article.GetArticleDetailHandler)      // 个人信息
+		_prof.GET("/mod/tel", article.GetArticleDetailHandler)   // 修改手机
+		_prof.GET("/mod/email", article.GetArticleDetailHandler) // 修改邮箱
+		_prof.GET("/mod/pwd", article.GetArticleDetailHandler)   // 修改密码
+		_prof.GET("/logout", article.GetArticleDetailHandler)    // 登出账号
 	}
 
 	// 系统模块
-	rgSys = router.Group("/v1/sys")
-	rgSys.Use(jwt.Auth())
+	_sys = router.Group("/v1/sys")
+	_sys.Use(jwt.Auth())
 	{
-		rgSys.GET("/profile", article.GetArticleDetailHandler)
-		rgSys.GET("/logout", article.GetArticleDetailHandler)
+		_sys.GET("/limit", article.GetArticleDetailHandler) // 权限管理
+		_sys.GET("/set", article.GetArticleDetailHandler)   // 系统设置
+		_sys.GET("/log", article.GetArticleDetailHandler)   // 日志管理
 	}
 
 	// 静态资源
-	rgAsset = router.Group("/asset")
+	_asset = router.Group("/asset")
 	{
-		rgAsset.StaticFS("/favorite", http.Dir("/favorite.icon"))
-		rgAsset.StaticFS("/export", http.Dir(export.GetExcelFullPath()))
-		rgAsset.StaticFS("/upload", http.Dir(export.GetExcelFullPath()))
-		rgAsset.StaticFS("/download", http.Dir(export.GetExcelFullPath()))
+		_asset.StaticFS("/css", http.Dir(export.GetExcelFullPath()))    // 样式
+		_asset.StaticFS("/js", http.Dir(export.GetExcelFullPath()))     // 脚本
+		_asset.StaticFS("/html", http.Dir(export.GetExcelFullPath()))   // 视图
+		_asset.StaticFS("/upload", http.Dir(export.GetExcelFullPath())) // 上传
 	}
 
-	// 帮助模块
-	helper = router.Group("/help")
+	// 帮助模块(超级权限)
+	_help = router.Group("/help")
+	_help.Use(jwt.Auth())
 	{
-		// 系统监控: http://localhost:8080/help/stats
-		helper.GET("/stats", stats.GetCurrentRunningStats)
+		_help.GET("/ping", stats.GetCurrentRunningStats)  // 检测系统
+		_help.GET("/stats", stats.GetCurrentRunningStats) // 系统监控
 	}
 }
