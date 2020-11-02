@@ -720,6 +720,50 @@ public final class PersonDto {
      * <code>.Append.Educational educational = 8;</code>
      */
     com.example.tutorial.PersonDto.Append.EducationalOrBuilder getEducationalOrBuilder();
+
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    java.util.List<com.google.protobuf.Any> 
+        getOthersList();
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    com.google.protobuf.Any getOthers(int index);
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    int getOthersCount();
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+        getOthersOrBuilderList();
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    com.google.protobuf.AnyOrBuilder getOthersOrBuilder(
+        int index);
   }
   /**
    * <pre>
@@ -742,6 +786,7 @@ public final class PersonDto {
       idCard_ = "";
       sex_ = 0;
       address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      others_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -830,6 +875,15 @@ public final class PersonDto {
 
               break;
             }
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+                others_ = new java.util.ArrayList<com.google.protobuf.Any>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              others_.add(
+                  input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry));
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -847,6 +901,9 @@ public final class PersonDto {
       } finally {
         if (((mutable_bitField0_ & 0x00000001) != 0)) {
           address_ = address_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+          others_ = java.util.Collections.unmodifiableList(others_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1189,6 +1246,61 @@ public final class PersonDto {
       return getEducational();
     }
 
+    public static final int OTHERS_FIELD_NUMBER = 9;
+    private java.util.List<com.google.protobuf.Any> others_;
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    public java.util.List<com.google.protobuf.Any> getOthersList() {
+      return others_;
+    }
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+        getOthersOrBuilderList() {
+      return others_;
+    }
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    public int getOthersCount() {
+      return others_.size();
+    }
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    public com.google.protobuf.Any getOthers(int index) {
+      return others_.get(index);
+    }
+    /**
+     * <pre>
+     *其他
+     * </pre>
+     *
+     * <code>repeated .google.protobuf.Any Others = 9;</code>
+     */
+    public com.google.protobuf.AnyOrBuilder getOthersOrBuilder(
+        int index) {
+      return others_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1226,6 +1338,9 @@ public final class PersonDto {
       }
       if (educational_ != null) {
         output.writeMessage(8, getEducational());
+      }
+      for (int i = 0; i < others_.size(); i++) {
+        output.writeMessage(9, others_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -1270,6 +1385,10 @@ public final class PersonDto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, getEducational());
       }
+      for (int i = 0; i < others_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, others_.get(i));
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1304,6 +1423,8 @@ public final class PersonDto {
         if (!getEducational()
             .equals(other.getEducational())) return false;
       }
+      if (!getOthersList()
+          .equals(other.getOthersList())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1336,6 +1457,10 @@ public final class PersonDto {
       if (hasEducational()) {
         hash = (37 * hash) + EDUCATIONAL_FIELD_NUMBER;
         hash = (53 * hash) + getEducational().hashCode();
+      }
+      if (getOthersCount() > 0) {
+        hash = (37 * hash) + OTHERS_FIELD_NUMBER;
+        hash = (53 * hash) + getOthersList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1469,6 +1594,7 @@ public final class PersonDto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getOthersFieldBuilder();
         }
       }
       @java.lang.Override
@@ -1493,6 +1619,12 @@ public final class PersonDto {
         } else {
           educational_ = null;
           educationalBuilder_ = null;
+        }
+        if (othersBuilder_ == null) {
+          others_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          othersBuilder_.clear();
         }
         return this;
       }
@@ -1536,6 +1668,15 @@ public final class PersonDto {
           result.educational_ = educational_;
         } else {
           result.educational_ = educationalBuilder_.build();
+        }
+        if (othersBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0)) {
+            others_ = java.util.Collections.unmodifiableList(others_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.others_ = others_;
+        } else {
+          result.others_ = othersBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1617,6 +1758,32 @@ public final class PersonDto {
         }
         if (other.hasEducational()) {
           mergeEducational(other.getEducational());
+        }
+        if (othersBuilder_ == null) {
+          if (!other.others_.isEmpty()) {
+            if (others_.isEmpty()) {
+              others_ = other.others_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureOthersIsMutable();
+              others_.addAll(other.others_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.others_.isEmpty()) {
+            if (othersBuilder_.isEmpty()) {
+              othersBuilder_.dispose();
+              othersBuilder_ = null;
+              others_ = other.others_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              othersBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getOthersFieldBuilder() : null;
+            } else {
+              othersBuilder_.addAllMessages(other.others_);
+            }
+          }
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2286,6 +2453,318 @@ public final class PersonDto {
           educational_ = null;
         }
         return educationalBuilder_;
+      }
+
+      private java.util.List<com.google.protobuf.Any> others_ =
+        java.util.Collections.emptyList();
+      private void ensureOthersIsMutable() {
+        if (!((bitField0_ & 0x00000002) != 0)) {
+          others_ = new java.util.ArrayList<com.google.protobuf.Any>(others_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> othersBuilder_;
+
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public java.util.List<com.google.protobuf.Any> getOthersList() {
+        if (othersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(others_);
+        } else {
+          return othersBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public int getOthersCount() {
+        if (othersBuilder_ == null) {
+          return others_.size();
+        } else {
+          return othersBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public com.google.protobuf.Any getOthers(int index) {
+        if (othersBuilder_ == null) {
+          return others_.get(index);
+        } else {
+          return othersBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder setOthers(
+          int index, com.google.protobuf.Any value) {
+        if (othersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOthersIsMutable();
+          others_.set(index, value);
+          onChanged();
+        } else {
+          othersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder setOthers(
+          int index, com.google.protobuf.Any.Builder builderForValue) {
+        if (othersBuilder_ == null) {
+          ensureOthersIsMutable();
+          others_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          othersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder addOthers(com.google.protobuf.Any value) {
+        if (othersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOthersIsMutable();
+          others_.add(value);
+          onChanged();
+        } else {
+          othersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder addOthers(
+          int index, com.google.protobuf.Any value) {
+        if (othersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOthersIsMutable();
+          others_.add(index, value);
+          onChanged();
+        } else {
+          othersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder addOthers(
+          com.google.protobuf.Any.Builder builderForValue) {
+        if (othersBuilder_ == null) {
+          ensureOthersIsMutable();
+          others_.add(builderForValue.build());
+          onChanged();
+        } else {
+          othersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder addOthers(
+          int index, com.google.protobuf.Any.Builder builderForValue) {
+        if (othersBuilder_ == null) {
+          ensureOthersIsMutable();
+          others_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          othersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder addAllOthers(
+          java.lang.Iterable<? extends com.google.protobuf.Any> values) {
+        if (othersBuilder_ == null) {
+          ensureOthersIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, others_);
+          onChanged();
+        } else {
+          othersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder clearOthers() {
+        if (othersBuilder_ == null) {
+          others_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          othersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public Builder removeOthers(int index) {
+        if (othersBuilder_ == null) {
+          ensureOthersIsMutable();
+          others_.remove(index);
+          onChanged();
+        } else {
+          othersBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public com.google.protobuf.Any.Builder getOthersBuilder(
+          int index) {
+        return getOthersFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public com.google.protobuf.AnyOrBuilder getOthersOrBuilder(
+          int index) {
+        if (othersBuilder_ == null) {
+          return others_.get(index);  } else {
+          return othersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public java.util.List<? extends com.google.protobuf.AnyOrBuilder> 
+           getOthersOrBuilderList() {
+        if (othersBuilder_ != null) {
+          return othersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(others_);
+        }
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public com.google.protobuf.Any.Builder addOthersBuilder() {
+        return getOthersFieldBuilder().addBuilder(
+            com.google.protobuf.Any.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public com.google.protobuf.Any.Builder addOthersBuilder(
+          int index) {
+        return getOthersFieldBuilder().addBuilder(
+            index, com.google.protobuf.Any.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *其他
+       * </pre>
+       *
+       * <code>repeated .google.protobuf.Any Others = 9;</code>
+       */
+      public java.util.List<com.google.protobuf.Any.Builder> 
+           getOthersBuilderList() {
+        return getOthersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> 
+          getOthersFieldBuilder() {
+        if (othersBuilder_ == null) {
+          othersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder>(
+                  others_,
+                  ((bitField0_ & 0x00000002) != 0),
+                  getParentForChildren(),
+                  isClean());
+          others_ = null;
+        }
+        return othersBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -4128,23 +4607,26 @@ public final class PersonDto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rdemo_v3.proto\"\035\n\rPersonRequest\022\014\n\004name" +
-      "\030\001 \001(\t\"\321\001\n\013PersonReply\022\014\n\004name\030\001 \001(\t\022\017\n\007" +
-      "id_card\030\002 \001(\t\022\013\n\003age\030\003 \001(\005\022\035\n\003sex\030\004 \001(\0162" +
-      "\020.PersonReply.Sex\022\017\n\007married\030\005 \001(\010\022\016\n\006am" +
-      "ount\030\006 \001(\001\022\017\n\007address\030\007 \003(\t\022(\n\013education" +
-      "al\030\010 \001(\0132\023.Append.Educational\"\033\n\003Sex\022\n\n\006" +
-      "FEMALE\020\000\022\010\n\004MALE\020\001\"h\n\006Append\022(\n\013educatio" +
-      "nal\030\001 \003(\0132\023.Append.Educational\0324\n\013Educat" +
-      "ional\022\022\n\nuniversity\030\001 \001(\t\022\021\n\tspecialty\030\002" +
-      " \003(\t2@\n\006Person\0226\n\024GetPersonInfoHandler\022\016" +
-      ".PersonRequest\032\014.PersonReply\"\000B2\n\024com.ex" +
-      "ample.tutorialB\tPersonDtoZ\004.;pb\252\002\010Pro.De" +
-      "mob\006proto3"
+      "\n\rdemo_v3.proto\032!include/google/protobuf" +
+      "/any.proto\"\035\n\rPersonRequest\022\014\n\004name\030\001 \001(" +
+      "\t\"\367\001\n\013PersonReply\022\014\n\004name\030\001 \001(\t\022\017\n\007id_ca" +
+      "rd\030\002 \001(\t\022\013\n\003age\030\003 \001(\005\022\035\n\003sex\030\004 \001(\0162\020.Per" +
+      "sonReply.Sex\022\017\n\007married\030\005 \001(\010\022\016\n\006amount\030" +
+      "\006 \001(\001\022\017\n\007address\030\007 \003(\t\022(\n\013educational\030\010 " +
+      "\001(\0132\023.Append.Educational\022$\n\006Others\030\t \003(\013" +
+      "2\024.google.protobuf.Any\"\033\n\003Sex\022\n\n\006FEMALE\020" +
+      "\000\022\010\n\004MALE\020\001\"h\n\006Append\022(\n\013educational\030\001 \003" +
+      "(\0132\023.Append.Educational\0324\n\013Educational\022\022" +
+      "\n\nuniversity\030\001 \001(\t\022\021\n\tspecialty\030\002 \003(\t2@\n" +
+      "\006Person\0226\n\024GetPersonInfoHandler\022\016.Person" +
+      "Request\032\014.PersonReply\"\000B2\n\024com.example.t" +
+      "utorialB\tPersonDtoZ\004.;pb\252\002\010Pro.Demob\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.google.protobuf.AnyProto.getDescriptor(),
         });
     internal_static_PersonRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -4157,7 +4639,7 @@ public final class PersonDto {
     internal_static_PersonReply_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PersonReply_descriptor,
-        new java.lang.String[] { "Name", "IdCard", "Age", "Sex", "Married", "Amount", "Address", "Educational", });
+        new java.lang.String[] { "Name", "IdCard", "Age", "Sex", "Married", "Amount", "Address", "Educational", "Others", });
     internal_static_Append_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Append_fieldAccessorTable = new
@@ -4170,6 +4652,7 @@ public final class PersonDto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Append_Educational_descriptor,
         new java.lang.String[] { "University", "Specialty", });
+    com.google.protobuf.AnyProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

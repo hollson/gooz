@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-//import "google/protobuf/any.proto";
+import "include/google/protobuf/any.proto";
 
 //package pbs;
 option go_package = ".;pb";
@@ -41,7 +41,7 @@ message PersonReply {
     double amount = 6; //资产
     repeated string address = 7; //地址
     Append.Educational educational = 8; //学历
-    //    repeated google.protobuf.Any Others = 9; //其他
+    repeated google.protobuf.Any Others = 9; //其他
 }
 
 // 附加信息

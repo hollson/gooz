@@ -5,12 +5,8 @@ package stats
 import (
 	"encoding/json"
 	"expvar"
-	"fmt"
-	"net/http"
 	"runtime"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 // 开始时间
@@ -65,30 +61,30 @@ func getLastGCPauseTime() interface{} {
 
 	return gcPause
 }
-
-// GetCurrentRunningStats 返回当前运行信息
-func GetCurrentRunningStats(c *gin.Context) {
-	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
-	first := true
-	report := func(key string, value interface{}) {
-		if !first {
-			fmt.Fprintf(c.Writer, ",\n")
-		}
-		first = false
-		if str, ok := value.(string); ok {
-			fmt.Fprintf(c.Writer, "%q: %q", key, str)
-		} else {
-			fmt.Fprintf(c.Writer, "%q: %v", key, value)
-		}
-	}
-
-	fmt.Fprintf(c.Writer, "{\n")
-	expvar.Do(func(kv expvar.KeyValue) {
-		report(kv.Key, kv.Value)
-	})
-	fmt.Fprintf(c.Writer, "\n}\n")
-	c.String(http.StatusOK, "")
-}
+//
+// // GetCurrentRunningStats 返回当前运行信息
+// func GetCurrentRunningStats(c *gin.Context) {
+// 	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
+// 	first := true
+// 	report := func(key string, value interface{}) {
+// 		if !first {
+// 			fmt.Fprintf(c.Writer, ",\n")
+// 		}
+// 		first = false
+// 		if str, ok := value.(string); ok {
+// 			fmt.Fprintf(c.Writer, "%q: %q", key, str)
+// 		} else {
+// 			fmt.Fprintf(c.Writer, "%q: %v", key, value)
+// 		}
+// 	}
+//
+// 	fmt.Fprintf(c.Writer, "{\n")
+// 	expvar.Do(func(kv expvar.KeyValue) {
+// 		report(kv.Key, kv.Value)
+// 	})
+// 	fmt.Fprintf(c.Writer, "\n}\n")
+// 	c.String(http.StatusOK, "")
+// }
 
 func init() {
 	expvar.Publish("运行时间", expvar.Func(calculateUptime))

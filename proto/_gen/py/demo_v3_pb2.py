@@ -13,6 +13,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from include.google.protobuf import any_pb2 as include_dot_google_dot_protobuf_dot_any__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -20,8 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto3',
   serialized_options=_b('\n\024com.example.tutorialB\tPersonDtoZ\004.;pb\252\002\010Pro.Demo'),
-  serialized_pb=_b('\n\rdemo_v3.proto\"\x1d\n\rPersonRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xd1\x01\n\x0bPersonReply\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07id_card\x18\x02 \x01(\t\x12\x0b\n\x03\x61ge\x18\x03 \x01(\x05\x12\x1d\n\x03sex\x18\x04 \x01(\x0e\x32\x10.PersonReply.Sex\x12\x0f\n\x07married\x18\x05 \x01(\x08\x12\x0e\n\x06\x61mount\x18\x06 \x01(\x01\x12\x0f\n\x07\x61\x64\x64ress\x18\x07 \x03(\t\x12(\n\x0b\x65\x64ucational\x18\x08 \x01(\x0b\x32\x13.Append.Educational\"\x1b\n\x03Sex\x12\n\n\x06\x46\x45MALE\x10\x00\x12\x08\n\x04MALE\x10\x01\"h\n\x06\x41ppend\x12(\n\x0b\x65\x64ucational\x18\x01 \x03(\x0b\x32\x13.Append.Educational\x1a\x34\n\x0b\x45\x64ucational\x12\x12\n\nuniversity\x18\x01 \x01(\t\x12\x11\n\tspecialty\x18\x02 \x03(\t2@\n\x06Person\x12\x36\n\x14GetPersonInfoHandler\x12\x0e.PersonRequest\x1a\x0c.PersonReply\"\x00\x42\x32\n\x14\x63om.example.tutorialB\tPersonDtoZ\x04.;pb\xaa\x02\x08Pro.Demob\x06proto3')
-)
+  serialized_pb=_b('\n\rdemo_v3.proto\x1a!include/google/protobuf/any.proto\"\x1d\n\rPersonRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\xf7\x01\n\x0bPersonReply\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07id_card\x18\x02 \x01(\t\x12\x0b\n\x03\x61ge\x18\x03 \x01(\x05\x12\x1d\n\x03sex\x18\x04 \x01(\x0e\x32\x10.PersonReply.Sex\x12\x0f\n\x07married\x18\x05 \x01(\x08\x12\x0e\n\x06\x61mount\x18\x06 \x01(\x01\x12\x0f\n\x07\x61\x64\x64ress\x18\x07 \x03(\t\x12(\n\x0b\x65\x64ucational\x18\x08 \x01(\x0b\x32\x13.Append.Educational\x12$\n\x06Others\x18\t \x03(\x0b\x32\x14.google.protobuf.Any\"\x1b\n\x03Sex\x12\n\n\x06\x46\x45MALE\x10\x00\x12\x08\n\x04MALE\x10\x01\"h\n\x06\x41ppend\x12(\n\x0b\x65\x64ucational\x18\x01 \x03(\x0b\x32\x13.Append.Educational\x1a\x34\n\x0b\x45\x64ucational\x12\x12\n\nuniversity\x18\x01 \x01(\t\x12\x11\n\tspecialty\x18\x02 \x03(\t2@\n\x06Person\x12\x36\n\x14GetPersonInfoHandler\x12\x0e.PersonRequest\x1a\x0c.PersonReply\"\x00\x42\x32\n\x14\x63om.example.tutorialB\tPersonDtoZ\x04.;pb\xaa\x02\x08Pro.Demob\x06proto3')
+  ,
+  dependencies=[include_dot_google_dot_protobuf_dot_any__pb2.DESCRIPTOR,])
 
 
 
@@ -42,8 +44,8 @@ _PERSONREPLY_SEX = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=231,
-  serialized_end=258,
+  serialized_start=304,
+  serialized_end=331,
 )
 _sym_db.RegisterEnumDescriptor(_PERSONREPLY_SEX)
 
@@ -74,8 +76,8 @@ _PERSONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17,
-  serialized_end=46,
+  serialized_start=52,
+  serialized_end=81,
 )
 
 
@@ -142,6 +144,13 @@ _PERSONREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='Others', full_name='PersonReply.Others', index=8,
+      number=9, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -155,8 +164,8 @@ _PERSONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=49,
-  serialized_end=258,
+  serialized_start=84,
+  serialized_end=331,
 )
 
 
@@ -193,8 +202,8 @@ _APPEND_EDUCATIONAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=312,
-  serialized_end=364,
+  serialized_start=385,
+  serialized_end=437,
 )
 
 _APPEND = _descriptor.Descriptor(
@@ -223,12 +232,13 @@ _APPEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=260,
-  serialized_end=364,
+  serialized_start=333,
+  serialized_end=437,
 )
 
 _PERSONREPLY.fields_by_name['sex'].enum_type = _PERSONREPLY_SEX
 _PERSONREPLY.fields_by_name['educational'].message_type = _APPEND_EDUCATIONAL
+_PERSONREPLY.fields_by_name['Others'].message_type = include_dot_google_dot_protobuf_dot_any__pb2._ANY
 _PERSONREPLY_SEX.containing_type = _PERSONREPLY
 _APPEND_EDUCATIONAL.containing_type = _APPEND
 _APPEND.fields_by_name['educational'].message_type = _APPEND_EDUCATIONAL
@@ -275,8 +285,8 @@ _PERSON = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=366,
-  serialized_end=430,
+  serialized_start=439,
+  serialized_end=503,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPersonInfoHandler',

@@ -133,6 +133,7 @@ update:
 vendor:
 	@go mod vendor;
 
+
 ## tag@修订版本号(同步git/tag和本地编译版本号)。
 .PHONY:tag
 tag:
