@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+//option go_package = "./;user";  //输出路径;包名
+
+// fix为定长编码，其余为变长编码
+message SomeMessage {
+    // 布尔类型
+    bool F1 = 1; //bool
+
+    // 有符号类型
+    int32 F2 = 2; //int32,低效
+    int64 F3 = 3; //int64
+    sint32 F4 = 4; //sint32,适用于负数
+    sint64 F5 = 5; //sint64
+    sfixed32 F6 = 6; //sfixed32,定长编码
+    sfixed64 F7 = 7; //sfixed64,定长编码
+
+    // 无符号类型
+    uint32 F8 = 8; //uint32
+    uint64 F9 = 9; //uint64
+    fixed32 F10 = 10; // fixed32,定长编码,
+    fixed64 F11 = 11; //fixed64,定长编码
+
+    // 浮点类型
+    float F12 = 12; //float
+    double F13 = 13; //double
+
+    // 字符类型
+    bytes F14 = 14; //bytes
+    string F15 = 15; //string
+}

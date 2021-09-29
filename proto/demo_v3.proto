@@ -1,9 +1,11 @@
 syntax = "proto3";
+//import "google/protobuf/any.proto";
+package pbs;
 
-import "include/google/protobuf/any.proto";
+option go_package = "pb;user";
 
-//package pbs;
-option go_package = ".;pb";
+//aaa 表示生成的go文件的存放地址，会自动生成目录的。
+//bbb 表示生成的go文件所属的包名
 
 // java 生成文件定义
 option java_package = "com.example.tutorial";
@@ -27,8 +29,7 @@ message PersonRequest {
 
 // 相应结果
 message PersonReply {
-    //姓名
-    string name = 1;
+    string name = 1; //姓名
     string id_card = 2; //身份证
     int32 age = 3; //年龄
     enum Sex {
@@ -36,12 +37,11 @@ message PersonReply {
         MALE = 1;
     }
     Sex sex = 4; //性别
-    //是否已婚
-    bool married = 5;
+    bool married = 5; //是否已婚
     double amount = 6; //资产
     repeated string address = 7; //地址
     Append.Educational educational = 8; //学历
-    repeated google.protobuf.Any Others = 9; //其他
+    //    repeated google.protobuf.Any Others = 9; //其他
 }
 
 // 附加信息
