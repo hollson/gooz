@@ -121,11 +121,12 @@ run: clean
 	@go run main.go $(deamon);
 
 
-## update@更新Git和Submodule
-.PHONY:update
-update:
-	@git submodule update --init --recursive;
-
+## pull@更新Git和Submodule
+.PHONY:pull
+pull:
+	@git pull
+	@#git submodule pull --init --recursive;
+	@echo "\033[31m ✅  git pull完成\033[0m";
 
 ## vendor@分发编译包
 .PHONY:vendor
@@ -177,5 +178,5 @@ help:Makefile
 	@echo
 	@echo "Available Commands:"
 	@sed -n "s/^##//p" $< | column -t -s '@' |grep --color=auto "^[[:space:]][a-z]\+[[:space:]]"
+	@echo "For more to https://makefiletutorial.com/"
 	@echo
-	@echo "For more to see https://makefiletutorial.com/"
