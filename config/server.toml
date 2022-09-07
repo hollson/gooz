@@ -1,0 +1,132 @@
+# keep-server系统配置文件
+# 更多toml语法,请参考: https://toml.io/cn/
+
+
+# =============================Application==================================
+# 说明: 应用信息(系统环境变量优先级将高于当前的配置项,如: KEEP_LANG)
+# ==========================================================================
+[app]
+	name = "keep-server"					# 应用名称
+	model = "dev"							# dev:开发; test:测试; prod:生产
+	lang = "zh-CN"							# 语言环境,zh-CN,en-US等(默认zh-CN)
+	version="v1.0.1"						# 版本号
+
+
+# ===============================System=====================================
+# 说明: 系统配置
+# ==========================================================================
+[system]
+    domain = "www.demo.com"					# 官方域名
+	official = 100000						# 官方账号
+	monitor = true							# 开启监控
+	robots = [3713,3709,3711]				# 机器人账号
+
+[system.nodes]								# 服务器节点
+	"Node001" = "172.16.0.1:8100"
+	"Node002" = "172.16.0.2:8100"
+	"Node003" = "172.16.0.3:8100"
+
+[system.alert]
+	account = "xxx-xxx-xxx"					# 账号
+	password = "*********"					# 命名
+
+
+# ===============================Services===================================
+# 说明: 外接服务
+# ==========================================================================
+[service.order]
+	host = "172.16.0.1"
+	port = 11001
+	token = "******"
+	mark = "订单服务"
+[service.nitify]
+	host = "172.16.0.1"
+	port = 11002
+	token = "******"
+	mark = "消息服务"
+[service.metric]
+	host = "172.16.0.1"
+	port = 11003
+	token = "******"
+	mark = "指标服务"
+
+
+# =================================Log======================================
+# 说明: 日志配置(默认为控制台输出,可同时启动多个Hook)
+# ==========================================================================
+[log]
+	level = "trace"							# error => info => trace
+	console = true							# 开启控制台输出(默认开启)
+
+# 文件日志
+[log.file]
+	path = "./logs"							# 日志输出路径
+	rotation = 1							# 文件切割周期(天),默认:1天
+	monitor = 5								# 文件监控周期(秒),默认:5s
+	retain = 90								# 日志保留时间(天),默认:7天
+	limit = 200								# 单个文件大小上限(M),默认:100M
+
+# elastic为空时,不启用es日志功能
+[log.elastic]
+	urls = ["http://172.16.0.1:9200","http://172.16.0.2:9200"]
+	account = "elastic"						# 账户名
+	password = "123456"						# 账号
+	index = "keep-server"					# 索引名称
+
+
+# ===============================Database===================================
+# 说明: PG数据库集群
+# ==========================================================================
+[repo.admin]								# 管理后台
+	[repo.admin.master]						# 主库
+		host = "172.16.0.1"
+		port = 3306
+		user = "postgres"
+		password = "postgres"
+		schema = "db_keep"
+		charset = "utf8"
+
+[repo.logic]								# 主体业务
+	[repo.logic.master]						# 主库
+		host = "172.16.0.1"
+		port = 3306
+		user = "postgres"
+		password = "postgres"
+		schema = "rw_keep"
+		charset = "utf8"
+	[[repo.logic.slave]]					# 从库
+		host = "172.16.0.1"
+		port = 3307
+		user = "postgres"
+		password = "postgres"
+		schema = "rd_keep"
+		charset = "utf8"
+	[[repo.logic.slave]]					# 从库
+		host = "172.16.0.1"
+		port = 3308
+		user = "postgres"
+		password = "postgres"
+		schema = "rd_keep"
+		charset = "utf8"
+
+
+# =================================Redis====================================
+# 说明: Redis哨兵/集群;以下单例、哨兵、集群配置没有关联性
+# ==========================================================================
+[redis]
+	host = "172.16.0.1"
+	port = 6379
+	auth = "123456"
+
+
+# =================================Kafka=====================================
+# 说明: Kafka配置
+# ===========================================================================
+[kafka]
+	hosts = ["172.16.0.1:9092", "172.16.0.1:9093", "172.16.0.1:9094"]
+	account = "kafka"
+	password = "kafka"
+	producer_topic = "sync_zh"
+	consumer_topic = "sync_en"
+	group = "rg_en"
+	sasl_enable = false

@@ -43,7 +43,7 @@ func GoEnv() Env {
 
 // 将运行环境映射为Gin的运行环境
 func GinEnv() string {
-	env:=GoEnv()
+	env := GoEnv()
 	switch env {
 	case Env_DEV:
 		return gin.DebugMode

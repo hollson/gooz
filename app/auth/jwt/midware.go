@@ -24,7 +24,7 @@ var JWT_STATUS = map[int]string{
 // 	从Http头部的Authorization(忽略大小写)中获取Token信息，并验证Token的有效性。
 func Auth() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var code  = 200
+		var code = 200
 		token := c.GetHeader("Authorization")
 		if len(token) == 0 {
 			code = 400

@@ -5,11 +5,10 @@ Version="v1.0.1"	#版本号
 Cgo=1				#是否开启Cgo，0：不开启，1：开启
 
 
-## all@可选的命令参数，执行build和run命令。
-all: proto build
+all: help
 
 
-## build <os>@编译(格式：make build os=linux/darwin/windows,os为可选参数)。
+## build <os>@编译(格式：make build [os=linux/darwin/windows])
 .PHONY:build
 OS:=$(if $(os),$(os),$(shell go env GOOS))
 ARCH:=$(if $(arch),$(arch),"amd64")
@@ -49,7 +48,7 @@ build: clean
 	fi;
 
 
-## clean@清理编译、日志和缓存等数据。
+## clean@清理编译、日志和缓存等数据
 .PHONY:clean
 clean:
 	@rm -rf ./bin;
@@ -65,7 +64,7 @@ clean:
 	@echo "\033[31m ✅  清理完毕\033[0m";
 
 
-## commit <msg>@提交Git(格式:make commit msg=备注内容,msg为可选参数)。
+## commit <msg>@提交Git(格式:make commit [msg=备注])
 .PHONY:commit
 message:=$(if $(msg),$(msg),"Rebuilded at $$(date '+%Y年%m月%d日 %H时%M分%S秒')")
 commit:
@@ -75,7 +74,7 @@ commit:
 	@echo "\033[0;31m 💿 Commit完毕\033[0m"
 
 
-## deploy@[远程]发布到远程服务器。
+## deploy@[远程]发布到远程服务器
 .PHONY:deploy
 deploy:
 	@#压缩本地发布包,并推送到远程服务器
@@ -90,7 +89,7 @@ deploy:
 	@echo "\033[31m ✅  发布完毕\033[0m";
 
 
-## install@[本地]安装并启动服务。
+## install@[本地]安装并启动服务
 .PHONY:install
 install:
 	@pkill $(AppName)
@@ -100,21 +99,21 @@ install:
 	@ps aux|grep $(AppName)
 
 
-## push <msg>@提交并推送到Git仓库(格式:make push msg=备注内容,msg为可选参数)。
+## push <msg>@提交并推送到Git仓库(格式:make push [msg=备注])
 .PHONY:push
 push:commit
 	@git push #origin master
 	@echo "\033[0;31m ⬆️ Push完毕\033[0m"
 
 
-## proto@更新并编译proto文件。
+## proto@更新并编译proto文件
 .PHONY:proto
 proto:
 	@cd proto && ./gen.sh && cd -;
 	@echo "\033[35m ✅  Proto编译完毕\033[0m"; \
 
 
-## run@运行服务。
+## run@运行服务
 .PHONY:proto run
 run: clean
 #	@pkill ${{AppName}};
@@ -122,26 +121,26 @@ run: clean
 	@go run main.go $(deamon);
 
 
-## update@更新Git和Submodule。
+## update@更新Git和Submodule
 .PHONY:update
 update:
 	@git submodule update --init --recursive;
 
 
-## vendor@分发编译包。
+## vendor@分发编译包
 .PHONY:vendor
 vendor:
 	@go mod vendor;
 
 
-## tag@修订版本号(同步git/tag和本地编译版本号)。
+## tag@修订版本号(同步git/tag和本地编译版本号)
 .PHONY:tag
 tag:
 	@git tag;
 #"版本号一致"
 
 
-## xorm@生成数据库表实体,支持mysql、postgres、sqlite等。
+## xorm@生成数据库表实体,支持mysql、postgres、sqlite等
 .PHONY:xorm
 Templates=$(GOPATH)/src/xorm.io/cmd/xorm/templates/goxorm/
 REPO_PATH=$$(pwd)/repo
@@ -151,10 +150,27 @@ xorm:
 	@#sudo xorm reverse postgres "user=postgres password=123456 dbname=gooz host=127.0.0.1 port=5432 sslmode=disable" $(Templates) $(REPO_PATH)/models;
 	@echo "\033[31m ✅  Reverse完毕\033[0m";
 
-#https://pkg.go.dev/github.com/lib/pq?tab=doc
+
+## linter@代码规范检查
+.PHONY: linter
+linter:
+	@golangci-lint run -c .golangci.yaml || exit 1
 
 
-## help@查看make帮助。
+## vet@代码静态检查
+.PHONY: vet
+vet:
+	@go vet
+
+
+## test@单元测试
+.PHONY: test
+test:
+	@go test;
+	@go test -v -failfast -race -count=1 ./... >/dev/null || exit 1;
+
+
+## help@查看make帮助
 .PHONY:help
 help:Makefile
 	@echo "Usage:\n  make [command]"

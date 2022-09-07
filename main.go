@@ -18,6 +18,7 @@ func init() {
     repo.Init()
     logger.Init()
 }
+//https://threedots.tech/post/introducing-clean-architecture/
 
 //go:generate go build -o gooz
 func main() {

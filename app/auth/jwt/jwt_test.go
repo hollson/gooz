@@ -9,8 +9,6 @@ import (
 	"fmt"
 	"strings"
 	"testing"
-
-	"github.com/dgrijalva/jwt-go"
 )
 
 func TestClaimToken(t *testing.T) {

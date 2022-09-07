@@ -23,8 +23,8 @@ var (
 )
 
 type Claims struct {
-	jwt.StandardClaims // 标准Claim
-	Version int64      // 服务端版本号
+	jwt.StandardClaims       // 标准Claim
+	Version            int64 // 服务端版本号
 }
 
 // 生成JWT令牌：

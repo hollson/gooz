@@ -132,7 +132,7 @@ package domain
 // 	// 7.事务
 // 	// 7.1简单事务
 // 	if false {
-// 		session := db.NewSession()
+// 		session := db.newSession()
 // 		defer session.Close()
 //
 // 		session.Begin()
@@ -148,7 +148,7 @@ package domain
 // 	}
 // 	// 7.2嵌套事务
 // 	if false {
-// 		session := db.NewSession()
+// 		session := db.newSession()
 // 		defer session.Close()
 // 		session.Begin()
 // 		_, err := session.Exec("insert into public.user(name,class_id) values('ft23',2)")
@@ -161,7 +161,7 @@ package domain
 // 		}
 //
 // 		tx, _ := session.BeginTrans()
-// 		_, err = tx.Session().Exec("insert into public.user(name,class_id) values('ft25',2)")
+// 		_, err = tx.newSession().Exec("insert into public.user(name,class_id) values('ft25',2)")
 // 		if err != nil {
 // 			tx.RollbackTrans()
 // 		}
@@ -173,7 +173,7 @@ package domain
 // 	if true {
 //
 // 		// 建立500条数据
-// 		session := db.NewSession()
+// 		session := db.newSession()
 // 		defer session.Close()
 // 		if false {
 // 			session.Begin()
@@ -234,7 +234,7 @@ package domain
 // 		dbGroup.Exec("inser into public.users(name) values('ft2001')")
 //
 // 		// 事务查询
-// 		session := dbGroup.NewSession()
+// 		session := dbGroup.newSession()
 // 		defer session.Close()
 // 		session.Begin()
 // 		_, err = session.Exec("inser into public.users(name) values('ft2001')")

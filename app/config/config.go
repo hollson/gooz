@@ -10,11 +10,11 @@ import (
 	"github.com/hollson/gooz/util"
 )
 
-var App *app               // App配置
-var Log *logger            // 日志配置
-var Mysql *mysql           // Mysql数据库
+var App *app     // App配置
+var Log *logger  // 日志配置
+var Mysql *mysql // Mysql数据库
 // var Redis map[string]redis // Redis配置
-var Postgres *[]postgres   // Postgres数据库
+var Postgres *[]postgres // Postgres数据库
 // var Log *Log
 // var Zk *Zookeeper
 // var etcd *Etcd
